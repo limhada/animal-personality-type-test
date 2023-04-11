@@ -12,6 +12,7 @@ import Question from '../conponents/QuestionContainer';
 
 // TODO: 시작 페이지 만들고 설문지 문항 차례대로 질문 페이지 만들기
 // FIXME: 사진 제거하기
+// TODO: 1일차 dev브랜치 새로 만들어서 push했음
 
 const Main = () => {
   return (

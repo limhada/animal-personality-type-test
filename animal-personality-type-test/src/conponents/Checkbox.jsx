@@ -16,13 +16,24 @@ const Checkbox = () => {
   const [checkedIndex, setCheckedIndex] = useState(null);
   const [sum, setSum] = useState(0);
 
+  // 변경 전
+  // const handleChekboxChange = (index) => {
+  //   setCheckedIndex(index);
+  //   if (index >= 0) {
+  //     // 확인란 1이 선택되어 있으면 인덱스 + 1
+  //     setSum(index + 1);
+  //   } else {
+  //     setSum(sum);
+  //   }
+  // };
+  // 변경 후 체크박스 체크 해제 가능!
   const handleChekboxChange = (index) => {
-    setCheckedIndex(index);
-    if (index >= 0) {
-      // 확인란 1이 선택되어 있으면 인덱스 + 1
-      setSum(index + 1);
+    if (checkedIndex === index) {
+      setCheckedIndex(null);
+      setSum(0);
     } else {
-      setSum(sum);
+      setCheckedIndex(index);
+      setSum(index + 1);
     }
   };
 
@@ -39,8 +50,8 @@ const Checkbox = () => {
             <label>Checkbox {index + 1}</label>
           </div>
         ))}
-        <p>Sum: {sum}</p>
       </CheckboxContainer>
+      <p>Sum: {sum}</p>
     </div>
   );
 };
