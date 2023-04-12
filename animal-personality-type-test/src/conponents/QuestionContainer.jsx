@@ -87,30 +87,77 @@ const questions = [
 
 // TODO: previous 버튼 1번 문항일때는 비활성화 시키기 + 마지막 문항일때는 next 버튼 비활성화 시키기
 const QuestionContainer = () => {
+  // 현재 질문 인덱스
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  // 각 항목의 총 점수
+  const [result, setResult] = useState(0);
 
-  // next 버튼 로직
+  // 이전 버튼 true면 비활성화, false면 활성화
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [nextButtonDisabled, setnextButtonDisabled] = useState(false);
+
+  // next 버튼 클릭 시 로직
   const handleNextClick = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
+    // 1번문항에서 next 클릭 시 previous 버튼 활성화
+    if (currentQuestionIndex >= 0) {
+      setIsButtonDisabled(false);
+    }
+    // 마지막 질문의 이전 질문에서 next를 클릭시 마지막 질문에서 next 버튼을 비활성화 시키기 위해서 questions.length - 1이 아닌 questions.length - 2를 함
+    if (currentQuestionIndex === questions.length - 2) {
+      setnextButtonDisabled(true);
+    }
+    // console.log(
+    //   currentQuestionIndex,
+    //   '다음 버튼 현재 인덱스',
+    //   isButtonDisabled,
+    //   '버튼 상태',
+    //   questions.length - 1,
+    //   '질문의 길이-1값',
+    // );
   };
 
-  // previous 버튼 로직
+  // previous 버튼 클릭 시 로직
   const handlePreviousClick = () => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
+    // 1번 질문일 경우 previous버튼 비활성화한다
+    if (currentQuestionIndex <= 1) {
+      setIsButtonDisabled(true);
+    }
+    // 마지막 질문에서 previous 버튼을 클릭 시 마지막 이전 질문으로 이동하면서 next버튼을 다시 활성화한다
+    if (currentQuestionIndex <= questions.length - 1) {
+      setnextButtonDisabled(false);
+    }
+
+    // console.log(
+    //   currentQuestionIndex,
+    //   '다음 버튼 현재 인덱스',
+    //   isButtonDisabled,
+    //   '버튼 상태',
+    //   questions.length - 1,
+    //   '질문의 길이-1값',
+    // );
   };
 
   return (
     <div>
       {/* 화면에 해당 인덱스의 컨텐츠를 띄워주는 로직 */}
-      {/* {questions[currentQuestionIndex].content} */}
       {questions[currentQuestionIndex].content}
       <Checkbox></Checkbox>
-      <button onClick={handlePreviousClick}>Previous</button>
-      <button onClick={handleNextClick}>Next</button>
+      <button onClick={handlePreviousClick} disabled={isButtonDisabled}>
+        Previous
+      </button>
+      <button onClick={handleNextClick} disabled={nextButtonDisabled}>
+        Next
+      </button>
+      {/* 
+      <button onClick={handleClick} disabled={isButtonDisabled}>
+        {isButtonDisabled ? 'Button is disabled' : 'Button is enabled'}
+      </button> */}
     </div>
   );
 };
