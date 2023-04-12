@@ -148,6 +148,7 @@ const QuestionContainer = () => {
       {/* 화면에 해당 인덱스의 컨텐츠를 띄워주는 로직 */}
       {questions[currentQuestionIndex].content}
       <Checkbox></Checkbox>
+      <Checkbox></Checkbox>
       <button onClick={handlePreviousClick} disabled={isButtonDisabled}>
         Previous
       </button>
