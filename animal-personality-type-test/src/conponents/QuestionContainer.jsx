@@ -54,23 +54,12 @@ const QuestionContainer = () => {
   const handleAnswerSubmit = (answer) => {
     // userAnswers 배열에 새로운 answer를 추가
     setUserAnswers([...userAnswers, answer]);
-    // 현재 문제의 인덱스를 1 증가시킴
+    // 현재 문제의 인덱스를 1 증가시킴 문제를 하나씩 다음 문제로 이동
     setCurrentQuestionIndex(currentQuestionIndex + 1);
   };
 
-  const generateButtons = (numButtons) => {
-    const buttons = []; // 버튼들을 저장할 배열을 초기화합니다.
-    for (let i = 0; i < numButtons; i++) {
-      // numButtons 만큼 반복문을 실행합니다.
-      buttons.push(
-        // 배열에 버튼을 추가합니다.
-        <button key={i} onClick={() => handleAnswerSubmit(`Button ${i + 1}`)}>
-          Button {i + 1}
-        </button>,
-      );
-    }
-    return buttons; // 완성된 버튼 배열을 반환합니다.
-  };
+  // 버튼 생성 버전 2
+  const buttonNames = ['매우 아님', '아님', '보통', '그렇다', '매우 그렇다'];
 
   return (
     <div>
@@ -89,30 +78,46 @@ const QuestionContainer = () => {
           )}
           {/* 현재 질문 내용 표시 */}
           <ul>
-            {/* 'Object.values(questions[currentQuestionIndex].content)'는 각 질문의 텍스트 콘텐츠를 포함하는 현재 질문 개체의 모든 속성 값의 배열 */}
-            {/* .map()은 배열의 각 값을 반복하고 각 값에 대해 값을 표시하는 새로운 <li> 요소를 반환 */}
-            {Object.values(questions[currentQuestionIndex].content).map(
+            {/* 질문 세개 한번에 다 보여주기 */}
+            {/* {Object.values(questions[currentQuestionIndex].content).map(
               (question, index) => (
                 <li key={index}>{question}</li>
               ),
-            )}
+            )} */}
+            {/* 한번에 한가지 질문 */}
+            {questions[currentQuestionIndex].content[0]}
           </ul>
           {/* 답변 버튼 표시 */}
-          {generateButtons(5)}
+          {/* 초기버튼 */}
+          {/* {generateButtons(5)} */}
+
+          {/* // FIXME: 버튼 생성 버전2 */}
+          <div>
+            {buttonNames.map((name, index) => (
+              <button
+                key={index}
+                // 여기가 답변으로 보내는 데이터
+                onClick={() =>
+                  // FIXME: 확인하고 되돌리기
+                  // handleAnswerSubmit(`Button ${index + 1} 이게 답변에 나오는 데이터!!! name으로 고치면 버튼이름을 전달`,)
+                  handleAnswerSubmit(
+                    `${
+                      index + 1
+                    } 이게 답변에 나오는 데이터!!! name으로 고치면 버튼이름을 전달`,
+                  )
+                }
+              >
+                {name}
+              </button>
+            ))}
+          </div>
+          {/* 여기까지 버튼 생성 버전2 */}
         </>
       ) : (
         <>
-          {/* 모든 질문에 대한 답변이 완료된 경우 */}
           <h1>Quiz complete!</h1>
-          {/* "Answers" 제목 표시 */}
           <h2>Answers:</h2>
-          {/* 사용자의 답변 표시 */}
-          {/* 정렬되지 않은 목록 <ul>을 만들고 userAnswers 배열의 값을 기반으로 목록 항목 <li>로 동적으로 채웁 */}
           <ul>
-            {/* Array.prototype.map() 메서드를 사용하여 userAnswers 배열을 매핑하여 목록 항목의 새 배열을 생성 
-            여기서 각 항목은 userAnswers 배열의 답변에 해당
-            'key' 속성은 각 목록 항목에 고유한 식별자를 부여하는 데 사용되며 이는 React가 목록 렌더링을 최적화하는 데 도움이 된다
-            */}
             {userAnswers.map((answer, index) => (
               //  <li> 태그에 전달된 answer 변수에는 userAnswers 배열의 각 답변 값이 포함되며, 이는 목록 항목의 텍스트 콘텐츠로 표시
               <li key={index}>{answer}</li>
