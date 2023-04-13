@@ -1,6 +1,22 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import 고슴도치 from '../assets/img/고슴도치.jpeg';
+import 고양이 from '../assets/img/고양이.jpeg';
+import 곰 from '../assets/img/곰.jpeg';
+import 나무늘보 from '../assets/img/나무늘보.jpeg';
+import 당나귀 from '../assets/img/당나귀.jpeg';
+import 독수리 from '../assets/img/독수리.jpeg';
+import 랫서팬더 from '../assets/img/랫서팬더.jpeg';
+import 벌새 from '../assets/img/벌새.jpeg';
+import 악어 from '../assets/img/악어.jpeg';
+import 알파카 from '../assets/img/알파카.jpeg';
+import 앵무새 from '../assets/img/앵무새.jpeg';
+import 원숭이 from '../assets/img/원숭이.jpeg';
+import 코끼리 from '../assets/img/코끼리.jpeg';
+import 코알라 from '../assets/img/코알라.jpeg';
+import 토끼 from '../assets/img/토끼.jpeg';
+
 // 질문 리스트
 const questions = [
   {
@@ -66,6 +82,7 @@ const QuestionContainer = () => {
     result.push(sum / 3);
   }
 
+  // 총 결과값인 [ 1, 2.5, 3, 2, 5] 가 들어있는 배열
   console.log('이건 언제 실행되나', result);
 
   const handleAnswerSubmit = (answer) => {
@@ -100,17 +117,171 @@ const QuestionContainer = () => {
   // 버튼 생성 버전 2
   const buttonNames = ['매우 아님', '아님', '보통', '그렇다', '매우 그렇다'];
 
-  function getImageSrc(value) {
-    let 동물 = [
-      { name: '고양이', min: 0, max: 2.5 },
-      { name: '나무늘보', min: 2.5, max: 4.5 },
-      { name: '고릴라', min: 4.5, max: 5 },
-    ];
-    let animal = 동물.find((item) => value >= item.min && value < item.max);
-    return animal ? animal.name + '.jpeg' : '';
-  }
-  let imageSrc = getImageSrc(result[0]);
+  // function getImageSrc(value) {
+  // min: 4.25, max: 6 에서 max값을 5로해서 에러가 났었음
+  const 동물 = [
+    {
+      id: 0,
+      type: '개방성',
+      content: [
+        { name: '당나귀', min: 0, max: 3.25 },
+        { name: '곰', min: 3.25, max: 4.25 },
+        { name: '원숭이', min: 4.25, max: 6 },
+      ],
+    },
+    {
+      id: 1,
+      type: '성실성',
+      content: [
+        { name: '나무늘보', min: 0, max: 3.25 },
+        { name: '코끼리', min: 3.25, max: 4.25 },
+        { name: '벌새', min: 4.25, max: 6 },
+      ],
+    },
+    {
+      id: 2,
+      type: '외향성',
+      content: [
+        { name: '고슴도치', min: 0, max: 3.25 },
+        { name: '고양이', min: 3.25, max: 4.25 },
+        { name: '앵무새', min: 4.25, max: 6 },
+      ],
+    },
+    {
+      id: 3,
+      type: '우호성',
+      content: [
+        { name: '알파카', min: 0, max: 3.25 },
+        { name: '악어', min: 3.25, max: 4.25 },
+        { name: '랫서팬더', min: 4.25, max: 6 },
+      ],
+    },
+    {
+      id: 4,
+      type: '신경성',
+      content: [
+        { name: '독수리', min: 0, max: 3.25 },
+        { name: '코알라', min: 3.25, max: 4.25 },
+        { name: '토끼', min: 4.25, max: 6 },
+      ],
+    },
+  ];
+  // let animal = 동물.find((item) => value >= item.min && value < item.max);
+  // return animal ? animal.name + '.jpeg' : '';
+  // }
+  // let imageSrc = getImageSrc(result[0]);
 
+  // FIXME: 수정하기
+  // FIXME: 수정하기
+  // FIXME: 수정하기
+  let finalResult = result.map((value, index) => {
+    let animalType = 동물.find((animal) => animal.id === index);
+    let animalContent = animalType.content.find(
+      (content) => value >= content.min && value < content.max,
+    );
+    // FIXME: 수정하기 확인하고
+    // return animalContent ? animalContent.name : 'Not found';
+    return animalContent ? animalContent.name : '';
+  });
+
+  // FIXME: 지울거 근데 마지막에 .name을 붙이면 될때도 있고 안될때도 있음 해결해보던가 지우우고 바로 위 코드로 사용하기
+  // let finalResult = result.map((value, index) => {
+  //   let animalType = 동물.find((animal) => animal.id === index);
+  //   let animalName = animalType.content.find(
+  //     (content) => value >= content.min && value < content.max,
+  //   ).name; // 이부분에 마지막에 .name를 하지 않으면 인덱스에 해당하는 객체를 통째로 가져옴 name min max가 다들어있음
+  //   return animalName;
+  // });
+
+  // 최종결과의 neme만 들어있는 변수
+  console.log(finalResult);
+
+  // FIXME: 수정할거!!
+  // FIXME: 수정할거!! 확인하고 지우기
+  // images 배열은 이미지 파일의 경로를 저장
+  // const images = finalResult.map(
+  //   (name) => require(`../assets/img/${name}.jpeg`).default,
+  // );
+
+  // FIXME: 수정할거!!
+  // FIXME: 수정할거!!확인하고 지우기
+  // let images = [];
+  // if (finalResult.every((element) => typeof element === NaN)) {
+  //   images = finalResult.map(
+  //     (name) => require(`../assets/img/${name}.jpeg`).default,
+  //   );
+  // }
+  // // 이 배열을 <img> 태그의 src 속성에 지정하여 이미지를 렌더링할 수 있습니다.
+  // const imageElements = images.map((image) => <img src={image} alt="" />);
+
+  // console.log(images, imageElements, '확인중');
+
+  // FIXME: 수정할거!!
+  // FIXME: 수정할거!!
+  // FIXME: 수정할거!!
+
+  // const renderImages = () =>
+  //   finalResult.map((animal) => {
+  //     const imagePath = `../assets/img/${animal}.jpeg`;
+  //     return (
+  //       <div>
+  //         <img src={imagePath} alt={animal} />
+  //       </div>
+  //     );
+  //   });
+
+  // TODO: 성공코드!!
+  const animalIndex = {
+    고슴도치: 고슴도치,
+    고양이: 고양이,
+    곰: 곰,
+    나무늘보: 나무늘보,
+    당나귀: 당나귀,
+    독수리: 독수리,
+    랫서팬더: 랫서팬더,
+    벌새: 벌새,
+    악어: 악어,
+    알파카: 알파카,
+    앵무새: 앵무새,
+    원숭이: 원숭이,
+    코끼리: 코끼리,
+    코알라: 코알라,
+    토끼: 토끼,
+  };
+
+  const renderImages = () =>
+    finalResult.map((animal) => (
+      <div>
+        <img src={animalIndex[animal]} alt={animal} />
+      </div>
+    ));
+
+  // FIXME: 실패코드
+  // const animalIndex2 = {
+  //   고슴도치: require('../assets/img/고슴도치.jpeg').default,
+  //   고양이: require('../assets/img/고양이.jpeg').default,
+  //   곰: require('../assets/img/곰.jpeg').default,
+  //   나무늘보: require('../assets/img/나무늘보.jpeg').default,
+  //   당나귀: require('../assets/img/당나귀.jpeg').default,
+  //   독수리: `${require('../assets/img/독수리.jpeg').default}`,
+  //   랫서팬더: require('../assets/img/랫서팬더.jpeg').default,
+  //   벌새: require('../assets/img/벌새.jpeg').default,
+  //   악어: require('../assets/img/악어.jpeg').default,
+  //   알파카: require('../assets/img/알파카.jpeg').default,
+  //   앵무새: require('../assets/img/앵무새.jpeg').default,
+  //   원숭이: require('../assets/img/원숭이.jpeg').default,
+  //   코끼리: require('../assets/img/코끼리.jpeg').default,
+  //   코알라: require('../assets/img/코알라.jpeg').default,
+  //   토끼: require('../assets/img/토끼.jpeg').default,
+  // };
+  // const renderImages2 = () =>
+  // finalResult.map((animal) => (
+  //   <div>
+  //     <img src={animalIndex2[animal]} alt={animal} />
+  //   </div>
+  // ));
+
+  // console.log(finalResult, '여기 확인줄!~');
   // const images = [
   //   '고슴도치.jpeg',
   //   '고양이.jpeg',
@@ -128,6 +299,31 @@ const QuestionContainer = () => {
   //   '코알라.jpeg',
   //   '토끼.jpeg',
   // ];
+
+  // let result2 = a.flatMap((aItem) => {
+  //   // aItem은 a 배열의 각 요소입니다.
+  //   console.log('aItem:', aItem);
+
+  //   let filteredAnimals = 동물.filter((item) => item.id === aItem.id);
+  //   // filteredAnimals는 동물 배열에서 id가 aItem의 id와 일치하는 요소들입니다.
+  //   console.log('filteredAnimals:', filteredAnimals);
+
+  //   let contents = filteredAnimals.flatMap((item) => item.content);
+  //   // contents는 filteredAnimals의 각 요소의 content 속성 값들입니다.
+  //   console.log('contents:', contents);
+
+  //   let filteredContents = contents.filter(
+  //     (item) => aItem.value >= item.min && aItem.value <= item.max
+  //   );
+  //   // filteredContents는 contents에서 value가 min~max 범위에 있는 요소들입니다.
+  //   console.log('filteredContents:', filteredContents);
+
+  //   let names = filteredContents.map((item) => item.name);
+  //   // names는 filteredContents의 각 요소의 name 속성 값들입니다.
+  //   console.log('names:', names);
+
+  //   return names;
+  // });
 
   return (
     <div>
@@ -200,7 +396,19 @@ const QuestionContainer = () => {
             ))} */}
             {/* 최종 반환할 값 */}
             {`결과 = ${result}`}
-            <img src={imageSrc} alt="animal" />;
+            {/* FIXME: 지울거 */}
+            {/* <img src={imageSrc} alt="animal" />; */}
+            {finalResult}
+            {/* <div>{imageElements}</div> */}
+            {/* TODO: 지울거 */}
+            {/* <img src={require('../assets/img/고슴도치.jpeg').default} alt="hedgehog" style={{width: '100px', height: '100px'}}/> */}
+            {/* <img src={고슴도치} alt="고슴도치" /> */}
+
+            {/* TODO: 성공코드!!!!!! */}
+            {renderImages()}
+
+            {/* TODO: 실패코드 지울거 */}
+            {/* {renderImages2()} */}
           </ul>
         </>
       )}
