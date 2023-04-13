@@ -98,7 +98,6 @@ const QuestionContainer = () => {
                 key={index}
                 // 여기가 답변으로 보내는 데이터
                 onClick={() =>
-                  // FIXME: 확인하고 되돌리기
                   // handleAnswerSubmit(`Button ${index + 1} 이게 답변에 나오는 데이터!!! name으로 고치면 버튼이름을 전달`,)
                   handleAnswerSubmit(
                     `${
