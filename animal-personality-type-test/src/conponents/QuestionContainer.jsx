@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import 고슴도치 from '../assets/img/고슴도치.jpeg';
-import 고양이 from '../assets/img/고양이.jpeg';
-import 곰 from '../assets/img/곰.jpeg';
-import 나무늘보 from '../assets/img/나무늘보.jpeg';
-import 당나귀 from '../assets/img/당나귀.jpeg';
-import 독수리 from '../assets/img/독수리.jpeg';
-import 랫서팬더 from '../assets/img/랫서팬더.jpeg';
-import 벌새 from '../assets/img/벌새.jpeg';
-import 악어 from '../assets/img/악어.jpeg';
-import 알파카 from '../assets/img/알파카.jpeg';
-import 앵무새 from '../assets/img/앵무새.jpeg';
-import 원숭이 from '../assets/img/원숭이.jpeg';
-import 코끼리 from '../assets/img/코끼리.jpeg';
-import 코알라 from '../assets/img/코알라.jpeg';
-import 토끼 from '../assets/img/토끼.jpeg';
+import 고슴도치 from '../assets/img/고슴도치.png';
+import 고양이 from '../assets/img/고양이.png';
+import 곰 from '../assets/img/곰.png';
+import 나무늘보 from '../assets/img/나무늘보.png';
+import 당나귀 from '../assets/img/당나귀.png';
+import 독수리 from '../assets/img/독수리.png';
+import 랫서팬더 from '../assets/img/랫서팬더.png';
+import 벌새 from '../assets/img/벌새.png';
+import 악어 from '../assets/img/악어.png';
+import 알파카 from '../assets/img/알파카.png';
+import 앵무새 from '../assets/img/앵무새.png';
+import 원숭이 from '../assets/img/원숭이.png';
+import 코끼리 from '../assets/img/코끼리.png';
+import 코알라 from '../assets/img/코알라.png';
+import 토끼 from '../assets/img/토끼.png';
+
+import 배경_숲 from '../assets/img/배경_숲.jpeg';
+
+// FIXME: 문항에 대한 답변을 선택하지 않았을 경우 ex 15개의 질문 중 1개만 답변했을 경우 2번째 3번째 답변까지 즉, 1~3번 질문이 한 카테고리인데 1번만 응답했을 시 1 + ? + ? / 3 이라서 NaN이 되어버림 이 문제는 추후에 해결하고자 한다
 
 // 질문 리스트
 const questions = [
@@ -66,6 +70,91 @@ const questions = [
   },
 ];
 
+// 배경 설정
+const Container = styled.div`
+  /* width: 1000px;
+  height: 1000;
+  */
+
+  /* width: 100%;
+  height: 100vh;
+  background-image: url(${배경_숲});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; */
+
+  width: 100vw;
+  height: 100vh;
+  background-image: url(${배경_숲});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  // 배경 이미지가 스크롤되지 않고 화면에 고정
+  background-attachment: fixed;
+`;
+
+// const Backround = styled.div`
+//   background-image: url(${배경_숲});
+//   width: 1000px;
+//   height: 1000px;
+//   background-repeat: no-repeat;
+//   background-position: top center;
+//   background-size: cover;
+//   background-attachment: fixed;
+// `;
+
+const QuestionsContent = styled.div`
+  // FIXME:  모바일의 경우 버튼을 ㅁㅁㅁㅁㅁ 이런식으로 가로로 배치하면 불편할것 같음 = 이런식으로 세로로 버튼이 있는게 좋을 것 같기도 함 고민해보기
+
+  // 비활성화 해야 됨
+  display: flex;
+  // 버튼을 세로로 =이런식으로 정렬
+  flex-direction: column;
+  // 가로 정렬
+  /* justify-content: center; */
+
+  // 세로정렬 답변버튼 가운데 정렬
+  align-items: center;
+
+  // 질문과 버튼이 담긴 박스의 배경색
+  /* background-color: #4122; */
+
+  // 하위 모든 자식 요소에 적용
+  /* & > * {
+    flex: 1;
+  } */
+`;
+// const Background = styled.div`
+//   /* background-image: rul(${배경_숲}); */
+
+//   // 배경 이미지 반복 x
+
+//   display: flex;
+//   flex-direction: column;
+//   // 가로 정렬
+//   justify-content: center;
+//   // 세로정렬
+//   align-items: center;
+
+//   // 글자 색
+//   /* color: #1b3b30; */
+//   width: 100%;
+//   height: 100%;
+//   /* height: 1000px; */
+// `;
+
+// 동물 이미지가 들어있는 컴포넌트
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-basis : 0;
+  width: 100%;
+  height: 100%;
+`;
+
+
+
+
 // TODO: previous 버튼 1번 문항일때는 비활성화 시키기 + 마지막 문항일때는 next 버튼 비활성화 시키기
 const QuestionContainer = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -83,7 +172,7 @@ const QuestionContainer = () => {
   }
 
   // 총 결과값인 [ 1, 2.5, 3, 2, 5] 가 들어있는 배열
-  console.log('이건 언제 실행되나', result);
+  // console.log('이건 언제 실행되나', result);
 
   const handleAnswerSubmit = (answer) => {
     // userAnswers 배열에 새로운 answer를 추가
@@ -194,7 +283,7 @@ const QuestionContainer = () => {
   // });
 
   // 최종결과의 neme만 들어있는 변수
-  console.log(finalResult);
+  // console.log(finalResult);
 
   // FIXME: 수정할거!!
   // FIXME: 수정할거!! 확인하고 지우기
@@ -249,11 +338,15 @@ const QuestionContainer = () => {
     토끼: 토끼,
   };
 
+  const AnimalImg = styled.img`
+    /* flex-basis: 0; */
+    width:10rem;
+    height:10rem;
+  `;
+
   const renderImages = () =>
     finalResult.map((animal) => (
-      <div>
-        <img src={animalIndex[animal]} alt={animal} />
-      </div>
+      <AnimalImg src={animalIndex[animal]} alt={animal} />
     ));
 
   // FIXME: 실패코드
@@ -325,8 +418,74 @@ const QuestionContainer = () => {
   //   return names;
   // });
 
+  // 답변버튼
+  const AnswerButton = styled.button`
+    width: 7rem;
+    height: 2rem;
+    // 답변 버튼 색
+    background-color: #aea18f;
+    /* #7e9181 레세다 그린 
+    #DBD8C8
+      #b3aca1
+      #FAEDCD
+      #E9EDC9
+      #CCD5AE
+
+    */
+
+    // 버튼 색 그라디언효과 넣기
+    /* background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); */
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+
+    // 위 오른쪽 아래 왼쪽
+    margin: 0.5rem 1rem 0.5rem 1rem;
+  `;
+
+  // 질문 컴포넌트
+  const Question = styled.div`
+    /* 핸드폰 */
+
+    /* 태블릿 */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      /* 스타일 */
+      font-size: 3rem;
+      background-color: #667eea;
+    }
+
+    /* 데스크탑 모니터 */
+    @media (min-width: 1024px) {
+      /* 스타일 */
+      font-size: 5rem;
+      /* background-color: #522700; */
+    }
+
+    //
+    background-color: #aea18f;
+    // 배경 투명도
+    opacity: 0.93;
+    border-radius: 1rem;
+    font-size: 2rem;
+
+    /* color: #1b3b30; */
+    color: white;
+    /* color: #522700; */
+    /* background-color: #667eea;
+    background-color: #aea18f;
+    background-color: #522700; */
+
+    // top
+    // FIXME: 마진을 넣을지 컴포넌트를 센터로 맞출지 생각해보기
+    margin: 5rem 1rem 1rem 1rem;
+    /* margin-bottom: 2rem; */
+  `;
+
   return (
-    <div>
+    <Container>
       {/* {console.log(questions.length)} */}
       {/* {console.log(currentQuestionIndex, currentContentIndex)}
       {console.log(userAnswers)} */}
@@ -334,85 +493,103 @@ const QuestionContainer = () => {
       {/* 아직 답해야 할 질문이 남아있는 경우 */}
       {/* {!(currentQuestionIndex === questions.length-1 && currentContentIndex === questions[currentContentIndex].content.length-1) ? (   */}
       {currentQuestionIndex < questions.length ? (
-        <>
+        <QuestionsContent>
           {/* 현재 질문 번호 표시 */}
           {/* <h1>Question {currentQuestionIndex + 1}</h1> */}
 
           {/* FIXME: 확인하고 지울지 활용할지 생각해보기 */}
           {/* 타이틀을 렌더링함 없으면 그냥 빈칸으로 렌더링 */}
           {/* <h1>타이틀 = {questions[currentQuestionIndex].title}</h1> */}
+
           {/* questions[currentQuestionIndex].title이 있으면 화면에 title을 렌더링 함 */}
-          {questions[currentQuestionIndex].title && (
+          {/* {questions[currentQuestionIndex].title && (
             <h1>타이틀 = {questions[currentQuestionIndex].title}</h1>
-          )}
+          )} */}
+
           {/* 현재 질문 내용 표시 */}
-          <ul>
-            {/* 질문 세개 한번에 다 보여주기 */}
-            {/* {Object.values(questions[currentQuestionIndex].content).map(
+
+          {/* 질문 세개 한번에 다 보여주기 */}
+          {/* {Object.values(questions[currentQuestionIndex].content).map(
               (question, index) => (
                 <li key={index}>{question}</li>
               ),
             )} */}
-            {/* 한번에 한가지 질문 */}
-            {/* {questions[currentQuestionIndex].content[0]} */}
 
-            <div>
-              {questions[currentQuestionIndex].content[currentContentIndex]}
-            </div>
-          </ul>
+          {/* 한번에 한가지 질문 */}
+          {/* {questions[currentQuestionIndex].content[0]} */}
+
+          {/* <div> */}
+          {/* {questions[currentQuestionIndex].content[currentContentIndex]} */}
+          {/* </div> */}
+
           {/* 답변 버튼 표시 */}
           {/* 초기버튼 */}
           {/* {generateButtons(5)} */}
 
           {/* // FIXME: 버튼 생성 버전2 */}
-          <div>
-            {buttonNames.map((name, index) => (
-              <button
-                key={index}
-                // 여기가 답변으로 보내는 데이터
-                onClick={() =>
-                  // handleAnswerSubmit(`Button ${index + 1} 이게 답변에 나오는 데이터!!! name으로 고치면 버튼이름을 전달`,)
-                  handleAnswerSubmit(
-                    // `${index + 1} 이게 답변에 나오는 데이터!!! name으로 고치면 버튼이름을 전달`,
-                    index + 1,
-                  )
-                }
-              >
-                {name}
-              </button>
-            ))}
-          </div>
+          {/* <div> */}
+          <Question>
+            {questions[currentQuestionIndex].content[currentContentIndex]}
+          </Question>
+          {buttonNames.map((name, index) => (
+            <AnswerButton
+              key={index}
+              // 여기가 답변으로 보내는 데이터
+              onClick={() =>
+                // handleAnswerSubmit(`Button ${index + 1} 이게 답변에 나오는 데이터!!! name으로 고치면 버튼이름을 전달`,)
+                handleAnswerSubmit(
+                  // `${index + 1} 이게 답변에 나오는 데이터!!! name으로 고치면 버튼이름을 전달`,
+                  index + 1,
+                )
+              }
+            >
+              {name}
+            </AnswerButton>
+          ))}
+          {/* </div> */}
           {/* 여기까지 버튼 생성 버전2 */}
-        </>
+        </QuestionsContent>
       ) : (
         <>
-          <h1>Quiz complete!</h1>
-          <h2>Answers:</h2>
-          <ul>
+          {/* 결과 페이지 제목 */}
+          
+          {/* <h2>Answers:</h2> */}
+
+          
             {/* FIXME: 사용자가 선택한 모든 결과값을 나타냄 화면에 렌더링 할 필요는 없음 */}
             {/* {userAnswers.map((answer, index) => (
               //  <li> 태그에 전달된 answer 변수에는 userAnswers 배열의 각 답변 값이 포함되며, 이는 목록 항목의 텍스트 콘텐츠로 표시
               <li key={index}>{answer}</li>
             ))} */}
-            {/* 최종 반환할 값 */}
-            {`결과 = ${result}`}
-            {/* FIXME: 지울거 */}
+
+            {/* FIXME: 확인하고 지우기! */}
+            {/* 최종 반환값 - 5개 카테고리별 평균값 */}
+            {/* {`결과 = ${result}`} */}
+
             {/* <img src={imageSrc} alt="animal" />; */}
-            {finalResult}
+
+            {/* result의 각 요소에 대응하는 동물 ex) result에서 외향성 값이 4 라면 곰 name: '곰', min: 3.25, max: 4.25 } */}
+            {/* result에 대응하는 동물이름이 들어있는 배열 */}
+            {/* {finalResult} */}
+
             {/* <div>{imageElements}</div> */}
             {/* TODO: 지울거 */}
             {/* <img src={require('../assets/img/고슴도치.jpeg').default} alt="hedgehog" style={{width: '100px', height: '100px'}}/> */}
             {/* <img src={고슴도치} alt="고슴도치" /> */}
 
-            {/* TODO: 성공코드!!!!!! */}
-            {renderImages()}
+            {/* TODO: 성공코드!! 동물 이미지 렌더링 */}
+            
+            <Content>
+            <h1> 나의 성격을 나타내는 동물은?! </h1>
+              <div>{renderImages()}</div>
+              </Content>
 
             {/* TODO: 실패코드 지울거 */}
             {/* {renderImages2()} */}
-          </ul>
+          
         </>
       )}
-    </div>
+    </Container>
   );
 };
 
