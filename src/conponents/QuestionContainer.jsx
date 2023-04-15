@@ -147,13 +147,10 @@ const QuestionsContent = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  flex-basis : 0;
+  flex-basis: 0;
   width: 100%;
   height: 100%;
 `;
-
-
-
 
 // TODO: previous 버튼 1번 문항일때는 비활성화 시키기 + 마지막 문항일때는 next 버튼 비활성화 시키기
 const QuestionContainer = () => {
@@ -340,8 +337,8 @@ const QuestionContainer = () => {
 
   const AnimalImg = styled.img`
     /* flex-basis: 0; */
-    width:10rem;
-    height:10rem;
+    width: 7rem;
+    height: 7rem;
   `;
 
   const renderImages = () =>
@@ -552,40 +549,36 @@ const QuestionContainer = () => {
       ) : (
         <>
           {/* 결과 페이지 제목 */}
-          
+
           {/* <h2>Answers:</h2> */}
 
-          
-            {/* FIXME: 사용자가 선택한 모든 결과값을 나타냄 화면에 렌더링 할 필요는 없음 */}
-            {/* {userAnswers.map((answer, index) => (
+          {/* FIXME: 사용자가 선택한 모든 결과값을 나타냄 화면에 렌더링 할 필요는 없음 */}
+          {/* {userAnswers.map((answer, index) => (
               //  <li> 태그에 전달된 answer 변수에는 userAnswers 배열의 각 답변 값이 포함되며, 이는 목록 항목의 텍스트 콘텐츠로 표시
               <li key={index}>{answer}</li>
             ))} */}
 
-            {/* FIXME: 확인하고 지우기! */}
-            {/* 최종 반환값 - 5개 카테고리별 평균값 */}
-            {/* {`결과 = ${result}`} */}
+          {/* FIXME: 확인하고 지우기! */}
+          {/* 최종 반환값 - 5개 카테고리별 평균값 */}
+          {/* {`결과 = ${result}`} */}
 
-            {/* <img src={imageSrc} alt="animal" />; */}
+          {/* <img src={imageSrc} alt="animal" />; */}
 
-            {/* result의 각 요소에 대응하는 동물 ex) result에서 외향성 값이 4 라면 곰 name: '곰', min: 3.25, max: 4.25 } */}
-            {/* result에 대응하는 동물이름이 들어있는 배열 */}
-            {/* {finalResult} */}
+          {/* result의 각 요소에 대응하는 동물 ex) result에서 외향성 값이 4 라면 곰 name: '곰', min: 3.25, max: 4.25 } */}
+          {/* result에 대응하는 동물이름이 들어있는 배열 */}
+          {/* {finalResult} */}
 
-            {/* <div>{imageElements}</div> */}
-            {/* TODO: 지울거 */}
-            {/* <img src={require('../assets/img/고슴도치.jpeg').default} alt="hedgehog" style={{width: '100px', height: '100px'}}/> */}
-            {/* <img src={고슴도치} alt="고슴도치" /> */}
+          {/* <div>{imageElements}</div> */}
+          {/* TODO: 지울거 */}
+          {/* <img src={require('../assets/img/고슴도치.jpeg').default} alt="hedgehog" style={{width: '100px', height: '100px'}}/> */}
+          {/* <img src={고슴도치} alt="고슴도치" /> */}
 
-            {/* TODO: 성공코드!! 동물 이미지 렌더링 */}
-            
-            <Content>
+          {/* TODO: 성공코드!! 동물 이미지 렌더링 */}
+
+          <Content>
             <h1> 나의 성격을 나타내는 동물은?! </h1>
-              <div>{renderImages()}</div>
-              </Content>
-
-            
-          
+            <div>{renderImages()}</div>
+          </Content>
         </>
       )}
     </Container>
