@@ -584,8 +584,7 @@ const QuestionContainer = () => {
               <div>{renderImages()}</div>
               </Content>
 
-            {/* TODO: 실패코드 지울거 */}
-            {/* {renderImages2()} */}
+            
           
         </>
       )}
