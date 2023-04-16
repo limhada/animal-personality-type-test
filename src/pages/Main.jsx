@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import Question from '../conponents/QuestionContainer';
 
 // const LogoPng = styled.img`
