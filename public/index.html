@@ -28,7 +28,7 @@
     <!-- Google tag (gtag.js) -->
     <script
       async
-      src="https://www.googletagmanager.com/gtag/js?id=${process.env.REACT_APP_GOOGLE_ANALYTICS_ID}"
+      src="https://www.googletagmanager.com/gtag/js?id=${process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID}"
     ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -37,7 +37,7 @@
       }
       gtag('js', new Date());
 
-      gtag('config', '${process.env.REACT_APP_GOOGLE_ANALYTICS_ID}');
+      gtag('config', '${process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID}');
     </script>
 
     <title>동물 성격유형 테스트</title>

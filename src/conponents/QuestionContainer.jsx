@@ -152,6 +152,88 @@ const Content = styled.div`
   height: 100%;
 `;
 
+
+const AnimalImg = styled.img`
+/* flex-basis: 0; */
+width: 7rem;
+height: 7rem;
+`;
+
+
+// 답변버튼
+const AnswerButton = styled.button`
+width: 7rem;
+height: 2rem;
+// 답변 버튼 색
+background-color: #aea18f;
+/* #7e9181 레세다 그린 
+#DBD8C8
+#b3aca1
+#FAEDCD
+#E9EDC9
+#CCD5AE
+
+*/
+
+// 버튼 색 그라디언효과 넣기
+/* background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); */
+color: white;
+font-size: 0.8rem;
+font-weight: bold;
+border: none;
+border-radius: 0.5rem;
+cursor: pointer;
+
+// 위 오른쪽 아래 왼쪽
+margin: 0.5rem 1rem 0.5rem 1rem;
+`;
+
+// 질문 컴포넌트
+const Question = styled.div`
+/* 핸드폰 */
+
+/* 태블릿 */
+@media (min-width: 768px) and (max-width: 1023px) {
+/* 스타일 */
+font-size: 3rem;
+background-color: #667eea;
+}
+
+/* 데스크탑 모니터 */
+@media (min-width: 1024px) {
+/* 스타일 */
+font-size: 5rem;
+/* background-color: #522700; */
+}
+
+//
+background-color: #aea18f;
+// 배경 투명도
+opacity: 0.93;
+border-radius: 1rem;
+font-size: 2rem;
+
+/* color: #1b3b30; */
+color: white;
+/* color: #522700; */
+/* background-color: #667eea;
+background-color: #aea18f;
+background-color: #522700; */
+
+// top
+// FIXME: 마진을 넣을지 컴포넌트를 센터로 맞출지 생각해보기
+margin: 5rem 1rem 1rem 1rem;
+/* margin-bottom: 2rem; */
+`;
+
+
+
+
+
+
+// TODO: 
+// TODO: 
+// TODO: 
 // TODO: previous 버튼 1번 문항일때는 비활성화 시키기 + 마지막 문항일때는 next 버튼 비활성화 시키기
 const QuestionContainer = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -335,11 +417,8 @@ const QuestionContainer = () => {
     토끼: 토끼,
   };
 
-  const AnimalImg = styled.img`
-    /* flex-basis: 0; */
-    width: 7rem;
-    height: 7rem;
-  `;
+
+
 
   const renderImages = () =>
     finalResult.map((animal) => (
@@ -415,71 +494,7 @@ const QuestionContainer = () => {
   //   return names;
   // });
 
-  // 답변버튼
-  const AnswerButton = styled.button`
-    width: 7rem;
-    height: 2rem;
-    // 답변 버튼 색
-    background-color: #aea18f;
-    /* #7e9181 레세다 그린 
-    #DBD8C8
-      #b3aca1
-      #FAEDCD
-      #E9EDC9
-      #CCD5AE
-
-    */
-
-    // 버튼 색 그라디언효과 넣기
-    /* background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); */
-    color: white;
-    font-size: 0.8rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-
-    // 위 오른쪽 아래 왼쪽
-    margin: 0.5rem 1rem 0.5rem 1rem;
-  `;
-
-  // 질문 컴포넌트
-  const Question = styled.div`
-    /* 핸드폰 */
-
-    /* 태블릿 */
-    @media (min-width: 768px) and (max-width: 1023px) {
-      /* 스타일 */
-      font-size: 3rem;
-      background-color: #667eea;
-    }
-
-    /* 데스크탑 모니터 */
-    @media (min-width: 1024px) {
-      /* 스타일 */
-      font-size: 5rem;
-      /* background-color: #522700; */
-    }
-
-    //
-    background-color: #aea18f;
-    // 배경 투명도
-    opacity: 0.93;
-    border-radius: 1rem;
-    font-size: 2rem;
-
-    /* color: #1b3b30; */
-    color: white;
-    /* color: #522700; */
-    /* background-color: #667eea;
-    background-color: #aea18f;
-    background-color: #522700; */
-
-    // top
-    // FIXME: 마진을 넣을지 컴포넌트를 센터로 맞출지 생각해보기
-    margin: 5rem 1rem 1rem 1rem;
-    /* margin-bottom: 2rem; */
-  `;
+  
 
   return (
     <Container>
