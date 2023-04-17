@@ -6,7 +6,7 @@ import ReactGA from 'react-ga4';
  * uri 변경 추적 컴포넌트
  * uri가 변경될 때마다 pageview 이벤트 전송
  */
-const RouteChangeTracker = ({ pageName }) => {
+const RouteChangeTracker = () => {
   const location = useLocation();
   const [initialized, setInitialized] = useState(false);
 
@@ -24,9 +24,9 @@ const RouteChangeTracker = ({ pageName }) => {
       ReactGA.set({ page: location.pathname });
       // 기존코드
       // ReactGA.send('pageview');
-      ReactGA.send(`pageview_${pageName}`);
+      ReactGA.send(`pageview`);
     }
-  }, [initialized, location, pageName]);
+  }, [initialized, location]);
 
   // // 개발용
   // useEffect(() => {

@@ -1,10 +1,10 @@
 import React from 'react';
-import RouteChangeTracker from '../routes/RouteChangeTracker';
+// import RouteChangeTracker from '../routes/RouteChangeTracker';
 const One = () => {
   return (
     <div>
-      <RouteChangeTracker pageName="One" />
-      <div>테스트 페이지</div>
+      {/* <RouteChangeTracker/> */}
+      <div>테스트 페이지222</div>
     </div>
   );
 };
