@@ -635,6 +635,13 @@ const QuestionContainer = () => {
 
             {/* 방법13   */}
             <button onClick={handleShareClick}>새창열기</button>
+
+            <a
+              href="https://animal-personality-type-test.vercel.app"
+              target="_system"
+            >
+              링크 텍스트
+            </a>
           </Content>
         </>
       )}
