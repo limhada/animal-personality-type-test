@@ -406,7 +406,7 @@ const QuestionContainer = () => {
     );
   };
 
-  // TODO: 방법9 - 성공 - 버튼을 클릭했을때 공유하기 기능이 정상적으로 작동
+  // TODO: 방법9 - 성공 - 버튼을 클릭했을때 공유하기 기능이 정상적으로 작동 하지만 모바일에서 문제 발생... 자세한 문제는 아래서 설명
   // FIXME: toBlob을 사용함 사용하는 방법 알아보기
   const handleShareClick9 = () => {
     html2canvas(document.querySelector('#main_capture')).then((canvas) => {
@@ -429,6 +429,32 @@ const QuestionContainer = () => {
           console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
         }
       }, 'image/png');
+    });
+  };
+
+  //방법 10
+  const handleShareClick10 = () => {
+    html2canvas(document.querySelector('#main_capture'), {
+      scale: window.devicePixelRatio,
+      foreignObjectRendering: true,
+    }).then((canvas) => {
+      canvas.toBlob((blob) => {
+        // 생성된 Blob 객체를 로컬 스토리지에 저장
+        localStorage.setItem('capturedImage', blob);
+        if (navigator.share) {
+          navigator
+            .share({
+              title: '캡처된 이미지 공유',
+              text: '이미지를 공유합니다',
+              // 생성된 Blob 객체를 files에 전달
+              files: [new File([blob], 'image.svg', { type: 'image/svg+xml' })],
+            })
+            .then(() => console.log('이미지 공유 완료'))
+            .catch((error) => console.error('이미지 공유 실패: ', error));
+        } else {
+          console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+        }
+      }, 'image/svg+xml');
     });
   };
 
@@ -490,6 +516,9 @@ const QuestionContainer = () => {
 
             {/* 방법9 */}
             <button onClick={handleShareClick9}>이미지 공유 방법9</button>
+
+            {/* 방법10   */}
+            <button onClick={handleShareClick10}>이미지 공유 방법10</button>
           </Content>
         </>
       )}
