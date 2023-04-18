@@ -300,43 +300,59 @@ const QuestionContainer = () => {
 
   // 방법3 -  - 이미지를 새창에서 연다
   const handleDownloadClick = () => {
-    html2canvas(document.querySelector("#main_capture")).then((canvas) => {
+    html2canvas(document.querySelector('#main_capture')).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
       const newTab = window.open();
       newTab.document.body.innerHTML = '<img src="' + imgData + '">';
     });
   };
 
-
-
   // 방법 4
   const [imageURL, setImageURL] = useState('');
 
-  const captureAndDisplay = ()  =>  {
+  const captureAndDisplay = () => {
     const element = document.querySelector('#main_capture');
 
-    html2canvas(element).then(canvas => {
+    html2canvas(element).then((canvas) => {
       const image = canvas.toDataURL();
       setImageURL(image);
-    })
-  }
+    });
+  };
 
-
-  // 방법5
+  // 방법5 성공 하지만 동물테스트 메인페이지 링크가 공유됨 공유 기능은 잘 작동함
   const shareImage = async (imageURL) => {
     try {
       await navigator.share({
         title: '이미지 공유하기',
         text: '이미지를 공유합니다.',
-        url: imageURL
+        url: imageURL,
       });
     } catch (error) {
       console.error('이미지 공유 실패:', error);
     }
   };
-  
 
+  // 방법6
+  const handleShareClick = () => {
+    // html2canvas(document.querySelector('#main_capture')).then((canvas) => {
+      // 이미지크기 50%줄이는 코드
+      html2canvas(document.querySelector("#main_capture"), { scale: 0.5 }).then(canvas => {
 
+      const image = canvas.toDataURL('image/png');
+      if (navigator.share) {
+        navigator
+          .share({
+            title: '캡처된 이미지 공유',
+            text: '이미지를 공유합니다',
+            files: [new File([image], 'image.png', { type: 'image/png' })],
+          })
+          .then(() => console.log('이미지 공유 완료'))
+          .catch((error) => console.error('이미지 공유 실패: ', error));
+      } else {
+        console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+      }
+    });
+  };
 
   return (
     <Container id="main_capture">
@@ -374,20 +390,19 @@ const QuestionContainer = () => {
             {/* 방법2와 3은 그냥 클릭하면 된다 */}
             <button onClick={handleDownloadClick}>Download</button>
 
-
             {/* 방법4 */}
             <div>
-              
-      
+              <button onClick={captureAndDisplay}>캡처 및 표시</button>
+              {imageURL && <img src={imageURL} alt="캡처된 이미지" />}
 
-      <button onClick={captureAndDisplay}>캡처 및 표시</button>
-      {imageURL && <img src={imageURL} alt="캡처된 이미지" />}
+              {/* 방법5 */}
+              <button onClick={() => shareImage(imageURL)}>
+                이미지 공유하기
+              </button>
+            </div>
 
-      {/* 방법5 */}
-      <button onClick={() => shareImage(imageURL)}>이미지 공유하기</button>
-    </div>
-
-
+            {/* 방법6 */}
+            <button onClick={handleShareClick}>이미지 공유 방법6</button>
           </Content>
         </>
       )}
