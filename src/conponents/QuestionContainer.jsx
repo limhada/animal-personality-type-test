@@ -300,112 +300,112 @@ const QuestionContainer = () => {
   // };
 
   // 방법3 -  - 이미지를 새창에서 연다
-  const handleDownloadClick = () => {
-    html2canvas(document.querySelector('#main_capture')).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const newTab = window.open();
-      newTab.document.body.innerHTML = '<img src="' + imgData + '">';
-    });
-  };
+  // const handleDownloadClick = () => {
+  //   html2canvas(document.querySelector('#main_capture')).then((canvas) => {
+  //     const imgData = canvas.toDataURL('image/png');
+  //     const newTab = window.open();
+  //     newTab.document.body.innerHTML = '<img src="' + imgData + '">';
+  //   });
+  // };
 
-  // 방법 4 캡처 및 표시
-  const [imageURL, setImageURL] = useState('');
+  // // 방법 4 캡처 및 표시
+  // const [imageURL, setImageURL] = useState('');
 
-  const captureAndDisplay = () => {
-    const element = document.querySelector('#main_capture');
+  // const captureAndDisplay = () => {
+  //   const element = document.querySelector('#main_capture');
 
-    html2canvas(element).then((canvas) => {
-      const image = canvas.toDataURL();
-      setImageURL(image);
-    });
-  };
+  //   html2canvas(element).then((canvas) => {
+  //     const image = canvas.toDataURL();
+  //     setImageURL(image);
+  //   });
+  // };
 
-  // 방법5 성공 하지만 동물테스트 메인페이지 링크가 공유됨 공유 기능은 잘 작동함
-  const shareImage = async (imageURL) => {
-    try {
-      await navigator.share({
-        title: '이미지 공유하기',
-        text: '이미지를 공유합니다.',
-        url: imageURL,
-      });
-    } catch (error) {
-      console.error('이미지 공유 실패:', error);
-    }
-  };
+  // // 방법5 성공 하지만 동물테스트 메인페이지 링크가 공유됨 공유 기능은 잘 작동함
+  // const shareImage = async (imageURL) => {
+  //   try {
+  //     await navigator.share({
+  //       title: '이미지 공유하기',
+  //       text: '이미지를 공유합니다.',
+  //       url: imageURL,
+  //     });
+  //   } catch (error) {
+  //     console.error('이미지 공유 실패:', error);
+  //   }
+  // };
 
-  // 방법6 정상적으로 작동하지만 방법 5와 마찬가지로 이미지가 정상적으로 열리지 않음
-  const handleShareClick = () => {
-    // html2canvas(document.querySelector('#main_capture')).then((canvas) => {
-    // 이미지크기 50%줄이는 코드
-    html2canvas(document.querySelector('#main_capture'), { scale: 0.5 }).then(
-      (canvas) => {
-        const image = canvas.toDataURL('image/png');
-        if (navigator.share) {
-          navigator
-            .share({
-              title: '캡처된 이미지 공유',
-              text: '이미지를 공유합니다',
-              files: [new File([image], 'image.png', { type: 'image/png' })],
-            })
-            .then(() => console.log('이미지 공유 완료'))
-            .catch((error) => console.error('이미지 공유 실패: ', error));
-        } else {
-          console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
-        }
-      },
-    );
-  };
+  // // 방법6 정상적으로 작동하지만 방법 5와 마찬가지로 이미지가 정상적으로 열리지 않음
+  // const handleShareClick = () => {
+  //   // html2canvas(document.querySelector('#main_capture')).then((canvas) => {
+  //   // 이미지크기 50%줄이는 코드
+  //   html2canvas(document.querySelector('#main_capture'), { scale: 0.5 }).then(
+  //     (canvas) => {
+  //       const image = canvas.toDataURL('image/png');
+  //       if (navigator.share) {
+  //         navigator
+  //           .share({
+  //             title: '캡처된 이미지 공유',
+  //             text: '이미지를 공유합니다',
+  //             files: [new File([image], 'image.png', { type: 'image/png' })],
+  //           })
+  //           .then(() => console.log('이미지 공유 완료'))
+  //           .catch((error) => console.error('이미지 공유 실패: ', error));
+  //       } else {
+  //         console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+  //       }
+  //     },
+  //   );
+  // };
 
-  // 방법 7 - 실패
-  const handleShareClick7 = () => {
-    html2canvas(document.querySelector('#main_capture'), { scale: 0.5 }).then(
-      (canvas) => {
-        const image = canvas.toDataURL('image/png');
-        // Base64 인코딩된 이미지를 로컬 스토리지에 저장
-        localStorage.setItem('capturedImage', image);
-        if (navigator.share) {
-          navigator
-            .share({
-              title: '캡처된 이미지 공유',
-              text: '이미지를 공유합니다',
-              // 로컬 스토리지에서 이미지를 불러와 사용
-              files: [new File([image], 'image.png', { type: 'image/png' })],
-            })
-            .then(() => console.log('이미지 공유 완료'))
-            .catch((error) => console.error('이미지 공유 실패: ', error));
-        } else {
-          console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
-        }
-      },
-    );
-  };
+  // // 방법 7 - 실패
+  // const handleShareClick7 = () => {
+  //   html2canvas(document.querySelector('#main_capture'), { scale: 0.5 }).then(
+  //     (canvas) => {
+  //       const image = canvas.toDataURL('image/png');
+  //       // Base64 인코딩된 이미지를 로컬 스토리지에 저장
+  //       localStorage.setItem('capturedImage', image);
+  //       if (navigator.share) {
+  //         navigator
+  //           .share({
+  //             title: '캡처된 이미지 공유',
+  //             text: '이미지를 공유합니다',
+  //             // 로컬 스토리지에서 이미지를 불러와 사용
+  //             files: [new File([image], 'image.png', { type: 'image/png' })],
+  //           })
+  //           .then(() => console.log('이미지 공유 완료'))
+  //           .catch((error) => console.error('이미지 공유 실패: ', error));
+  //       } else {
+  //         console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+  //       }
+  //     },
+  //   );
+  // };
 
-  //방법 8
-  const handleShareClick8 = () => {
-    html2canvas(document.querySelector('#main_capture'), { scale: 0.5 }).then(
-      (canvas) => {
-        const image = canvas.toDataURL('image/png');
-        // Base64 인코딩된 이미지를 로컬 스토리지에 저장
-        localStorage.setItem('capturedImage', image);
-        if (navigator.share) {
-          const sharedImage = new Image();
-          sharedImage.src = localStorage.getItem('capturedImage');
-          sharedImage.onload = () => {
-            navigator
-              .share({
-                title: '캡처된 이미지 공유',
-                text: '이미지를 공유합니다',
-                files: [sharedImage],
-              })
-              .then(() => console.log('이미지 공유 완료'))
-              .catch((error) => console.error('이미지 공유 실패: ', error));
-          };
-        } else {
-          console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
-        }
-      },
-    );
-  };
+  // //방법 8
+  // const handleShareClick8 = () => {
+  //   html2canvas(document.querySelector('#main_capture'), { scale: 0.5 }).then(
+  //     (canvas) => {
+  //       const image = canvas.toDataURL('image/png');
+  //       // Base64 인코딩된 이미지를 로컬 스토리지에 저장
+  //       localStorage.setItem('capturedImage', image);
+  //       if (navigator.share) {
+  //         const sharedImage = new Image();
+  //         sharedImage.src = localStorage.getItem('capturedImage');
+  //         sharedImage.onload = () => {
+  //           navigator
+  //             .share({
+  //               title: '캡처된 이미지 공유',
+  //               text: '이미지를 공유합니다',
+  //               files: [sharedImage],
+  //             })
+  //             .then(() => console.log('이미지 공유 완료'))
+  //             .catch((error) => console.error('이미지 공유 실패: ', error));
+  //         };
+  //       } else {
+  //         console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+  //       }
+  //     },
+  //   );
+  // };
 
   // TODO: 방법9 - 성공 - 버튼을 클릭했을때 공유하기 기능이 정상적으로 작동 하지만 모바일에서 문제 발생... 자세한 문제는 아래서 설명
   // FIXME: toBlob을 사용함 사용하는 방법 알아보기
@@ -429,7 +429,7 @@ const QuestionContainer = () => {
         } else {
           console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
         }
-      }, 'image/png');
+      }, 'image/webp');
     });
   };
 
@@ -481,7 +481,7 @@ const QuestionContainer = () => {
         } else {
           console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
         }
-      }, 'image/svg+xml');
+      }, 'image/png');
     });
   };
 
@@ -545,27 +545,28 @@ const QuestionContainer = () => {
             {/* {image && <img src={image} alt="Downloaded image" />} */}
 
             {/* 방법2와 3은 그냥 클릭하면 된다 */}
-            <button onClick={handleDownloadClick}>Download</button>
+            {/* <button onClick={handleDownloadClick}>Download</button> */}
 
             {/* 방법4 */}
-            <div>
-              <button onClick={captureAndDisplay}>캡처 및 표시</button>
-              {imageURL && <img src={imageURL} alt="캡처된 이미지" />}
+            
+            {/* <div> */}
+              {/* <button onClick={captureAndDisplay}>캡처 및 표시</button> */}
+              {/* {imageURL && <img src={imageURL} alt="캡처된 이미지" />} */}
 
               {/* 방법5 */}
-              <button onClick={() => shareImage(imageURL)}>
-                이미지 공유하기
-              </button>
-            </div>
+              {/* <button onClick={() => shareImage(imageURL)}> */}
+                {/* 이미지 공유하기 */}
+              {/* </button> */}
+            {/* </div> */}
 
             {/* 방법6 */}
-            <button onClick={handleShareClick}>이미지 공유 방법6</button>
+            {/* <button onClick={handleShareClick}>이미지 공유 방법6</button> */}
 
             {/* 방법7 */}
-            <button onClick={handleShareClick7}>이미지 공유 방법7</button>
+            {/* <button onClick={handleShareClick7}>이미지 공유 방법7</button> */}
 
             {/* 방법8 */}
-            <button onClick={handleShareClick8}>이미지 공유 방법8</button>
+            {/* <button onClick={handleShareClick8}>이미지 공유 방법8</button> */}
 
             {/* 방법9 */}
             <button onClick={handleShareClick9}>이미지 공유 방법9</button>
