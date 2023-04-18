@@ -35,15 +35,15 @@ const questions = [
       2: '새로운 아이디어나 방법을 시도해 보는 것을 좋아하시나요?',
     },
   },
-  // {
-  //   id: 1,
-  //   type: '성실성',
-  //   content: {
-  //     0: '일을 미루기보다는 빨리 처리하는 편인가요?',
-  //     1: '계획을 세우고 그 계획에 따라 일을 처리하시나요?',
-  //     2: '약속 시간을 잘 지키시나요?',
-  //   },
-  // },
+  {
+    id: 1,
+    type: '성실성',
+    content: {
+      0: '일을 미루기보다는 빨리 처리하는 편인가요?',
+      1: '계획을 세우고 그 계획에 따라 일을 처리하시나요?',
+      2: '약속 시간을 잘 지키시나요?',
+    },
+  },
   // {
   //   id: 2,
   //   type: '외향성',
@@ -437,7 +437,7 @@ const QuestionContainer = () => {
   const handleShareClick10 = () => {
     html2canvas(document.querySelector('#main_capture'), {
       scale: window.devicePixelRatio,
-      foreignObjectRendering: true,
+      foreignObjectRendering: false,
     }).then((canvas) => {
       canvas.toBlob((blob) => {
         // 생성된 Blob 객체를 로컬 스토리지에 저장
@@ -459,11 +459,11 @@ const QuestionContainer = () => {
     });
   };
 
-  //방법 11 jpeg를 png으로
+  //방법 11  png으로
   const handleShareClick11 = () => {
     html2canvas(document.querySelector('#main_capture'), {
       scale: window.devicePixelRatio,
-      foreignObjectRendering: true,
+      foreignObjectRendering: false,
     }).then((canvas) => {
       canvas.toBlob((blob) => {
         // 생성된 Blob 객체를 로컬 스토리지에 저장
@@ -485,15 +485,16 @@ const QuestionContainer = () => {
     });
   };
 
-  //방법 12 jpeg를 jpeg로
+  //방법 12 jpeg로
   const handleShareClick12 = () => {
     html2canvas(document.querySelector('#main_capture'), {
       scale: window.devicePixelRatio,
-      foreignObjectRendering: true,
+      // FIXME: true로 설정 시 배경 이미지 포함 안됨!!!
+      foreignObjectRendering: false,
     }).then((canvas) => {
       canvas.toBlob((blob) => {
         // 생성된 Blob 객체를 로컬 스토리지에 저장
-        localStorage.setItem('capturedImage', blob);
+        // localStorage.setItem('capturedImage', blob);
         if (navigator.share) {
           navigator
             .share({
@@ -507,8 +508,49 @@ const QuestionContainer = () => {
         } else {
           console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
         }
-      }, 'image/svg+xml');
+      }, 'image/jpeg');
     });
+  };
+
+  // 방법13 카카오
+  const handleShareClick13 = () => {
+    if (/KAKAOTALK/i.test(navigator.userAgent)) {
+      html2canvas(document.querySelector('#main_capture')).then((canvas) => {
+        canvas.toBlob((blob) => {
+          // 생성된 Blob 객체를 로컬 스토리지에 저장
+          // localStorage.setItem('capturedImage', blob);
+          // 카카오톡 메시지에 첨부할 이미지 URL 생성
+          const imageUrl = URL.createObjectURL(blob);
+          // 카카오톡 메시지 공유
+          window.location.href = `kakaotalk://sendurl?url=${encodeURIComponent(
+            imageUrl,
+          )}`;
+        }, 'image/jpeg');
+      });
+    } else {
+      html2canvas(document.querySelector('#main_capture')).then((canvas) => {
+        canvas.toBlob((blob) => {
+          // 생성된 Blob 객체를 로컬 스토리지에 저장
+          // localStorage.setItem('capturedImage', blob);
+          if (navigator.share) {
+            navigator
+              .share({
+                title: '캡처된 이미지 공유',
+                text: '이미지를 공유합니다',
+                files: [
+                  new File([blob], 'image.jpeg', {
+                    type: 'image/jpeg',
+                  }),
+                ],
+              })
+              .then(() => console.log('이미지 공유 완료'))
+              .catch((error) => console.error('이미지 공유 실패: ', error));
+          } else {
+            console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+          }
+        }, 'image/jpeg');
+      });
+    }
   };
 
   return (
@@ -548,15 +590,15 @@ const QuestionContainer = () => {
             {/* <button onClick={handleDownloadClick}>Download</button> */}
 
             {/* 방법4 */}
-            
-            {/* <div> */}
-              {/* <button onClick={captureAndDisplay}>캡처 및 표시</button> */}
-              {/* {imageURL && <img src={imageURL} alt="캡처된 이미지" />} */}
 
-              {/* 방법5 */}
-              {/* <button onClick={() => shareImage(imageURL)}> */}
-                {/* 이미지 공유하기 */}
-              {/* </button> */}
+            {/* <div> */}
+            {/* <button onClick={captureAndDisplay}>캡처 및 표시</button> */}
+            {/* {imageURL && <img src={imageURL} alt="캡처된 이미지" />} */}
+
+            {/* 방법5 */}
+            {/* <button onClick={() => shareImage(imageURL)}> */}
+            {/* 이미지 공유하기 */}
+            {/* </button> */}
             {/* </div> */}
 
             {/* 방법6 */}
@@ -579,6 +621,9 @@ const QuestionContainer = () => {
 
             {/* 방법12   */}
             <button onClick={handleShareClick12}>이미지 공유 방법12</button>
+
+            {/* 방법13   */}
+            <button onClick={handleShareClick13}>이미지 공유 방법13</button>
           </Content>
         </>
       )}
