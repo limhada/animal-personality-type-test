@@ -413,7 +413,7 @@ const QuestionContainer = () => {
     html2canvas(document.querySelector('#main_capture')).then((canvas) => {
       canvas.toBlob((blob) => {
         // 생성된 Blob 객체를 로컬 스토리지에 저장
-        localStorage.setItem('capturedImage', blob);
+        // localStorage.setItem('capturedImage', blob);
         if (navigator.share) {
           navigator
             .share({
@@ -441,7 +441,7 @@ const QuestionContainer = () => {
     }).then((canvas) => {
       canvas.toBlob((blob) => {
         // 생성된 Blob 객체를 로컬 스토리지에 저장
-        localStorage.setItem('capturedImage', blob);
+        // localStorage.setItem('capturedImage', blob);
         if (navigator.share) {
           navigator
             .share({
@@ -467,7 +467,7 @@ const QuestionContainer = () => {
     }).then((canvas) => {
       canvas.toBlob((blob) => {
         // 생성된 Blob 객체를 로컬 스토리지에 저장
-        localStorage.setItem('capturedImage', blob);
+        // localStorage.setItem('capturedImage', blob);
         if (navigator.share) {
           navigator
             .share({
