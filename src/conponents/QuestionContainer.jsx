@@ -409,6 +409,7 @@ const QuestionContainer = () => {
 
   // TODO: 방법9 - 성공 - 버튼을 클릭했을때 공유하기 기능이 정상적으로 작동 하지만 모바일에서 문제 발생... 자세한 문제는 아래서 설명
   // FIXME: toBlob을 사용함 사용하는 방법 알아보기
+  // 얘가 용량 제일 작음 186kb
   const handleShareClick9 = () => {
     html2canvas(document.querySelector('#main_capture')).then((canvas) => {
       canvas.toBlob((blob) => {
@@ -433,7 +434,7 @@ const QuestionContainer = () => {
     });
   };
 
-  //방법 10 gvg
+  //방법 10 gvg  2.2m 얘도 용량 제일 큼
   const handleShareClick10 = () => {
     html2canvas(document.querySelector('#main_capture'), {
       scale: window.devicePixelRatio,
@@ -459,7 +460,7 @@ const QuestionContainer = () => {
     });
   };
 
-  //방법 11  png으로
+  //방법 11  png으로 / 2.2m 용량 제일 큼 나머지는 433kb
   const handleShareClick11 = () => {
     html2canvas(document.querySelector('#main_capture'), {
       scale: window.devicePixelRatio,
@@ -553,6 +554,13 @@ const QuestionContainer = () => {
     }
   };
 
+  // FIXME: 버튼 클릭 시 새 창 열기 핸드폰에서 작동하나 확인하기
+  const handleShareClick = () => {
+    const shareUrl = 'animal-personality-type-test.vercel.app';
+    const win = window.open(`${shareUrl}`, '_blank');
+    win.focus();
+  };
+
   return (
     <Container id="main_capture">
       {/* 아직 답해야 할 질문이 남아있는 경우 */}
@@ -624,6 +632,9 @@ const QuestionContainer = () => {
 
             {/* 방법13   */}
             <button onClick={handleShareClick13}>이미지 공유 방법13</button>
+
+            {/* 방법13   */}
+            <button onClick={handleShareClick}>새창열기</button>
           </Content>
         </>
       )}
