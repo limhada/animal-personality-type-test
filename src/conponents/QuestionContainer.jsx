@@ -555,6 +555,7 @@ const QuestionContainer = () => {
   };
 
   // FIXME: 버튼 클릭 시 새 창 열기 핸드폰에서 작동하나 확인하기
+  // 실패 - 카카오 인앱브라우저 밖으로 탈출 실패
   const handleShareClick = () => {
     const shareUrl = 'animal-personality-type-test.vercel.app';
     const win = window.open(`${shareUrl}`, '_blank');
@@ -590,55 +591,41 @@ const QuestionContainer = () => {
           <Content>
             <h1> 나의 성격을 나타내는 동물은?! </h1>
             <div>{renderImages()}</div>
-
             {/* 방법1 */}
             {/* {image && <img src={image} alt="Downloaded image" />} */}
-
             {/* 방법2와 3은 그냥 클릭하면 된다 */}
             {/* <button onClick={handleDownloadClick}>Download</button> */}
-
             {/* 방법4 */}
-
             {/* <div> */}
             {/* <button onClick={captureAndDisplay}>캡처 및 표시</button> */}
             {/* {imageURL && <img src={imageURL} alt="캡처된 이미지" />} */}
-
             {/* 방법5 */}
             {/* <button onClick={() => shareImage(imageURL)}> */}
             {/* 이미지 공유하기 */}
             {/* </button> */}
             {/* </div> */}
-
             {/* 방법6 */}
             {/* <button onClick={handleShareClick}>이미지 공유 방법6</button> */}
-
             {/* 방법7 */}
             {/* <button onClick={handleShareClick7}>이미지 공유 방법7</button> */}
-
             {/* 방법8 */}
             {/* <button onClick={handleShareClick8}>이미지 공유 방법8</button> */}
-
             {/* 방법9 */}
             <button onClick={handleShareClick9}>이미지 공유 방법9</button>
-
             {/* 방법10   */}
             <button onClick={handleShareClick10}>이미지 공유 방법10</button>
-
             {/* 방법11   */}
             <button onClick={handleShareClick11}>이미지 공유 방법11</button>
-
             {/* 방법12   */}
             <button onClick={handleShareClick12}>이미지 공유 방법12</button>
-
             {/* 방법13   */}
             <button onClick={handleShareClick13}>이미지 공유 방법13</button>
-
             {/* 방법13   */}
             <button onClick={handleShareClick}>새창열기</button>
-
+            링크를 클릭해서 카카오인앱브라우저 밖으로 탈출 시도 - 실패
             <a
               href="https://animal-personality-type-test.vercel.app"
-              target="_system"
+              // target="_system" 타켓을 지우고 재시도
             >
               링크 텍스트
             </a>

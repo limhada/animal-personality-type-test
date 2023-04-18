@@ -41,6 +41,31 @@
     </script>
 
     <title>동물 성격유형 테스트</title>
+
+    <script>
+      const Agent = navigator.userAgent.toLowerCase();
+      // 카카오 브라우저로 실행 시킨 경우
+      if (Agent.includes('kakao')) {
+        // 아이폰 접속이 아닐 경우
+        if (!navigator.userAgent.match(/iPhone|iPad/i)) {
+          // 카카오 인앱 브라우저 닫기
+          location.href = 'kakaotalk://inappbrowser/close';
+          // 크롬 앱이 설치되어 있다면 해당 앱으로
+          if (/chrome/i.test(navigator.userAgent)) {
+            window.location.href =
+              'intent://' +
+              location.href.replace(/^https?:\/\//i, '') +
+              '#Intent;scheme=https;package=com.android.chrome;end';
+            // 아니라면 삼성 인터넷으로 페이지를 연다.
+          } else {
+            window.location.href =
+              'intent://' +
+              location.href.replace(/^https?:\/\//i, '') +
+              '#Intent;scheme=https;package=com.sec.android.app.sbrowser;end';
+          }
+        }
+      }
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
