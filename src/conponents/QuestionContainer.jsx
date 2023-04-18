@@ -20,6 +20,7 @@ import 토끼 from '../assets/img/토끼.png';
 import 배경_숲 from '../assets/img/배경_숲.jpeg';
 
 import html2canvas from 'html2canvas';
+import 원숭이1 from '../assets/img/원숭이1.jpg';
 
 // FIXME: 문항에 대한 답변을 선택하지 않았을 경우 ex 15개의 질문 중 1개만 답변했을 경우 2번째 3번째 답변까지 즉, 1~3번 질문이 한 카테고리인데 1번만 응답했을 시 1 + ? + ? / 3 이라서 NaN이 되어버림 이 문제는 추후에 해결하고자 한다
 
@@ -137,7 +138,7 @@ const animalIndex = {
   악어: 악어,
   알파카: 알파카,
   앵무새: 앵무새,
-  원숭이: 원숭이,
+  원숭이: 원숭이1,
   코끼리: 코끼리,
   코알라: 코알라,
   토끼: 토끼,
@@ -432,7 +433,7 @@ const QuestionContainer = () => {
     });
   };
 
-  //방법 10
+  //방법 10 gvg
   const handleShareClick10 = () => {
     html2canvas(document.querySelector('#main_capture'), {
       scale: window.devicePixelRatio,
@@ -448,6 +449,58 @@ const QuestionContainer = () => {
               text: '이미지를 공유합니다',
               // 생성된 Blob 객체를 files에 전달
               files: [new File([blob], 'image.svg', { type: 'image/svg+xml' })],
+            })
+            .then(() => console.log('이미지 공유 완료'))
+            .catch((error) => console.error('이미지 공유 실패: ', error));
+        } else {
+          console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+        }
+      }, 'image/svg+xml');
+    });
+  };
+
+  //방법 11 jpeg를 png으로
+  const handleShareClick11 = () => {
+    html2canvas(document.querySelector('#main_capture'), {
+      scale: window.devicePixelRatio,
+      foreignObjectRendering: true,
+    }).then((canvas) => {
+      canvas.toBlob((blob) => {
+        // 생성된 Blob 객체를 로컬 스토리지에 저장
+        localStorage.setItem('capturedImage', blob);
+        if (navigator.share) {
+          navigator
+            .share({
+              title: '캡처된 이미지 공유',
+              text: '이미지를 공유합니다',
+              // 생성된 Blob 객체를 files에 전달
+              files: [new File([blob], 'image.png', { type: 'image/png' })],
+            })
+            .then(() => console.log('이미지 공유 완료'))
+            .catch((error) => console.error('이미지 공유 실패: ', error));
+        } else {
+          console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+        }
+      }, 'image/svg+xml');
+    });
+  };
+
+  //방법 12 jpeg를 jpeg로
+  const handleShareClick12 = () => {
+    html2canvas(document.querySelector('#main_capture'), {
+      scale: window.devicePixelRatio,
+      foreignObjectRendering: true,
+    }).then((canvas) => {
+      canvas.toBlob((blob) => {
+        // 생성된 Blob 객체를 로컬 스토리지에 저장
+        localStorage.setItem('capturedImage', blob);
+        if (navigator.share) {
+          navigator
+            .share({
+              title: '캡처된 이미지 공유',
+              text: '이미지를 공유합니다',
+              // 생성된 Blob 객체를 files에 전달
+              files: [new File([blob], 'image.jpg', { type: 'image/jpeg' })],
             })
             .then(() => console.log('이미지 공유 완료'))
             .catch((error) => console.error('이미지 공유 실패: ', error));
@@ -519,6 +572,12 @@ const QuestionContainer = () => {
 
             {/* 방법10   */}
             <button onClick={handleShareClick10}>이미지 공유 방법10</button>
+
+            {/* 방법11   */}
+            <button onClick={handleShareClick11}>이미지 공유 방법11</button>
+
+            {/* 방법12   */}
+            <button onClick={handleShareClick12}>이미지 공유 방법12</button>
           </Content>
         </>
       )}
