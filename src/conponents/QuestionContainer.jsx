@@ -34,42 +34,42 @@ const questions = [
       2: '새로운 아이디어나 방법을 시도해 보는 것을 좋아하시나요?',
     },
   },
-  {
-    id: 1,
-    type: '성실성',
-    content: {
-      0: '일을 미루기보다는 빨리 처리하는 편인가요?',
-      1: '계획을 세우고 그 계획에 따라 일을 처리하시나요?',
-      2: '약속 시간을 잘 지키시나요?',
-    },
-  },
-  {
-    id: 2,
-    type: '외향성',
-    content: {
-      0: '사람들과 함께 있는 것을 좋아하시나요?',
-      1: '대화를 시작하기 쉬운 편인가요?',
-      2: '새로운 사람들을 만나는 것을 좋아하시나요?',
-    },
-  },
-  {
-    id: 3,
-    type: '우호성',
-    content: {
-      0: '다른 사람들의 감정에 민감하게 반응하시나요?',
-      1: '다른 사람들을 쉽게 돕고 지원하시나요?',
-      2: '다른 사람들과 관계 맺고 유지하는 것이 쉽나요?',
-    },
-  },
-  {
-    id: 4,
-    type: '신경성',
-    content: {
-      0: '일이나 상황에 대해 예민하게 반응하시나요?',
-      1: '사소한 일을 할때도 걱정이 많은 편인가요?',
-      2: '어려운 일이나 문제에 대처하는 것이 어려우신가요?',
-    },
-  },
+  // {
+  //   id: 1,
+  //   type: '성실성',
+  //   content: {
+  //     0: '일을 미루기보다는 빨리 처리하는 편인가요?',
+  //     1: '계획을 세우고 그 계획에 따라 일을 처리하시나요?',
+  //     2: '약속 시간을 잘 지키시나요?',
+  //   },
+  // },
+  // {
+  //   id: 2,
+  //   type: '외향성',
+  //   content: {
+  //     0: '사람들과 함께 있는 것을 좋아하시나요?',
+  //     1: '대화를 시작하기 쉬운 편인가요?',
+  //     2: '새로운 사람들을 만나는 것을 좋아하시나요?',
+  //   },
+  // },
+  // {
+  //   id: 3,
+  //   type: '우호성',
+  //   content: {
+  //     0: '다른 사람들의 감정에 민감하게 반응하시나요?',
+  //     1: '다른 사람들을 쉽게 돕고 지원하시나요?',
+  //     2: '다른 사람들과 관계 맺고 유지하는 것이 쉽나요?',
+  //   },
+  // },
+  // {
+  //   id: 4,
+  //   type: '신경성',
+  //   content: {
+  //     0: '일이나 상황에 대해 예민하게 반응하시나요?',
+  //     1: '사소한 일을 할때도 걱정이 많은 편인가요?',
+  //     2: '어려운 일이나 문제에 대처하는 것이 어려우신가요?',
+  //   },
+  // },
 ];
 
 // 버튼 이름
@@ -307,7 +307,7 @@ const QuestionContainer = () => {
     });
   };
 
-  // 방법 4
+  // 방법 4 캡처 및 표시
   const [imageURL, setImageURL] = useState('');
 
   const captureAndDisplay = () => {
@@ -332,26 +332,103 @@ const QuestionContainer = () => {
     }
   };
 
-  // 방법6
+  // 방법6 정상적으로 작동하지만 방법 5와 마찬가지로 이미지가 정상적으로 열리지 않음
   const handleShareClick = () => {
     // html2canvas(document.querySelector('#main_capture')).then((canvas) => {
-      // 이미지크기 50%줄이는 코드
-      html2canvas(document.querySelector("#main_capture"), { scale: 0.5 }).then(canvas => {
+    // 이미지크기 50%줄이는 코드
+    html2canvas(document.querySelector('#main_capture'), { scale: 0.5 }).then(
+      (canvas) => {
+        const image = canvas.toDataURL('image/png');
+        if (navigator.share) {
+          navigator
+            .share({
+              title: '캡처된 이미지 공유',
+              text: '이미지를 공유합니다',
+              files: [new File([image], 'image.png', { type: 'image/png' })],
+            })
+            .then(() => console.log('이미지 공유 완료'))
+            .catch((error) => console.error('이미지 공유 실패: ', error));
+        } else {
+          console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+        }
+      },
+    );
+  };
 
-      const image = canvas.toDataURL('image/png');
-      if (navigator.share) {
-        navigator
-          .share({
-            title: '캡처된 이미지 공유',
-            text: '이미지를 공유합니다',
-            files: [new File([image], 'image.png', { type: 'image/png' })],
-          })
-          .then(() => console.log('이미지 공유 완료'))
-          .catch((error) => console.error('이미지 공유 실패: ', error));
-      } else {
-        console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
-      }
-    });
+  // 방법 7 - 실패
+  const handleShareClick7 = () => {
+    html2canvas(document.querySelector('#main_capture'), { scale: 0.5 }).then(
+      (canvas) => {
+        const image = canvas.toDataURL('image/png');
+        // Base64 인코딩된 이미지를 로컬 스토리지에 저장
+        localStorage.setItem('capturedImage', image);
+        if (navigator.share) {
+          navigator
+            .share({
+              title: '캡처된 이미지 공유',
+              text: '이미지를 공유합니다',
+              // 로컬 스토리지에서 이미지를 불러와 사용
+              files: [new File([image], 'image.png', { type: 'image/png' })],
+            })
+            .then(() => console.log('이미지 공유 완료'))
+            .catch((error) => console.error('이미지 공유 실패: ', error));
+        } else {
+          console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+        }
+      },
+    );
+  };
+
+  //방법 8
+  const handleShareClick8 = () => {
+    html2canvas(document.querySelector('#main_capture'), { scale: 0.5 }).then(
+      (canvas) => {
+        const image = canvas.toDataURL('image/png');
+        // Base64 인코딩된 이미지를 로컬 스토리지에 저장
+        localStorage.setItem('capturedImage', image);
+        if (navigator.share) {
+          const sharedImage = new Image();
+          sharedImage.src = localStorage.getItem('capturedImage');
+          sharedImage.onload = () => {
+            navigator
+              .share({
+                title: '캡처된 이미지 공유',
+                text: '이미지를 공유합니다',
+                files: [sharedImage],
+              })
+              .then(() => console.log('이미지 공유 완료'))
+              .catch((error) => console.error('이미지 공유 실패: ', error));
+          };
+        } else {
+          console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+        }
+      },
+    );
+  };
+
+  //방법9
+  const handleShareClick9 = () => {
+    html2canvas(document.querySelector('#main_capture'), { scale: 0.5 }).then(
+      (canvas) => {
+        canvas.toBlob((blob) => {
+          // 생성된 Blob 객체를 로컬 스토리지에 저장
+          localStorage.setItem('capturedImage', blob);
+          if (navigator.share) {
+            navigator
+              .share({
+                title: '캡처된 이미지 공유',
+                text: '이미지를 공유합니다',
+                // 생성된 Blob 객체를 files에 전달
+                files: [new File([blob], 'image.png', { type: 'image/png' })],
+              })
+              .then(() => console.log('이미지 공유 완료'))
+              .catch((error) => console.error('이미지 공유 실패: ', error));
+          } else {
+            console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+          }
+        }, 'image/png');
+      },
+    );
   };
 
   return (
@@ -403,6 +480,15 @@ const QuestionContainer = () => {
 
             {/* 방법6 */}
             <button onClick={handleShareClick}>이미지 공유 방법6</button>
+
+            {/* 방법7 */}
+            <button onClick={handleShareClick7}>이미지 공유 방법7</button>
+
+            {/* 방법8 */}
+            <button onClick={handleShareClick8}>이미지 공유 방법8</button>
+
+            {/* 방법9 */}
+            <button onClick={handleShareClick9}>이미지 공유 방법9</button>
           </Content>
         </>
       )}
