@@ -19,6 +19,7 @@ import 토끼 from '../assets/img/토끼.png';
 import 배경_숲 from '../assets/img/배경_숲.jpeg';
 
 import html2canvas from 'html2canvas';
+import { Link } from 'react-scroll';
 
 // FIXME: 문항에 대한 답변을 선택하지 않았을 경우 ex 15개의 질문 중 1개만 답변했을 경우 2번째 3번째 답변까지 즉, 1~3번 질문이 한 카테고리인데 1번만 응답했을 시 1 + ? + ? / 3 이라서 NaN이 되어버림 이 문제는 추후에 해결하고자 한다
 
@@ -71,7 +72,6 @@ const questions = [
   //   },
   // },
 ];
-
 
 // 버튼 이름
 const buttonNames = ['매우 아님', '아님', '보통', '그렇다', '매우 그렇다'];
@@ -146,9 +146,10 @@ const animalIndex = {
 
 // FIXME: 내용 매끄럽게 수정하기
 // 해설 내용
+
 const explanation = {
   강아지:
-    '사람은 새로운 아이디어나 경험에 대해 열려있으므로, 호기심이 많은 강아지와 어울릴 수 있습니다.',
+    '새로운 아이디어나 경험에 대해 열려있으므로, 호기심이 많은 강아지와 어울릴 수 있습니다.',
   곰: '새로운 아이디어나 경험에 대해 어느 정도 열려있지만, 전통적인 방식을 선호하는 경우도 있으므로, 균형 잡힌 곰과 어울릴 수 있습니다.',
   당나귀:
     '새로운 아이디어나 경험보다는 전통적인 방식을 선호하는 경우가 많으므로, 집요한 당나귀와 어울릴 수 있습니다.',
@@ -260,6 +261,21 @@ const Question = styled.div`
   }
 `;
 
+const ShareResultsbutton = styled.button`
+  width: 7rem;
+  height: 2rem;
+  color: white;
+  background-color: #667eea;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+`;
+
+const ResultContainer = styled.div`
+  background-color: #aea18f;
+`;
+
 const QuestionContainer = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   // 컨텐츠 인덱스
@@ -308,217 +324,13 @@ const QuestionContainer = () => {
     finalResult.map((animal) => (
       <AnimalImg src={animalIndex[animal]} alt={animal} />
     ));
-  
+
   // 결과 화면에 해석 보여주기
   const renderExplanation = () =>
-  finalResult.map((animal) => (
-      <div>{explanation[animal]}</div>
+    // 동적으로 아이디 만드는법 정리해서 포스팅하기
+    finalResult.map((animal, i) => (
+      <div id={`explanation${i}`}>{explanation[animal]}</div>
     ));
-
-
-  // 방법1 - 성공- 컴포넌트를 캡처해서 이미지로 화면에 띄움
-  // const [image, setImage] = useState(null);
-  // const handleDownloadClick = () => {
-  //   html2canvas(document.querySelector("#main_capture")).then(canvas => {
-  //     setImage(canvas.toDataURL('image/png'));
-  //   });
-  // };
-
-  // 방법2 - 성공 - 컴포넌트를 캡처해서 버튼 클릭 시 다운로드 함
-  // const handleDownloadClick = () => {
-  //   html2canvas(document.querySelector('#main_capture')).then((canvas) => {
-  //     const imgData = canvas.toDataURL('image/png');
-  //     const link = document.createElement('a');
-  //     link.download = 'my_image.png';
-  //     link.href = imgData;
-  //     document.body.appendChild(link);
-  //     link.click();
-  //     document.body.removeChild(link);
-  //   });
-  // };
-
-  // 방법3 -  - 이미지를 새창에서 연다
-  // const handleDownloadClick = () => {
-  //   html2canvas(document.querySelector('#main_capture')).then((canvas) => {
-  //     const imgData = canvas.toDataURL('image/png');
-  //     const newTab = window.open();
-  //     newTab.document.body.innerHTML = '<img src="' + imgData + '">';
-  //   });
-  // };
-
-  // // 방법 4 캡처 및 표시
-  // const [imageURL, setImageURL] = useState('');
-
-  // const captureAndDisplay = () => {
-  //   const element = document.querySelector('#main_capture');
-
-  //   html2canvas(element).then((canvas) => {
-  //     const image = canvas.toDataURL();
-  //     setImageURL(image);
-  //   });
-  // };
-
-  // // 방법5 성공 하지만 동물테스트 메인페이지 링크가 공유됨 공유 기능은 잘 작동함
-  // const shareImage = async (imageURL) => {
-  //   try {
-  //     await navigator.share({
-  //       title: '이미지 공유하기',
-  //       text: 'https://animal-personality-type-test.vercel.app/.',
-  //       url: imageURL,
-  //     });
-  //   } catch (error) {
-  //     console.error('이미지 공유 실패:', error);
-  //   }
-  // };
-
-  // // 방법6 정상적으로 작동하지만 방법 5와 마찬가지로 이미지가 정상적으로 열리지 않음
-  // const handleShareClick = () => {
-  //   // html2canvas(document.querySelector('#main_capture')).then((canvas) => {
-  //   // 이미지크기 50%줄이는 코드
-  //   html2canvas(document.querySelector('#main_capture'), { scale: 0.5 }).then(
-  //     (canvas) => {
-  //       const image = canvas.toDataURL('image/png');
-  //       if (navigator.share) {
-  //         navigator
-  //           .share({
-  //             title: '동물성격유형테스트',
-  //             text: 'https://animal-personality-type-test.vercel.app/',
-  //             files: [new File([image], 'image.png', { type: 'image/png' })],
-  //           })
-  //           .then(() => console.log('이미지 공유 완료'))
-  //           .catch((error) => console.error('이미지 공유 실패: ', error));
-  //       } else {
-  //         console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
-  //       }
-  //     },
-  //   );
-  // };
-
-  // // 방법 7 - 실패
-  // const handleShareClick7 = () => {
-  //   html2canvas(document.querySelector('#main_capture'), { scale: 0.5 }).then(
-  //     (canvas) => {
-  //       const image = canvas.toDataURL('image/png');
-  //       // Base64 인코딩된 이미지를 로컬 스토리지에 저장
-  //       localStorage.setItem('capturedImage', image);
-  //       if (navigator.share) {
-  //         navigator
-  //           .share({
-  //             title: '동물성격유형테스트',
-  //             text: 'https://animal-personality-type-test.vercel.app/',
-  //             // 로컬 스토리지에서 이미지를 불러와 사용
-  //             files: [new File([image], 'image.png', { type: 'image/png' })],
-  //           })
-  //           .then(() => console.log('이미지 공유 완료'))
-  //           .catch((error) => console.error('이미지 공유 실패: ', error));
-  //       } else {
-  //         console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
-  //       }
-  //     },
-  //   );
-  // };
-
-  // //방법 8
-  // const handleShareClick8 = () => {
-  //   html2canvas(document.querySelector('#main_capture'), { scale: 0.5 }).then(
-  //     (canvas) => {
-  //       const image = canvas.toDataURL('image/png');
-  //       // Base64 인코딩된 이미지를 로컬 스토리지에 저장
-  //       localStorage.setItem('capturedImage', image);
-  //       if (navigator.share) {
-  //         const sharedImage = new Image();
-  //         sharedImage.src = localStorage.getItem('capturedImage');
-  //         sharedImage.onload = () => {
-  //           navigator
-  //             .share({
-  //               title: '동물성격유형테스트',
-  //               text: 'https://animal-personality-type-test.vercel.app/',
-  //               files: [sharedImage],
-  //             })
-  //             .then(() => console.log('이미지 공유 완료'))
-  //             .catch((error) => console.error('이미지 공유 실패: ', error));
-  //         };
-  //       } else {
-  //         console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
-  //       }
-  //     },
-  //   );
-  // };
-
-  // TODO: 방법9 - 성공 - 버튼을 클릭했을때 공유하기 기능이 정상적으로 작동 하지만 모바일에서 문제 발생... 자세한 문제는 아래서 설명
-  // FIXME: toBlob을 사용함 사용하는 방법 알아보기
-  // 얘가 용량 제일 작음 186kb
-  // const handleShareClick9 = () => {
-  //   html2canvas(document.querySelector('#main_capture')).then((canvas) => {
-  //     canvas.toBlob((blob) => {
-  //       // 생성된 Blob 객체를 로컬 스토리지에 저장
-  //       // localStorage.setItem('capturedImage', blob);
-  //       if (navigator.share) {
-  //         navigator
-  //           .share({
-  //             title: '동물성격유형테스트',
-  //             text: 'https://animal-personality-type-test.vercel.app/',
-  //             // 생성된 Blob 객체를 files에 전달
-  //             // 이미지가 컴퓨터로 공유하면 화질이 안깨지는데 모바일로 공유하면 안드/ios에서 화질깨짐
-  //             // files: [new File([blob], 'image.png', { type: 'image/png' })],
-  //             files: [new File([blob], 'image.webp', { type: 'image/webp' })],
-  //           })
-  //           .then(() => console.log('이미지 공유 완료'))
-  //           .catch((error) => console.error('이미지 공유 실패: ', error));
-  //       } else {
-  //         console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
-  //       }
-  //     }, 'image/webp');
-  //   });
-  // };
-
-  //방법 10 gvg  2.2m 얘도 용량 제일 큼
-  // const handleShareClick10 = () => {
-  //   html2canvas(document.querySelector('#main_capture'), {
-  //     scale: window.devicePixelRatio,
-  //     foreignObjectRendering: false,
-  //   }).then((canvas) => {
-  //     canvas.toBlob((blob) => {
-  //       if (navigator.share) {
-  //         navigator
-  //           .share({
-  //             title: '동물성격유형테스트',
-  //             text: 'https://animal-personality-type-test.vercel.app/',
-  //             // 생성된 Blob 객체를 files에 전달
-  //             files: [new File([blob], 'image.svg', { type: 'image/svg+xml' })],
-  //           })
-  //           .then(() => console.log('이미지 공유 완료'))
-  //           .catch((error) => console.error('이미지 공유 실패: ', error));
-  //       } else {
-  //         console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
-  //       }
-  //     }, 'image/svg+xml');
-  //   });
-  // };
-
-  //방법 11  png으로 / 2.2m 용량 제일 큼 나머지는 433kb
-  // const handleShareClick11 = () => {
-  //   html2canvas(document.querySelector('#main_capture'), {
-  //     scale: window.devicePixelRatio,
-  //     foreignObjectRendering: false,
-  //   }).then((canvas) => {
-  //     canvas.toBlob((blob) => {
-  //       if (navigator.share) {
-  //         navigator
-  //           .share({
-  //             title: '동물성격유형테스트',
-  //             text: 'https://animal-personality-type-test.vercel.app/',
-  //             // 생성된 Blob 객체를 files에 전달
-  //             files: [new File([blob], 'image.png', { type: 'image/png' })],
-  //           })
-  //           .then(() => console.log('이미지 공유 완료'))
-  //           .catch((error) => console.error('이미지 공유 실패: ', error));
-  //       } else {
-  //         console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
-  //       }
-  //     }, 'image/png');
-  //   });
-  // };
 
   //FIXME: 방법 12 jpeg로 452kb 이걸로 선택!! 용량이 2번째로 적음 1번째로적은 webp형식은 안도르이드에서 문제가 있음 해결방법을 찾으면 webp로 수정하기
   const handleShareClick12 = () => {
@@ -532,7 +344,7 @@ const QuestionContainer = () => {
           navigator
             .share({
               title: '동물성격유형테스트',
-              text: 'https://animal-personality-type-test.vercel.app/',
+              text: 'https://limhada.com/',
               // 생성된 Blob 객체를 files에 전달
               files: [new File([blob], 'image.jpg', { type: 'image/jpeg' })],
             })
@@ -544,52 +356,6 @@ const QuestionContainer = () => {
       }, 'image/jpeg');
     });
   };
-
-  // 방법13 카카오 //FIXME: 뭔지 모르겠지만 아이폰에서는 동작하지 않음
-  // const handleShareClick13 = () => {
-  //   if (/KAKAOTALK/i.test(navigator.userAgent)) {
-  //     html2canvas(document.querySelector('#main_capture')).then((canvas) => {
-  //       canvas.toBlob((blob) => {
-  //         // 카카오톡 메시지에 첨부할 이미지 URL 생성
-  //         const imageUrl = URL.createObjectURL(blob);
-  //         // 카카오톡 메시지 공유
-  //         window.location.href = `kakaotalk://sendurl?url=${encodeURIComponent(
-  //           imageUrl,
-  //         )}`;
-  //       }, 'image/jpeg');
-  //     });
-  //   } else {
-  //     html2canvas(document.querySelector('#main_capture')).then((canvas) => {
-  //       canvas.toBlob((blob) => {
-  //         // 생성된 Blob 객체를 로컬 스토리지에 저장
-  //         // localStorage.setItem('capturedImage', blob);
-  //         if (navigator.share) {
-  //           navigator
-  //             .share({
-  //               title: '동물성격유형테스트',
-  //               text: 'https://animal-personality-type-test.vercel.app/',
-  //               files: [
-  //                 new File([blob], 'image.jpeg', {
-  //                   type: 'image/jpeg',
-  //                 }),
-  //               ],
-  //             })
-  //             .then(() => console.log('이미지 공유 완료'))
-  //             .catch((error) => console.error('이미지 공유 실패: ', error));
-  //         } else {
-  //           console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
-  //         }
-  //       }, 'image/jpeg');
-  //     });
-  //   }
-  // };
-
-  // 새 창 열기 핸드폰에서 작동하나 확인하기 - 실패 - 카카오 인앱브라우저 밖으로 탈출 실패
-  // const handleShareClick = () => {
-  //   const shareUrl = 'animal-personality-type-test.vercel.app';
-  //   const win = window.open(`${shareUrl}`, '_blank');
-  //   win.focus();
-  // };
 
   return (
     <Container id="main_capture">
@@ -619,51 +385,21 @@ const QuestionContainer = () => {
           {/* TODO: 성공코드!! 동물 이미지 렌더링 */}
           <Content>
             <h1> 나의 성격을 나타내는 동물은?! </h1>
+            {/* 결과 이미지 */}
             <div>{renderImages()}</div>
-            <div>{renderExplanation()}</div>
 
-            {/* 방법1 */}
-            {/* {image && <img src={image} alt="Downloaded image" />} */}
-            {/* 방법2와 3은 그냥 클릭하면 된다 */}
-            {/* <button onClick={handleDownloadClick}>Download</button> */}
-            {/* 방법4 */}
-            {/* <div> */}
-            {/* <button onClick={captureAndDisplay}>캡처 및 표시</button> */}
-            {/* {imageURL && <img src={imageURL} alt="캡처된 이미지" />} */}
-            {/* 방법5 */}
-            {/* <button onClick={() => shareImage(imageURL)}> */}
-            {/* 이미지 공유하기 */}
-            {/* </button> */}
-            {/* </div> */}
-            {/* 방법6 */}
-            {/* <button onClick={handleShareClick}>이미지 공유 방법6</button> */}
-            {/* 방법7 */}
-            {/* <button onClick={handleShareClick7}>이미지 공유 방법7</button> */}
-            {/* 방법8 */}
-            {/* <button onClick={handleShareClick8}>이미지 공유 방법8</button> */}
-            {/* 방법9 */}
-            {/* <button onClick={handleShareClick9}>이미지 공유 방법9</button> */}
-            {/* 방법10   */}
-            {/* <button onClick={handleShareClick10}>이미지 공유 방법10</button> */}
-            {/* 방법11   */}
-            {/* <button onClick={handleShareClick11}>이미지 공유 방법11</button> */}
-            {/* 방법12   */}
-            <button onClick={handleShareClick12}>이미지 공유 방법12</button>
-            {/* 방법13   */}
-            {/* <button onClick={handleShareClick13}>이미지 공유 방법13</button> */}
-            {/* 방법14   */}
-            {/* <button onClick={handleShareClick}>새창열기</button> */}
-            {/* 
-            <a
-              // 링크 클릭 시 새로운 링크로 이동
-              href="https://animal-personality-type-test.vercel.app"
-              // target="_system" 타켓을 지우고 재시도
-            >
-              링크 텍스트 (링크를 클릭해서 카카오인앱브라우저 밖으로 탈출 시도 -
-              실패)
-            </a>
-             */}
+            <ShareResultsbutton onClick={handleShareClick12}>
+              결과 공유하기
+            </ShareResultsbutton>
+            <Link to="explanation0" smooth={true} duration={500}>
+              <button>결과로 이동</button>
+            </Link>
           </Content>
+          {/* 해설내용 */}
+          {/* 중괄호 두번쓰는 이유 : 스타일 속성 값으로 JavaScript 객체를 사용하려면, 객체 리터럴 문법으로 작성된 객체를 중괄호로 감싸야 합니다. 이때, 중괄호는 객체 리터럴을 JSX에서 인식하도록 하는 역할을 하기 때문에 두 번 사용됩니다. */}
+          {/* #으로 색을 표현하는 것을 Hexadecimal Color 또는 Hex Color라고 부릅니다. 이는 16진수 값으로 표현된 RGB 색상 값을 나타내며, CSS에서 가장 일반적으로 사용되는 색상 표현 방법 중 하나 */}
+          {/* #으로 시작하는 문자열은 CSS에서 색상을 표현할 때 사용됩니다. 하지만, React에서 JSX 문법을 사용할 때는 #으로 시작하는 숫자를 직접 사용할 수 없습니다. 이는 JSX에서 중괄호({})를 사용하여 JavaScript 표현식을 삽입할 수 있는데, 중괄호 내부에서 #으로 시작하는 숫자는 JavaScript에서 잘못된 표현식으로 인식되기 때문입니다.따라서, JSX에서 CSS 색상 값을 지정할 때는 # 대신에 rgb(), rgba(), hsl(), hsla()와 같은 CSS 색상 함수를 사용하거나, CSS에서 지정 가능한 색상 이름을 사용해야 합니다. */}
+          <ResultContainer>{renderExplanation()}</ResultContainer>
         </>
       )}
     </Container>
