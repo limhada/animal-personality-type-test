@@ -1,16 +1,29 @@
 body {
-  margin: 0;
+  /* margin: 0; */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  /* Mac 운영체제에서 Safari와 Chrome에서 사용됩니다. 이 속성을 적용하면 글꼴의 경계선을 부드럽게 만들어 글꼴을 더 선명하게 보이도록 합니다. */
   -webkit-font-smoothing: antialiased;
+  /*  Mac 운영체제에서 Firefox에서 사용됩니다. 이 속성을 적용하면 글꼴을 더 선명하게 보이도록 하는 대신 글꼴 경계선을 부드럽게 만듭니다. grayscale 값은 글꼴의 경계선을 흐릿하게 만들어 선명한 이미지를 제공합니다. */
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
+
+/* dist/style.css */
+/* Universal Selector 유니버설 셀렉터 */
+* { 
+  box-sizing: border-box;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/* FIXME: 지우기! code는 일반 텍스트보다는 코드 블록에서 사용되는 텍스트를 나타냅니다. 그렇기 때문에 코드 블록에서 사용되는 글꼴을 다르게 설정하고자 code{} 선택자를 사용하여 별도의 스타일을 지정해 줄 수 있습니다. */
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+} */
 /* 
 // 버튼 색 그라디언효과 넣기
 // background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);

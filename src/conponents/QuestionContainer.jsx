@@ -265,15 +265,17 @@ const ShareResultsbutton = styled.button`
   width: 7rem;
   height: 2rem;
   color: white;
-  background-color: #667eea;
+  background-color: #aea18f;
   font-size: 0.8rem;
   font-weight: bold;
-  border: none;
+  /* border: none; */
   cursor: pointer;
 `;
 
 const ResultContainer = styled.div`
   background-color: #aea18f;
+  width: 100%;
+  height: 100rem;
 `;
 
 const QuestionContainer = () => {
@@ -391,8 +393,8 @@ const QuestionContainer = () => {
             <ShareResultsbutton onClick={handleShareClick12}>
               결과 공유하기
             </ShareResultsbutton>
-            <Link to="explanation0" smooth={true} duration={500}>
-              <button>결과로 이동</button>
+            <Link to="explanation0" smooth={true} offset={-300} duration={500}>
+              <ShareResultsbutton>결과로 이동</ShareResultsbutton>
             </Link>
           </Content>
           {/* 해설내용 */}
