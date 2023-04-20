@@ -7,7 +7,7 @@ import 곰 from '../assets/img/곰.png';
 import 나무늘보 from '../assets/img/나무늘보.png';
 import 당나귀 from '../assets/img/당나귀.png';
 import 독수리 from '../assets/img/독수리.png';
-import 랫서팬더 from '../assets/img/랫서팬더.png';
+import 레서판다 from '../assets/img/레서판다.png';
 import 벌새 from '../assets/img/벌새.png';
 import 악어 from '../assets/img/악어.png';
 import 알파카 from '../assets/img/알파카.png';
@@ -110,7 +110,7 @@ const animal = [
     content: [
       { name: '알파카', min: 0, max: 3.1 },
       { name: '악어', min: 3.1, max: 4.1 },
-      { name: '랫서팬더', min: 4.1, max: 5.1 },
+      { name: '레서판다', min: 4.1, max: 5.1 },
     ],
   },
   {
@@ -132,7 +132,7 @@ const animalIndex = {
   나무늘보: 나무늘보,
   당나귀: 당나귀,
   독수리: 독수리,
-  랫서팬더: 랫서팬더,
+  레서판다: 레서판다,
   벌새: 벌새,
   악어: 악어,
   알파카: 알파카,
@@ -149,7 +149,7 @@ const animalIndex = {
 const explanation = {
   강아지:
     '강아지: 새로운 아이디어나 경험에 대해 열려있으므로, 호기심이 많습니다.',
-  곰: '곰: 새로운 아이디어나 경험에 대해 어느 정도 열려있지만, 기존의 방식을 선호하는 경우도 있습니다.',
+  곰: '곰: 일이나 상황에 대해 어느 정도 예민하게 반응하지만, 때때로 차분하게 대처하는 경우도 있습니다.',
   당나귀:
     '당나귀: 새로운 아이디어나 경험보다는 기존의 방식을 선호하는 경우가 많으므로, 완고한 성격일 수 있습니다.',
   벌새: '벌새: 계획적이고 체계적으로 일을 처리하는 경우가 많으므로, 부지런한 성격입니다.',
@@ -161,8 +161,8 @@ const explanation = {
   고양이:
     '고양이: 사람들과 함께 있는 것도 좋지만 때때로 혼자 있는 것도 좋아합니다',
   고슴도치: '고슴도치: 의외로 겁이 많은 성격이므로 혼자 있는 것을 좋아합니다.',
-  랫서팬더:
-    '랫서팬더: 다른 사람들의 감정에 민감하게 반응하며, 주변 사람들을 친절하게 도와주는 경우가 많습니다.',
+  레서판다:
+    '레서판다: 다른 사람들의 감정에 민감하게 반응하며, 주변 사람들을 친절하게 도와주는 경우가 많습니다.',
   악어: '악어: 다른 사람들의 감정에 어느 정도 반응하지만, 때때로 자신의 의견을 단호하게 표현하는 경우도 있습니다.',
   알파카:
     '알파카: 다른 사람들의 감정에 둔감한 경우가 많으며, 자신의 의견을 단호하게 표현하는 경우가 많습니다.',
@@ -281,7 +281,7 @@ const Question = styled.div`
 
   /* 데스크탑 모니터 */
   @media (min-width: 1024px) {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 `;
 
@@ -515,7 +515,7 @@ const QuestionContainer = () => {
     margin: 5px; */
   `;
 
-// 결과페이지 소제목 진하게
+  // 결과페이지 소제목 진하게
   const Subheading = styled.span`
     font-weight: bold;
   `;
