@@ -221,6 +221,7 @@ const Content = styled(Container)`
 
   /* flex-basis: 0; */
   /* width: 100%; */
+  /* FIXME: 모바일 웹페이지 열렸을때 주소창 보이면 화면이 살짝 아래가 짤려서 버튼이 안보임 그럴때는 값을 90정도로 설정 */
   height: 95vh;
 `;
 
@@ -326,6 +327,7 @@ const Title = styled.h1`
   /* justify-content: center; */
   align-items: center;
   text-align: center;
+  opacity: 0.93;
 `;
 
 const ResultButoon = styled.div`
@@ -413,10 +415,11 @@ const QuestionContainer = () => {
         {/* {explanation[animal]} */}
         {/* 동물 이름만 진하게 */}
         {/*  match 메서드는 주어진 문자열에서 정규표현식과 일치하는 부분을 찾아 반환하며, [0]을 사용하여 찾은 첫번째 일치하는 문자열을 반환 */}
-        
+
         {/* : 이후 해석내용만 잘라내기 */}
         {/*  :와 이어지는 공백(\s) 다음에 오는 모든 문자열(.+)을 찾아내도록, 여기서 [1]을 붙이면 일치하는 부분 중 첫 번째 그룹의 문자열, 즉 : 이후의 문자열만 추출할 수 있습니다.*/}
-        <Subheading>{explanation[animal].match(/^.*?:/)[0]}</Subheading>{` ${explanation[animal].match(/:\s(.+)/)[1]}`}
+        <Subheading>{explanation[animal].match(/^.*?:/)[0]}</Subheading>
+        {` ${explanation[animal].match(/:\s(.+)/)[1]}`}
       </div>
     ));
 
