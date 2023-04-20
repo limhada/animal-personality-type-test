@@ -43,34 +43,34 @@ const questions = [
       2: '약속 시간을 잘 지키시나요?',
     },
   },
-  // {
-  //   id: 2,
-  //   type: '외향성',
-  //   content: {
-  //     0: '사람들과 함께 있는 것을 좋아하시나요?',
-  //     1: '대화를 시작하기 쉬운 편인가요?',
-  //     1: '처음 보는 사람에게 먼저 다가가는 편인가요?',
-  //     2: '새로운 사람들을 만나는 것을 좋아하시나요?',
-  //   },
-  // },
-  // {
-  //   id: 3,
-  //   type: '우호성',
-  //   content: {
-  //     0: '다른 사람들의 감정에 민감하게 반응하시나요?',
-  //     1: '다른 사람들을 잘 도와주시나요?',
-  //     2: '다른 사람들과 원만한 관계를 유지하시나요?',
-  //   },
-  // },
-  // {
-  //   id: 4,
-  //   type: '신경성',
-  //   content: {
-  //     0: '어떤 일이나 상황에 대해 예민하게 반응하시나요?',
-  //     1: '어려운 일이나 상황을 이겨내기 힘든가요?',
-  //     2: '사소한 일을 할때도 걱정이 많은 편인가요?',
-  //   },
-  // },
+  {
+    id: 2,
+    type: '외향성',
+    content: {
+      0: '사람들과 함께 있는 것을 좋아하시나요?',
+      1: '대화를 시작하기 쉬운 편인가요?',
+      1: '처음 보는 사람에게 먼저 다가가는 편인가요?',
+      2: '새로운 사람들을 만나는 것을 좋아하시나요?',
+    },
+  },
+  {
+    id: 3,
+    type: '우호성',
+    content: {
+      0: '다른 사람들의 감정에 민감하게 반응하시나요?',
+      1: '다른 사람들을 잘 도와주시나요?',
+      2: '다른 사람들과 원만한 관계를 유지하시나요?',
+    },
+  },
+  {
+    id: 4,
+    type: '신경성',
+    content: {
+      0: '어떤 일이나 상황에 대해 예민하게 반응하시나요?',
+      1: '어려운 일이나 상황을 이겨내기 힘든가요?',
+      2: '사소한 일을 할때도 걱정이 많은 편인가요?',
+    },
+  },
 ];
 
 // 버튼 이름
@@ -195,6 +195,8 @@ width: 100vw;는 뷰포트 너비(viewport width)를 100%로 설정하는 것입
 
 // 질문과 버튼이 들어있는 박스
 const QuestionsContent = styled.div`
+ // 질문이 길어지면 버튼이 밀려나지 않게 하려고 부모에 설정한 것임!
+ position: relative; 
   display: flex;
   // 응답 버튼을 세로로 = 이런식으로 정렬
   flex-direction: column;
@@ -216,13 +218,26 @@ const Content = styled.div`
   flex-direction: column;
   flex-basis: 0;
   width: 100%;
-  height: 100%;
+  height: 95vh;
 `;
 
 // 결과 동물 이미지
-const AnimalImg = styled.img`
-  width: 7rem;
-  height: 7rem;
+// const AnimalImg = styled.img`
+//   width: 7rem;
+//   height: 7rem;
+// `;
+
+const ButtonContainer = styled.div`
+
+  display: flex;
+  // 버튼 정렬
+  flex-direction: column;
+justify-content: center;
+  /* align-items: center; */
+  position: absolute;
+      top: 33vh;
+      /* left: 35vw; */
+
 `;
 
 // 답변버튼
@@ -254,6 +269,10 @@ const Question = styled.div`
   color: white;
   // FIXME: 마진을 넣을지 컴포넌트를 센터로 맞출지 생각해보기
   margin: 5rem 1rem 1rem 1rem;
+
+  // 텍스트를 중앙에 정렬
+  text-align: center;
+
   /* 태블릿 */
   @media (min-width: 768px) and (max-width: 1023px) {
     font-size: 3rem;
@@ -262,7 +281,7 @@ const Question = styled.div`
 
   /* 데스크탑 모니터 */
   @media (min-width: 1024px) {
-    font-size: 5rem;
+    font-size: 4rem;
   }
 `;
 
@@ -281,7 +300,17 @@ const ShareResultsbutton = styled.button`
 const ResultContainer = styled.div`
   background-color: #aea18f;
   width: 100%;
-  height: 50rem;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+`;
+
+// 해설
+const Title = styled.h1`
+  background-color: #aea18f;
+  color: white;
 `;
 
 const QuestionContainer = () => {
@@ -329,15 +358,36 @@ const QuestionContainer = () => {
 
   // 결과화면에 이미지 그려주기
   const renderImages = () =>
-    finalResult.map((animal) => (
-      <AnimalImg src={animalIndex[animal]} alt={animal} />
+    finalResult.map((animal, i) => (
+      <AnimalImg
+        id={`animalImg${i + 1}`}
+        src={animalIndex[animal]}
+        alt={animal}
+      />
+    ));
+
+  //
+  const questionbutton = () =>
+    buttonNames.map((name, index) => (
+      <AnswerButton
+        key={index}
+        // 여기가 답변으로 보내는 데이터
+        onClick={() =>
+          handleAnswerSubmit(
+            // `${index + 1} 이게 답변에 나오는 데이터!!! name으로 고치면 버튼이름을 전달`,
+            index + 1,
+          )
+        }
+      >
+        {name} {/* 버튼이름 */}
+      </AnswerButton>
     ));
 
   // 결과 화면에 해석 보여주기
   const renderExplanation = () =>
     // 동적으로 아이디 만드는법 정리해서 포스팅하기
     finalResult.map((animal, i) => (
-      <div id={`explanation${i}`}>{explanation[animal]}</div>
+      <div id={`explanation${i + 1}`}>{explanation[animal]}</div>
     ));
 
   //FIXME: 방법 12 jpeg로 452kb 이걸로 선택!! 용량이 2번째로 적음 1번째로적은 webp형식은 안도르이드에서 문제가 있음 해결방법을 찾으면 webp로 수정하기
@@ -365,6 +415,91 @@ const QuestionContainer = () => {
     });
   };
 
+  const AnimalImgWrapper = styled.div`
+    /* position: absolute; */
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; */
+    /* height: 100vh; */
+    /* flex-direction: row-reverse; // 추가 */
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    #animalImg1 {
+      position: absolute;
+      // 라인 확인용 컬러
+      /* background-color: green; */
+      top: 20vh;
+      left: 37.5vw;
+      /* 컴퓨터에서는 50% 모바일에서는 오른쪽으로 치우짐 */
+      /* CSS에서 left: 50%는 부모 요소의 가로폭 기준으로 왼쪽에서 50%의 위치에 해당하는 지점에 위치하도록 지정하는 것입니다.
+
+이렇게 지정하는 경우, 부모 요소의 가로폭이 바뀌면 해당 위치도 함께 변경됩니다.
+
+하지만, 모바일 화면과 컴퓨터 화면의 가로폭이 다르기 때문에, 같은 비율로 위치시킨다면 실제로 위치하는 지점이 다르게 됩니다.
+
+따라서, 모바일과 컴퓨터에서 같은 위치에 놓이도록 하려면 다른 방법을 사용해야 합니다. 예를 들어, viewport의 너비를 기준으로 % 대신에 vh, vw 단위를 사용하면 모바일과 컴퓨터에서 더 일관성있는 결과를 얻을 수 있습니다. */
+      /* left: 50%; */
+    }
+
+    #animalImg2 {
+      position: absolute;
+      /* background-color: green; */
+      top: 30vh;
+      left: 10vw;
+    }
+
+    #animalImg3 {
+      position: absolute;
+      /* background-color: green; */
+      top: 30vh;
+      left: 65vw;
+    }
+
+    #animalImg4 {
+      position: absolute;
+      /* background-color: green; */
+      top: 45vh;
+      left: 20vw;
+    }
+
+    #animalImg5 {
+      position: absolute;
+      /* background-color: green; */
+      top: 45vh;
+      left: 55vw;
+    }
+  `;
+
+  const AnimalImg = styled.img`
+    /* position: absolute; */
+    width: 7rem;
+    height: 7rem;
+    /* flex-basis: 30%;
+    margin: 5px; */
+  `;
+
+  // const RedRect = styled(AnimalImg)`
+  // top: 0;
+  // left: 0;
+  // background-color: red;
+  // `;
+
+  // const YellowRect = styled(AnimalImg)`
+  // top: 25px;
+  // left: 25px;
+  // background-color: yellow;
+  // `;
+
+  // const GreenRect = styled(AnimalImg)`
+  // top: 12.5px;
+  // left: 12.5px;
+  // background-color: green;
+  // `;
+
   return (
     <Container id="main_capture">
       {/* 아직 답해야 할 질문이 남아있는 경우 */}
@@ -373,41 +508,36 @@ const QuestionContainer = () => {
           <Question>
             {questions[currentQuestionIndex].content[currentContentIndex]}
           </Question>
-          {buttonNames.map((name, index) => (
-            <AnswerButton
-              key={index}
-              // 여기가 답변으로 보내는 데이터
-              onClick={() =>
-                handleAnswerSubmit(
-                  // `${index + 1} 이게 답변에 나오는 데이터!!! name으로 고치면 버튼이름을 전달`,
-                  index + 1,
-                )
-              }
-            >
-              {name} {/* 버튼이름 */}
-            </AnswerButton>
-          ))}
+
+          <ButtonContainer>{questionbutton()}</ButtonContainer>
+
+          {/* {buttonNames.map((name, index) => (<AnswerButton key={index} onClick={() => handleAnswerSubmit(index + 1,)}>{name}</AnswerButton>))} */}
         </QuestionsContent>
       ) : (
         <>
           {/* TODO: 성공코드!! 동물 이미지 렌더링 */}
           <Content>
-            <h1> 나의 성격을 나타내는 동물은?! </h1>
+            <Title> 내 안에 숨어있던 동물은? </Title>
             {/* 결과 이미지 */}
-            <div>{renderImages()}</div>
-
-            <ShareResultsbutton onClick={handleShareClick12}>
-              결과 공유하기
-            </ShareResultsbutton>
-            <Link to="explanation0" smooth={true} offset={-300} duration={500}>
-              <ShareResultsbutton>결과로 이동</ShareResultsbutton>
-            </Link>
+            {/* <div>{renderImages()}</div> */}
+            <AnimalImgWrapper>{renderImages()}</AnimalImgWrapper>
           </Content>
+
           {/* 해설내용 */}
           {/* 중괄호 두번쓰는 이유 : 스타일 속성 값으로 JavaScript 객체를 사용하려면, 객체 리터럴 문법으로 작성된 객체를 중괄호로 감싸야 합니다. 이때, 중괄호는 객체 리터럴을 JSX에서 인식하도록 하는 역할을 하기 때문에 두 번 사용됩니다. */}
           {/* #으로 색을 표현하는 것을 Hexadecimal Color 또는 Hex Color라고 부릅니다. 이는 16진수 값으로 표현된 RGB 색상 값을 나타내며, CSS에서 가장 일반적으로 사용되는 색상 표현 방법 중 하나 */}
           {/* #으로 시작하는 문자열은 CSS에서 색상을 표현할 때 사용됩니다. 하지만, React에서 JSX 문법을 사용할 때는 #으로 시작하는 숫자를 직접 사용할 수 없습니다. 이는 JSX에서 중괄호({})를 사용하여 JavaScript 표현식을 삽입할 수 있는데, 중괄호 내부에서 #으로 시작하는 숫자는 JavaScript에서 잘못된 표현식으로 인식되기 때문입니다.따라서, JSX에서 CSS 색상 값을 지정할 때는 # 대신에 rgb(), rgba(), hsl(), hsla()와 같은 CSS 색상 함수를 사용하거나, CSS에서 지정 가능한 색상 이름을 사용해야 합니다. */}
-          <ResultContainer>{renderExplanation()}</ResultContainer>
+          <ResultContainer>
+            <ShareResultsbutton onClick={handleShareClick12}>
+              결과 공유하기
+            </ShareResultsbutton>
+            {/* 첫번째 해설로 스크롤이동 */}
+            <Link to="explanation1" smooth={true} offset={-300} duration={500}>
+              <ShareResultsbutton>결과보기</ShareResultsbutton>
+            </Link>
+
+            {renderExplanation()}
+          </ResultContainer>
         </>
       )}
     </Container>
