@@ -216,8 +216,13 @@ const QuestionsContent = styled.div`
 const Content = styled(Container)`
   display: flex;
   flex-direction: column;
-  flex-basis: 0;
-  width: 100%;
+  justify-content: center;
+  align-items: center;
+  // Title을 가운데 정렬
+  /* align-items: center; */
+
+  /* flex-basis: 0; */
+  /* width: 100%; */
   height: 95vh;
 `;
 
@@ -295,8 +300,9 @@ const ShareResultsbutton = styled.button`
 // 해설 결과 전체 컨테이너
 const ResultContainer = styled.div`
   background-color: #aea18f;
+  color: white;
   width: 100%;
-  height: auto;
+  /* height: auto; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -305,8 +311,20 @@ const ResultContainer = styled.div`
 
 // 해설
 const Title = styled.h1`
-  background-color: #aea18f;
+  margin-top: 2rem;
+  border-radius: 0.7rem;
+  width: 90%;
+  /* height: 200px; */
+  /* height: 10rem; */
+  /* margin: 0 auto; */
+  background-color: #aea18b;
+  font-size: 1.2rem;
   color: white;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  text-align: center;
 `;
 
 const QuestionContainer = () => {
@@ -383,7 +401,7 @@ const QuestionContainer = () => {
   const renderExplanation = () =>
     // 동적으로 아이디 만드는법 정리해서 포스팅하기
     finalResult.map((animal, i) => (
-      <div id={`explanation${i + 1}`}>{explanation[animal]}</div>
+      <div id={`explanation${i + 1}`} style={{ marginBottom: '10px' }}>{explanation[animal]}</div>
     ));
 
   //FIXME: 방법 12 jpeg로 452kb 이걸로 선택!! 용량이 2번째로 적음 1번째로적은 webp형식은 안도르이드에서 문제가 있음 해결방법을 찾으면 webp로 수정하기
@@ -515,7 +533,10 @@ const QuestionContainer = () => {
         <>
           {/* TODO: 성공코드!! 동물 이미지 렌더링 */}
           <Content id="main_capture">
-            <Title> 내 안에 숨어있던 동물은? </Title>
+            <Title>
+              <h1>내 안에 숨어있던</h1>
+              <h1>동물은!?</h1>
+            </Title>
             {/* 결과 이미지 */}
             {/* <div>{renderImages()}</div> */}
             <AnimalImgWrapper>{renderImages()}</AnimalImgWrapper>
