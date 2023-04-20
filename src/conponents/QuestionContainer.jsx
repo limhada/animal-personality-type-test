@@ -48,7 +48,6 @@ const questions = [
     type: '외향성',
     content: {
       0: '사람들과 함께 있는 것을 좋아하시나요?',
-      1: '대화를 시작하기 쉬운 편인가요?',
       1: '처음 보는 사람에게 먼저 다가가는 편인가요?',
       2: '새로운 사람들을 만나는 것을 좋아하시나요?',
     },
@@ -76,51 +75,51 @@ const questions = [
 // 버튼 이름
 const buttonNames = ['매우 아님', '아님', '보통', '그렇다', '매우 그렇다'];
 
-// min: 4.25, max: 6 에서 max값을 5로해서 에러가 났었음
+// min: 4.1, max: 5.1 에서 max값을 5로해서 에러가 났었음
 const animal = [
   {
     id: 0,
     type: '개방성',
     content: [
-      { name: '당나귀', min: 0, max: 3.25 },
-      { name: '곰', min: 3.25, max: 4.25 },
-      { name: '강아지', min: 4.25, max: 6 },
+      { name: '당나귀', min: 0, max: 3.1 },
+      { name: '곰', min: 3.1, max: 4.1 },
+      { name: '강아지', min: 4.1, max: 5.1 },
     ],
   },
   {
     id: 1,
     type: '성실성',
     content: [
-      { name: '나무늘보', min: 0, max: 3.25 },
-      { name: '코끼리', min: 3.25, max: 4.25 },
-      { name: '벌새', min: 4.25, max: 6 },
+      { name: '나무늘보', min: 0, max: 3.1 },
+      { name: '코끼리', min: 3.1, max: 4.1 },
+      { name: '벌새', min: 4.1, max: 5.1 },
     ],
   },
   {
     id: 2,
     type: '외향성',
     content: [
-      { name: '고슴도치', min: 0, max: 3.25 },
-      { name: '고양이', min: 3.25, max: 4.25 },
-      { name: '앵무새', min: 4.25, max: 6 },
+      { name: '고슴도치', min: 0, max: 3.1 },
+      { name: '고양이', min: 3.1, max: 4.1 },
+      { name: '앵무새', min: 4.1, max: 5.1 },
     ],
   },
   {
     id: 3,
     type: '우호성',
     content: [
-      { name: '알파카', min: 0, max: 3.25 },
-      { name: '악어', min: 3.25, max: 4.25 },
-      { name: '랫서팬더', min: 4.25, max: 6 },
+      { name: '알파카', min: 0, max: 3.1 },
+      { name: '악어', min: 3.1, max: 4.1 },
+      { name: '랫서팬더', min: 4.1, max: 5.1 },
     ],
   },
   {
     id: 4,
     type: '신경성',
     content: [
-      { name: '독수리', min: 0, max: 3.25 },
-      { name: '코알라', min: 3.25, max: 4.25 },
-      { name: '토끼', min: 4.25, max: 6 },
+      { name: '독수리', min: 0, max: 3.1 },
+      { name: '코알라', min: 3.1, max: 4.1 },
+      { name: '토끼', min: 4.1, max: 5.1 },
     ],
   },
 ];
@@ -149,30 +148,29 @@ const animalIndex = {
 
 const explanation = {
   강아지:
-    '새로운 아이디어나 경험에 대해 열려있으므로, 호기심이 많은 강아지와 어울릴 수 있습니다.',
-  곰: '새로운 아이디어나 경험에 대해 어느 정도 열려있지만, 전통적인 방식을 선호하는 경우도 있으므로, 균형 잡힌 곰과 어울릴 수 있습니다.',
+    '강아지: 새로운 아이디어나 경험에 대해 열려있으므로, 호기심이 많습니다.',
+  곰: '곰: 새로운 아이디어나 경험에 대해 어느 정도 열려있지만, 기존의 방식을 선호하는 경우도 있으므로, 균형.',
   당나귀:
-    '새로운 아이디어나 경험보다는 전통적인 방식을 선호하는 경우가 많으므로, 집요한 당나귀와 어울릴 수 있습니다.',
-  벌새: '계획적이고 체계적으로 일을 처리하는 경우가 많으므로, 부지런한 벌새와 어울릴 수 있습니다.',
+    '당나귀: 새로운 아이디어나 경험보다는 기존의 방식을 선호하는 경우가 많으므로, 완고한 성격일 수 있습니다.',
+  벌새: '벌새: 계획적이고 체계적으로 일을 처리하는 경우가 많으므로, 부지런한 성격입니다.',
   코끼리:
-    '계획적으로 일을 처리하는 경우도 있지만, 때때로 일을 미루는 경우도 있으므로, 융통성 있는 코끼리와 어울릴 수 있습니다.',
+    '코끼리: 계획적으로 일을 처리하는 경우도 있지만, 때때로 일을 미루는 경우도 있습니다.',
   나무늘보:
-    '일을 처리하는데 있어서 계획적이지 않은 경우가 많으며, 때때로 일을 미루는 경우도 있으므로, 나른한 나무늘보와 어울릴 수 있습니다.',
-  앵무새:
-    '외향성이 높은 사람은 사람들과 함께하는 것을 좋아하므로, 사회적인 동물인 앵무새와 어울릴 수 있습니다.',
-  고양이: '때때로 혼자 있는 것도 좋아하므로, 고양이와 어울릴 수 있습니다.',
-  고슴도치:
-    '혼자 있는 것을 좋아하므로, 겁이 많은 고슴도치와 어울릴 수 있습니다.',
+    '나무늘보: 일을 처리하는데 있어서 계획적이지 않은 경우가 많으며, 때때로 일을 미루는 경우도 있습니다.',
+  앵무새: '앵무새: 다른사람들과 함께하는 시간을 즐기며 사교성이 좋습니다.',
+  고양이:
+    '고양이: 사람들과 함게 있는것도 좋지만 때때로 혼자 있는 것도 좋아합니다',
+  고슴도치: '고슴도치: 의외로 겁이 많은 성격이므로 혼자 있는 것을 좋아합니다.',
   랫서팬더:
-    '다른 사람들의 감정에 민감하게 반응하며, 다른 사람들을 쉽게 돕고 지원하는 경우가 많으므로, 친절한 랫서팬더와 어울릴 수 있습니다.',
-  악어: '다른 사람들의 감정에 어느 정도 반응하지만, 때때로 자신의 의견을 단호하게 표현하는 경우도 있으므로, 자기주장이 강한 악어와 어울릴 수 있습니다.',
+    '랫서팬더: 다른 사람들의 감정에 민감하게 반응하며, 주변 사람들을 친절하게 도와주는 경우가 많습니다.',
+  악어: '악어: 다른 사람들의 감정에 어느 정도 반응하지만, 때때로 자신의 의견을 단호하게 표현하는 경우도 있습니다.',
   알파카:
-    '다른 사람들의 감정에 둔감한 경우가 많으며, 자신의 의견을 단호하게 표현하는 경우가 많으므로, 고집스러운 알파카와 어울릴 수 있습니다.',
-  토끼: '일이나 상황에 대해 예민하게 반응하며, 자주 걱정하는 경우가 많으므로, 겁이 많은 토끼와 어울릴 수 있습니다.',
+    '알파카: 다른 사람들의 감정에 둔감한 경우가 많으며, 자신의 의견을 단호하게 표현하는 경우가 많습니다.',
+  토끼: '토끼: 일이나 상황에 대해 예민하게 반응하며, 걱정이 많은 편입니다.',
   코알라:
-    '일이나 상황에 대해 어느 정도 예민하게 반응하지만, 때때로 차분하게 대처하는 경우도 있으므로, 차분한 코알라와 어울릴 수 있습니다.',
+    '코알라: 균형적인 타입으로 새로운 아이디어나 경험에 대해 어느 정도 열려있지만, 기존의 방식을 선호하는 경우도 있습니다.',
   독수리:
-    '일이나 상황에 대해 둔감한 경우가 많으며, 차분하게 대처하는 경우가 많으므로, 냉정한 독수리와 어울릴 수 있습니다.',
+    '독수리: 냉정한 타입으로 일이나 상황에 대해 둔감하며 차분하게 대처하는 경우가 많습니다.',
 };
 
 // 최상위 컨테이너 - 배경 설정
@@ -293,7 +291,9 @@ const ShareResultsbutton = styled.button`
   background-color: #aea18f;
   font-size: 0.8rem;
   font-weight: bold;
-  /* border: none; */
+  border: 1;
+  border-radius: 0.7rem;
+  margin-right: 1rem;
   cursor: pointer;
 `;
 
@@ -305,6 +305,7 @@ const ResultContainer = styled.div`
   /* height: auto; */
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
@@ -325,6 +326,12 @@ const Title = styled.h1`
   /* justify-content: center; */
   align-items: center;
   text-align: center;
+`;
+
+const ResultButoon = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 1rem 1rem 1rem 1rem;
 `;
 
 const QuestionContainer = () => {
@@ -401,7 +408,16 @@ const QuestionContainer = () => {
   const renderExplanation = () =>
     // 동적으로 아이디 만드는법 정리해서 포스팅하기
     finalResult.map((animal, i) => (
-      <div id={`explanation${i + 1}`} style={{ marginBottom: '10px' }}>{explanation[animal]}</div>
+      <div id={`explanation${i + 1}`} style={{ marginBottom: '10px' }}>
+        {/* 기존코드 */}
+        {/* {explanation[animal]} */}
+        {/* 동물 이름만 진하게 */}
+        {/*  match 메서드는 주어진 문자열에서 정규표현식과 일치하는 부분을 찾아 반환하며, [0]을 사용하여 찾은 첫번째 일치하는 문자열을 반환 */}
+        
+        {/* : 이후 해석내용만 잘라내기 */}
+        {/*  :와 이어지는 공백(\s) 다음에 오는 모든 문자열(.+)을 찾아내도록, 여기서 [1]을 붙이면 일치하는 부분 중 첫 번째 그룹의 문자열, 즉 : 이후의 문자열만 추출할 수 있습니다.*/}
+        <Subheading>{explanation[animal].match(/^.*?:/)[0]}</Subheading>{` ${explanation[animal].match(/:\s(.+)/)[1]}`}
+      </div>
     ));
 
   //FIXME: 방법 12 jpeg로 452kb 이걸로 선택!! 용량이 2번째로 적음 1번째로적은 webp형식은 안도르이드에서 문제가 있음 해결방법을 찾으면 webp로 수정하기
@@ -446,8 +462,8 @@ const QuestionContainer = () => {
       position: absolute;
       // 라인 확인용 컬러
       /* background-color: green; */
-      top: 20vh;
-      left: 37.5vw;
+      top: 15vh;
+      left: 36vw;
       /* 컴퓨터에서는 50% 모바일에서는 오른쪽으로 치우짐 */
       /* CSS에서 left: 50%는 부모 요소의 가로폭 기준으로 왼쪽에서 50%의 위치에 해당하는 지점에 위치하도록 지정하는 것입니다.
 
@@ -462,28 +478,28 @@ const QuestionContainer = () => {
     #animalImg2 {
       position: absolute;
       /* background-color: green; */
-      top: 30vh;
-      left: 10vw;
+      top: 32vh;
+      left: 7vw;
     }
 
     #animalImg3 {
       position: absolute;
       /* background-color: green; */
-      top: 30vh;
+      top: 32vh;
       left: 65vw;
     }
 
     #animalImg4 {
       position: absolute;
       /* background-color: green; */
-      top: 45vh;
+      top: 50vh;
       left: 20vw;
     }
 
     #animalImg5 {
       position: absolute;
       /* background-color: green; */
-      top: 45vh;
+      top: 50vh;
       left: 55vw;
     }
   `;
@@ -496,23 +512,9 @@ const QuestionContainer = () => {
     margin: 5px; */
   `;
 
-  // const RedRect = styled(AnimalImg)`
-  // top: 0;
-  // left: 0;
-  // background-color: red;
-  // `;
-
-  // const YellowRect = styled(AnimalImg)`
-  // top: 25px;
-  // left: 25px;
-  // background-color: yellow;
-  // `;
-
-  // const GreenRect = styled(AnimalImg)`
-  // top: 12.5px;
-  // left: 12.5px;
-  // background-color: green;
-  // `;
+  const Subheading = styled.span`
+    font-weight: bold;
+  `;
 
   return (
     // 전체 컴포넌트인 Container를 캡처하면 질문과 버튼 등이 함께 캡처되서 미관상 좋지 않다 따라서 <Content id="main_capture"> 컴포넌트로 id를 옮겨서 캡처 대상을 바꾸어주었다.
@@ -534,8 +536,12 @@ const QuestionContainer = () => {
           {/* TODO: 성공코드!! 동물 이미지 렌더링 */}
           <Content id="main_capture">
             <Title>
-              <h1>내 안에 숨어있던</h1>
-              <h1>동물은!?</h1>
+              {/* <h1>내 안에 숨어있던</h1>
+              <h1>동물은!?</h1> */}
+              {/* FIXME: 위 코드 지우기 */}
+              <h1>
+                내 안에 숨어있던 <br /> 동물은!?
+              </h1>
             </Title>
             {/* 결과 이미지 */}
             {/* <div>{renderImages()}</div> */}
@@ -547,17 +553,20 @@ const QuestionContainer = () => {
           {/* #으로 색을 표현하는 것을 Hexadecimal Color 또는 Hex Color라고 부릅니다. 이는 16진수 값으로 표현된 RGB 색상 값을 나타내며, CSS에서 가장 일반적으로 사용되는 색상 표현 방법 중 하나 */}
           {/* #으로 시작하는 문자열은 CSS에서 색상을 표현할 때 사용됩니다. 하지만, React에서 JSX 문법을 사용할 때는 #으로 시작하는 숫자를 직접 사용할 수 없습니다. 이는 JSX에서 중괄호({})를 사용하여 JavaScript 표현식을 삽입할 수 있는데, 중괄호 내부에서 #으로 시작하는 숫자는 JavaScript에서 잘못된 표현식으로 인식되기 때문입니다.따라서, JSX에서 CSS 색상 값을 지정할 때는 # 대신에 rgb(), rgba(), hsl(), hsla()와 같은 CSS 색상 함수를 사용하거나, CSS에서 지정 가능한 색상 이름을 사용해야 합니다. */}
           <ResultContainer>
-            <div>
-              
-            </div>
-            <ShareResultsbutton onClick={handleShareClick12}>
-              결과 공유하기
-            </ShareResultsbutton>
-            {/* 첫번째 해설로 스크롤이동 */}
-            <Link to="explanation1" smooth={true} offset={-300} duration={500}>
-              <ShareResultsbutton>결과보기</ShareResultsbutton>
-            </Link>
-
+            <ResultButoon>
+              <ShareResultsbutton onClick={handleShareClick12}>
+                결과 공유하기
+              </ShareResultsbutton>
+              {/* 첫번째 해설로 스크롤이동 */}
+              <Link
+                to="explanation1"
+                smooth={true}
+                offset={-300}
+                duration={500}
+              >
+                <ShareResultsbutton>결과보기</ShareResultsbutton>
+              </Link>
+            </ResultButoon>
             {renderExplanation()}
           </ResultContainer>
         </>
