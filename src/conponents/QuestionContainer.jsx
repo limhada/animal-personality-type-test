@@ -177,8 +177,13 @@ const explanation = {
 
 // 최상위 컨테이너 - 배경 설정
 const Container = styled.div`
-  width: 100vw;
+  /* width 100vw 하면 가로스크롤 생기는 이유 
+width: 100vw;는 뷰포트 너비(viewport width)를 100%로 설정하는 것입니다. 뷰포트 너비는 브라우저에서 보이는 화면의 너비를 말합니다. 하지만 이 경우 브라우저 창의 너비가 수평 스크롤바까지 포함되므로 수평 스크롤바가 생성됩니다.
+
+반면에 width: 100%;는 부모 요소의 너비를 100%로 설정하는 것입니다. 이 경우 부모 요소가 수평 스크롤바를 가지고 있다면, 자식 요소도 같이 스크롤되므로 수평 스크롤바가 생성되지 않습니다. 그러나 부모 요소가 스크롤바를 가지고 있지 않다면, 자식 요소는 부모 요소의 너비를 100%로 채우게 되므로 가로 스크롤바가 생기지 않습니다. */
+  width: 100%;
   height: 100vh;
+
   background-image: url(${배경_숲});
   background-size: cover;
   // 이미지 반복 x
@@ -272,10 +277,11 @@ const ShareResultsbutton = styled.button`
   cursor: pointer;
 `;
 
+// 해설 결과 전체 컨테이너
 const ResultContainer = styled.div`
   background-color: #aea18f;
   width: 100%;
-  height: 100rem;
+  height: 50rem;
 `;
 
 const QuestionContainer = () => {
