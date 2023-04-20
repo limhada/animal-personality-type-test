@@ -276,7 +276,7 @@ const Question = styled.div`
   /* 태블릿 */
   @media (min-width: 768px) and (max-width: 1023px) {
     font-size: 3rem;
-    background-color: #667eea;
+    /* background-color: #667eea; */
   }
 
   /* 데스크탑 모니터 */
@@ -515,6 +515,7 @@ const QuestionContainer = () => {
     margin: 5px; */
   `;
 
+// 결과페이지 소제목 진하게
   const Subheading = styled.span`
     font-weight: bold;
   `;
