@@ -547,6 +547,9 @@ const QuestionContainer = () => {
           {/* #으로 색을 표현하는 것을 Hexadecimal Color 또는 Hex Color라고 부릅니다. 이는 16진수 값으로 표현된 RGB 색상 값을 나타내며, CSS에서 가장 일반적으로 사용되는 색상 표현 방법 중 하나 */}
           {/* #으로 시작하는 문자열은 CSS에서 색상을 표현할 때 사용됩니다. 하지만, React에서 JSX 문법을 사용할 때는 #으로 시작하는 숫자를 직접 사용할 수 없습니다. 이는 JSX에서 중괄호({})를 사용하여 JavaScript 표현식을 삽입할 수 있는데, 중괄호 내부에서 #으로 시작하는 숫자는 JavaScript에서 잘못된 표현식으로 인식되기 때문입니다.따라서, JSX에서 CSS 색상 값을 지정할 때는 # 대신에 rgb(), rgba(), hsl(), hsla()와 같은 CSS 색상 함수를 사용하거나, CSS에서 지정 가능한 색상 이름을 사용해야 합니다. */}
           <ResultContainer>
+            <div>
+              
+            </div>
             <ShareResultsbutton onClick={handleShareClick12}>
               결과 공유하기
             </ShareResultsbutton>
