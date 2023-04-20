@@ -195,8 +195,8 @@ width: 100vw;는 뷰포트 너비(viewport width)를 100%로 설정하는 것입
 
 // 질문과 버튼이 들어있는 박스
 const QuestionsContent = styled.div`
- // 질문이 길어지면 버튼이 밀려나지 않게 하려고 부모에 설정한 것임!
- position: relative; 
+  // 질문이 길어지면 버튼이 밀려나지 않게 하려고 부모에 설정한 것임!
+  position: relative;
   display: flex;
   // 응답 버튼을 세로로 = 이런식으로 정렬
   flex-direction: column;
@@ -213,7 +213,7 @@ const QuestionsContent = styled.div`
 `;
 
 // 동물 이미지가 들어있는 컴포넌트
-const Content = styled.div`
+const Content = styled(Container)`
   display: flex;
   flex-direction: column;
   flex-basis: 0;
@@ -228,16 +228,12 @@ const Content = styled.div`
 // `;
 
 const ButtonContainer = styled.div`
-
   display: flex;
   // 버튼 정렬
   flex-direction: column;
-justify-content: center;
-  /* align-items: center; */
   position: absolute;
-      top: 33vh;
-      /* left: 35vw; */
-
+  top: 33vh;
+  /* left: 35vw; */
 `;
 
 // 답변버튼
@@ -501,7 +497,9 @@ const QuestionContainer = () => {
   // `;
 
   return (
-    <Container id="main_capture">
+    // 전체 컴포넌트인 Container를 캡처하면 질문과 버튼 등이 함께 캡처되서 미관상 좋지 않다 따라서 <Content id="main_capture"> 컴포넌트로 id를 옮겨서 캡처 대상을 바꾸어주었다.
+    //  그런데 한가지 문제가 생겼다 배경이미지가 적용되지 않아 하얀 화면만 캡처되었다 따라서 <Content>의 css설정에서 const Content = styled(Container)`···`; 이처럼 Content에서 Container를 상속받아 배경이미지가 하얗게 안보이던 문제를 해결하였다
+    <Container>
       {/* 아직 답해야 할 질문이 남아있는 경우 */}
       {currentQuestionIndex < questions.length ? (
         <QuestionsContent>
@@ -516,7 +514,7 @@ const QuestionContainer = () => {
       ) : (
         <>
           {/* TODO: 성공코드!! 동물 이미지 렌더링 */}
-          <Content>
+          <Content id="main_capture">
             <Title> 내 안에 숨어있던 동물은? </Title>
             {/* 결과 이미지 */}
             {/* <div>{renderImages()}</div> */}
