@@ -426,57 +426,33 @@ const QuestionContainer = () => {
     ));
 
   //FIXME: 방법 12 jpeg로 452kb 이걸로 선택!! 용량이 2번째로 적음 1번째로적은 webp형식은 안도르이드에서 문제가 있음 해결방법을 찾으면 webp로 수정하기
-  // const handleShareClick12 = () => {
-  //   html2canvas(document.querySelector('#main_capture'), {
-  //     scale: window.devicePixelRatio,
-  //     // FIXME: true로 설정 시 배경 이미지 포함 안됨!!!
-  //     foreignObjectRendering: false,
-  //   }).then((canvas) => {
-  //     canvas.toBlob((blob) => {
-  //       if (navigator.share) {
-  //         navigator
-  //           .share({
-  //             title: '동물성격유형테스트',
-  //             text: 'https://limhada.com/',
-  //             // 생성된 Blob 객체를 files에 전달
-  //             files: [new File([blob], 'image.jpg', { type: 'image/jpeg' })],
-  //           })
-  //           .then(() => console.log('이미지 공유 완료'))
-  //           .catch((error) => console.error('이미지 공유 실패: ', error));
-  //       } else {
-  //         console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
-  //       }
-  //     }, 'image/jpeg');
-  //   });
-  // };
-
-
-
-
   const handleShareClick12 = () => {
     html2canvas(document.querySelector('#main_capture'), {
       scale: window.devicePixelRatio,
+      // FIXME: true로 설정 시 배경 이미지 포함 안됨!!!
       foreignObjectRendering: false,
     }).then((canvas) => {
       canvas.toBlob((blob) => {
-        // 생성된 Blob 객체를 로컬 스토리지에 저장
-        // localStorage.setItem('capturedImage', blob);
         if (navigator.share) {
           navigator
             .share({
-              title: '캡처된 이미지 공유',
-              text: 'https://limhada.com/ 이미지공유',
+              title: '동물성격유형테스트',
+              text: '동물성격유형결과',
+              url:'https://limhada.com/',
               // 생성된 Blob 객체를 files에 전달
-              files: [new File([blob], 'image.png', { type: 'image/png' })],
+              files: [new File([blob], 'image.jpg', { type: 'image/jpeg' })],
             })
             .then(() => console.log('이미지 공유 완료'))
             .catch((error) => console.error('이미지 공유 실패: ', error));
         } else {
           console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
         }
-      }, 'image/png');
+      }, 'image/jpeg');
     });
   };
+
+
+
 
   const AnimalImgWrapper = styled.div`
     /* position: absolute; */
@@ -604,8 +580,11 @@ const QuestionContainer = () => {
                 <ShareResultsbutton>결과보기</ShareResultsbutton>
               </Link>
             </ResultButoon>
+            <div>
+              {/* 글씨 중앙정렬을 풀기위한 div */}
             {renderExplanation()}
-            <div><br/>* 이 테스트는 심리학적인 연구나 진단을 위한 것이 아닙니다. 따라서 유머적인 측면에서만 이해하시길 바랍니다.</div>
+            </div>
+            <div style={{ fontSize: '0.5rem'}}><br/>* 이 테스트는 심리학적인 연구나 진단을 위한 것이 아닙니다. 따라서 유머적인 측면에서만 이해하시길 바랍니다.</div>
           </ResultContainer>
         </>
       )}
