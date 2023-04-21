@@ -632,19 +632,21 @@ const Counter = styled.div`
               <Link
                 to="explanation1"
                 smooth={true}
-                offset={-300}
+                offset={-100}
                 duration={500}
               >
                 <ShareResultsbutton>결과보기</ShareResultsbutton>
               </Link>
             </ResultButoon>
-            <div>
+            <div style={{ marginLeft: '2rem', marginRight: '2rem' }}>
+  <div style={{ lineHeight: '1.8rem' }}>
               {/* 글씨 중앙정렬을 풀기위한 div */}
               {renderExplanation()}
             </div>
             <div style={{ fontSize: '0.5rem' }}>
               <br />* 이 테스트는 심리학적인 연구나 진단을 위한 것이 아닙니다.
               따라서 유머적인 측면에서만 이해하시길 바랍니다.
+            </div>
             </div>
           </ResultContainer>
         </>
