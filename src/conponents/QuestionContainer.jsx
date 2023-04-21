@@ -511,14 +511,138 @@ const QuestionContainer = () => {
       top: 50vh;
       left: 55vw;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    /* 태블릿 */
+  @media (min-width: 768px) and (max-width: 1023px) {
+
+
+    position: relative;
+#animalImg1 {
+  position: absolute;
+  top: 10vh;
+  left: 42vw;
+}
+
+#animalImg2 {
+  position: absolute;
+  /* background-color: green; */
+  top: 30vh;
+  left: 25vw;
+}
+
+#animalImg3 {
+  position: absolute;
+  /* background-color: green; */
+  top: 30vh;
+  left: 59vw;
+}
+
+#animalImg4 {
+  position: absolute;
+  /* background-color: green; */
+  top: 50vh;
+  left: 35vw;
+}
+
+#animalImg5 {
+  position: absolute;
+  /* background-color: green; */
+  top: 50vh;
+  left: 50vw;
+}
+
+  }
+
+
+
+
+
+
+
+  /* 데스크탑 모니터 */
+  @media (min-width: 1024px) {
+    position: relative;
+    
+    
+
+#animalImg1 {
+  position: absolute;
+  top: 10vh;
+  left: 45vw;
+}
+
+#animalImg2 {
+  position: absolute;
+  /* background-color: green; */
+  top: 30vh;
+  left: 30vw;
+}
+
+#animalImg3 {
+  position: absolute;
+  /* background-color: green; */
+  top: 30vh;
+  left: 60vw;
+}
+
+#animalImg4 {
+  position: absolute;
+  /* background-color: green; */
+  top: 50vh;
+  left: 35vw;
+}
+
+#animalImg5 {
+  position: absolute;
+  /* background-color: green; */
+  top: 50vh;
+  left: 55vw;
+}
+
+  }
   `;
 
   const AnimalImg = styled.img`
-    /* position: absolute; */
     width: 7rem;
     height: 7rem;
-    /* flex-basis: 30%;
-    margin: 5px; */
+    
+    /* background-color: #667eea; */
+
+     /* 태블릿 */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    /* background-color: #667eea; */
+    width: 7rem;
+    height: 7rem;
+  }
+
+  /* 데스크탑 모니터 */
+  @media (min-width: 1024px) {
+    /* background-color: #667eea; */
+    width: 10rem;
+    height: 10rem;
+  }
+
+
   `;
 
   // 결과페이지 소제목 진하게
