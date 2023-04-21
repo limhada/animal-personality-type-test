@@ -222,7 +222,7 @@ const Content = styled(Container)`
   /* flex-basis: 0; */
   /* width: 100%; */
   /* FIXME: 모바일 웹페이지 열렸을때 주소창 보이면 화면이 살짝 아래가 짤려서 버튼이 안보임 그럴때는 값을 90정도로 설정 */
-  height: 95vh;
+  height: 90vh;
 `;
 
 // 결과 동물 이미지
@@ -275,13 +275,13 @@ const Question = styled.div`
 
   /* 태블릿 */
   @media (min-width: 768px) and (max-width: 1023px) {
-    font-size: 3rem;
+    font-size: 2.5rem;
     /* background-color: #667eea; */
   }
 
   /* 데스크탑 모니터 */
   @media (min-width: 1024px) {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 `;
 
@@ -418,8 +418,10 @@ const QuestionContainer = () => {
 
         {/* : 이후 해석내용만 잘라내기 */}
         {/*  :와 이어지는 공백(\s) 다음에 오는 모든 문자열(.+)을 찾아내도록, 여기서 [1]을 붙이면 일치하는 부분 중 첫 번째 그룹의 문자열, 즉 : 이후의 문자열만 추출할 수 있습니다.*/}
-        <Subheading>{explanation[animal].match(/^.*?:/)[0]}</Subheading>
-        {` ${explanation[animal].match(/:\s(.+)/)[1]}`}
+        {/* <Subheading>{explanation[animal].match(/^.*?:/)[0]}</Subheading> */}
+        <Subheading>{explanation[animal].match(/^[^:]+/)[0]
+}</Subheading>
+        <div>{` ${explanation[animal].match(/:\s(.+)/)[1]}`}</div>
       </div>
     ));
 
@@ -461,6 +463,9 @@ const QuestionContainer = () => {
     width: 100%;
     height: 100%;
 
+
+
+    
     #animalImg1 {
       position: absolute;
       // 라인 확인용 컬러
@@ -572,6 +577,7 @@ const QuestionContainer = () => {
               </Link>
             </ResultButoon>
             {renderExplanation()}
+            <div><br/>* 이 테스트는 심리학적인 연구나 진단을 위한 것이 아닙니다. 따라서 유머적인 측면에서만 이해하시길 바랍니다.</div>
           </ResultContainer>
         </>
       )}
