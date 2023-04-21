@@ -18,8 +18,6 @@ import 코알라 from '../assets/img/코알라.png';
 import 토끼 from '../assets/img/토끼.png';
 import 배경_숲 from '../assets/img/배경_숲.jpeg';
 
-import splash from '../assets/img/splash.jpg';
-
 import html2canvas from 'html2canvas';
 import { Link } from 'react-scroll';
 
@@ -561,9 +559,6 @@ const QuestionContainer = () => {
 
   // 게이지바
   const [count, setCount] = useState(1);
-
-  //시작
-  // const [start, setStart] = useState(false);
 
   return (
     // 전체 컴포넌트인 Container를 캡처하면 질문과 버튼 등이 함께 캡처되서 미관상 좋지 않다 따라서 <Content id="main_capture"> 컴포넌트로 id를 옮겨서 캡처 대상을 바꾸어주었다.
