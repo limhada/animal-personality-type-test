@@ -395,11 +395,12 @@ const QuestionContainer = () => {
       <AnswerButton
         key={index}
         // 여기가 답변으로 보내는 데이터
-        onClick={() =>
+        onClick={() => {
           handleAnswerSubmit(
             // `${index + 1} 이게 답변에 나오는 데이터!!! name으로 고치면 버튼이름을 전달`,
             index + 1,
-          )
+          );  setCount(count + 1); }
+          // FIXME: 게이지바
         }
       >
         {name} {/* 버튼이름 */}
@@ -419,8 +420,7 @@ const QuestionContainer = () => {
         {/* : 이후 해석내용만 잘라내기 */}
         {/*  :와 이어지는 공백(\s) 다음에 오는 모든 문자열(.+)을 찾아내도록, 여기서 [1]을 붙이면 일치하는 부분 중 첫 번째 그룹의 문자열, 즉 : 이후의 문자열만 추출할 수 있습니다.*/}
         {/* <Subheading>{explanation[animal].match(/^.*?:/)[0]}</Subheading> */}
-        <Subheading>{explanation[animal].match(/^[^:]+/)[0]
-}</Subheading>
+        <Subheading>{explanation[animal].match(/^[^:]+/)[0]}</Subheading>
         <div>{` ${explanation[animal].match(/:\s(.+)/)[1]}`}</div>
       </div>
     ));
@@ -437,8 +437,8 @@ const QuestionContainer = () => {
           navigator
             .share({
               title: '동물성격유형테스트',
-              text: '동물성격유형결과',
-              url:'https://limhada.com/',
+              text: '동물성격유형결과 https://limhada.com/',
+              // url:'https://limhada.com/',
               // 생성된 Blob 객체를 files에 전달
               files: [new File([blob], 'image.jpg', { type: 'image/jpeg' })],
             })
@@ -450,9 +450,6 @@ const QuestionContainer = () => {
       }, 'image/jpeg');
     });
   };
-
-
-
 
   const AnimalImgWrapper = styled.div`
     /* position: absolute; */
@@ -467,9 +464,6 @@ const QuestionContainer = () => {
     width: 100%;
     height: 100%;
 
-
-
-    
     #animalImg1 {
       position: absolute;
       // 라인 확인용 컬러
@@ -529,6 +523,51 @@ const QuestionContainer = () => {
     font-weight: bold;
   `;
 
+
+
+
+
+
+
+// 게이지바
+const Gauge = styled.div`
+  width: 15rem;
+  height: 1.3rem;
+  background-color: #ddd;
+  position: relative;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+`;
+
+const Progress = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: ${(props) => props.width}%;
+  height: 1.3rem;
+  background-color: #aea18b;
+  border-radius: 10px;
+  transition: width 0.3s ease-in-out;
+`;
+
+const Counter = styled.div`
+  position: relative;  right: 0;
+  font-size: 16px;
+  z-index: 1;
+  color: white;
+  text-align: center; /* 가운데 정렬 */
+`;
+
+
+    // 게이지바
+  const [count, setCount] = useState(1);
+
+
+
+
+
+
   return (
     // 전체 컴포넌트인 Container를 캡처하면 질문과 버튼 등이 함께 캡처되서 미관상 좋지 않다 따라서 <Content id="main_capture"> 컴포넌트로 id를 옮겨서 캡처 대상을 바꾸어주었다.
     //  그런데 한가지 문제가 생겼다 배경이미지가 적용되지 않아 하얀 화면만 캡처되었다 따라서 <Content>의 css설정에서 const Content = styled(Container)`···`; 이처럼 Content에서 Container를 상속받아 배경이미지가 하얗게 안보이던 문제를 해결하였다
@@ -539,6 +578,25 @@ const QuestionContainer = () => {
           <Question>
             {questions[currentQuestionIndex].content[currentContentIndex]}
           </Question>
+
+
+          <div>
+      <Gauge><Counter>{count}/15</Counter>
+        {/* <Progress width={(count * 10) % 101} /> */}
+        {/* 게이지바 최대 15단계 */}
+        <Progress width={(count / 15) * 100} />
+      </Gauge>
+      
+    </div>
+
+
+
+
+
+
+
+
+
 
           <ButtonContainer>{questionbutton()}</ButtonContainer>
 
@@ -582,9 +640,12 @@ const QuestionContainer = () => {
             </ResultButoon>
             <div>
               {/* 글씨 중앙정렬을 풀기위한 div */}
-            {renderExplanation()}
+              {renderExplanation()}
             </div>
-            <div style={{ fontSize: '0.5rem'}}><br/>* 이 테스트는 심리학적인 연구나 진단을 위한 것이 아닙니다. 따라서 유머적인 측면에서만 이해하시길 바랍니다.</div>
+            <div style={{ fontSize: '0.5rem' }}>
+              <br />* 이 테스트는 심리학적인 연구나 진단을 위한 것이 아닙니다.
+              따라서 유머적인 측면에서만 이해하시길 바랍니다.
+            </div>
           </ResultContainer>
         </>
       )}
