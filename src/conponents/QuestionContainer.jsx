@@ -18,6 +18,8 @@ import 코알라 from '../assets/img/코알라.png';
 import 토끼 from '../assets/img/토끼.png';
 import 배경_숲 from '../assets/img/배경_숲.jpeg';
 
+import splash from '../assets/img/splash.jpg';
+
 import html2canvas from 'html2canvas';
 import { Link } from 'react-scroll';
 
@@ -395,11 +397,14 @@ const QuestionContainer = () => {
       <AnswerButton
         key={index}
         // 여기가 답변으로 보내는 데이터
-        onClick={() => {
-          handleAnswerSubmit(
-            // `${index + 1} 이게 답변에 나오는 데이터!!! name으로 고치면 버튼이름을 전달`,
-            index + 1,
-          );  setCount(count + 1); }
+        onClick={
+          () => {
+            handleAnswerSubmit(
+              // `${index + 1} 이게 답변에 나오는 데이터!!! name으로 고치면 버튼이름을 전달`,
+              index + 1,
+            );
+            setCount(count + 1);
+          }
           // FIXME: 게이지바
         }
       >
@@ -523,80 +528,63 @@ const QuestionContainer = () => {
     font-weight: bold;
   `;
 
+  // 게이지바
+  const Gauge = styled.div`
+    width: 15rem;
+    height: 1.3rem;
+    background-color: #ddd;
+    position: relative;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center; /* 가운데 정렬 */
+  `;
 
+  const Progress = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: ${(props) => props.width}%;
+    height: 1.3rem;
+    background-color: #aea18b;
+    border-radius: 10px;
+    transition: width 0.3s ease-in-out;
+  `;
 
+  const Counter = styled.div`
+    position: relative;
+    right: 0;
+    font-size: 16px;
+    z-index: 1;
+    color: white;
+    text-align: center; /* 가운데 정렬 */
+  `;
 
-
-
-
-// 게이지바
-const Gauge = styled.div`
-  width: 15rem;
-  height: 1.3rem;
-  background-color: #ddd;
-  position: relative;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center; /* 가운데 정렬 */
-`;
-
-const Progress = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: ${(props) => props.width}%;
-  height: 1.3rem;
-  background-color: #aea18b;
-  border-radius: 10px;
-  transition: width 0.3s ease-in-out;
-`;
-
-const Counter = styled.div`
-  position: relative;  right: 0;
-  font-size: 16px;
-  z-index: 1;
-  color: white;
-  text-align: center; /* 가운데 정렬 */
-`;
-
-
-    // 게이지바
+  // 게이지바
   const [count, setCount] = useState(1);
 
-
-
-
-
+  //시작
+  // const [start, setStart] = useState(false);
 
   return (
     // 전체 컴포넌트인 Container를 캡처하면 질문과 버튼 등이 함께 캡처되서 미관상 좋지 않다 따라서 <Content id="main_capture"> 컴포넌트로 id를 옮겨서 캡처 대상을 바꾸어주었다.
     //  그런데 한가지 문제가 생겼다 배경이미지가 적용되지 않아 하얀 화면만 캡처되었다 따라서 <Content>의 css설정에서 const Content = styled(Container)`···`; 이처럼 Content에서 Container를 상속받아 배경이미지가 하얗게 안보이던 문제를 해결하였다
     <Container>
       {/* 아직 답해야 할 질문이 남아있는 경우 */}
+
       {currentQuestionIndex < questions.length ? (
         <QuestionsContent>
           <Question>
             {questions[currentQuestionIndex].content[currentContentIndex]}
           </Question>
 
-
           <div>
-      <Gauge><Counter>{count}/15</Counter>
-        {/* <Progress width={(count * 10) % 101} /> */}
-        {/* 게이지바 최대 15단계 */}
-        <Progress width={(count / 15) * 100} />
-      </Gauge>
-      
-    </div>
-
-
-
-
-
-
-
-
-
+            <Gauge>
+              <Counter>{count}/15</Counter>
+              {/* <Progress width={(count * 10) % 101} /> */}
+              {/* 게이지바 최대 15단계 */}
+              <Progress width={(count / 15) * 100} />
+            </Gauge>
+          </div>
 
           <ButtonContainer>{questionbutton()}</ButtonContainer>
 
@@ -639,14 +627,14 @@ const Counter = styled.div`
               </Link>
             </ResultButoon>
             <div style={{ marginLeft: '2rem', marginRight: '2rem' }}>
-  <div style={{ lineHeight: '1.8rem' }}>
-              {/* 글씨 중앙정렬을 풀기위한 div */}
-              {renderExplanation()}
-            </div>
-            <div style={{ fontSize: '0.5rem' }}>
-              <br />* 이 테스트는 심리학적인 연구나 진단을 위한 것이 아닙니다.
-              따라서 유머적인 측면에서만 이해하시길 바랍니다.
-            </div>
+              <div style={{ lineHeight: '1.8rem' }}>
+                {/* 글씨 중앙정렬을 풀기위한 div */}
+                {renderExplanation()}
+              </div>
+              <div style={{ fontSize: '0.5rem' }}>
+                <br />* 이 테스트는 심리학적인 연구나 진단을 위한 것이 아닙니다.
+                따라서 유머적인 측면에서만 이해하시길 바랍니다.
+              </div>
             </div>
           </ResultContainer>
         </>
