@@ -320,7 +320,7 @@ const Title = styled.h1`
   /* height: 10rem; */
   /* margin: 0 auto; */
   background-color: #aea18b;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   color: white;
   display: flex;
   flex-direction: column;
@@ -718,7 +718,7 @@ const QuestionContainer = () => {
               <h1>동물은!?</h1> */}
               {/* FIXME: 위 코드 지우기 */}
               <h1>
-                내 안에 숨어있던 <br /> 동물은!?
+                당신이라는 숲에 살고있는 <br /> 동물 친구들입니다!
               </h1>
             </Title>
             {/* 결과 이미지 */}
@@ -742,7 +742,7 @@ const QuestionContainer = () => {
                 offset={-100}
                 duration={500}
               >
-                <ShareResultsbutton>결과보기</ShareResultsbutton>
+                <ShareResultsbutton>해설 보기</ShareResultsbutton>
               </Link>
             </ResultButoon>
             <div style={{ marginLeft: '2rem', marginRight: '2rem' }}>
