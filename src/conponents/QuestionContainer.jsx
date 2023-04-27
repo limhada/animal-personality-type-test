@@ -429,30 +429,112 @@ const QuestionContainer = () => {
     ));
 
   //FIXME: 방법 12 jpeg로 452kb 이걸로 선택!! 용량이 2번째로 적음 1번째로적은 webp형식은 안도르이드에서 문제가 있음 해결방법을 찾으면 webp로 수정하기
+  // const handleShareClick12 = () => {
+  //   html2canvas(document.querySelector('#main_capture'), {
+  //     scale: window.devicePixelRatio,
+  //     // FIXME: true로 설정 시 배경 이미지 포함 안됨!!!
+  //     foreignObjectRendering: false,
+  //   })
+  //   .then((canvas) => {
+  //     canvas.toBlob((blob) => {
+  //       if (navigator.share) {
+  //         navigator
+  //           .share({
+  //             title: '동물성격유형테스트',
+  //             text: '동물성격유형결과 https://limhada.com/',
+  //             // url:'https://limhada.com/',
+  //             // 생성된 Blob 객체를 files에 전달
+  //             files: [new File([blob], 'image.jpg', { type: 'image/jpeg' })],
+  //           })
+  //           .then(() => console.log('이미지 공유 완료'))
+  //           .catch((error) => console.error('이미지 공유 실패: ', error));
+  //       } else {
+  //         console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+  //       }
+  //     }, 'image/jpeg');
+  //   });
+  // };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const handleShareClick12 = () => {
-    html2canvas(document.querySelector('#main_capture'), {
+    const promises = [];
+  
+    // #main_capture 캡처하는 Promise 추가
+    promises.push(html2canvas(document.querySelector('#main_capture'), {
       scale: window.devicePixelRatio,
       // FIXME: true로 설정 시 배경 이미지 포함 안됨!!!
       foreignObjectRendering: false,
-    }).then((canvas) => {
-      canvas.toBlob((blob) => {
-        if (navigator.share) {
-          navigator
-            .share({
-              title: '동물성격유형테스트',
-              text: '동물성격유형결과 https://limhada.com/',
-              // url:'https://limhada.com/',
-              // 생성된 Blob 객체를 files에 전달
-              files: [new File([blob], 'image.jpg', { type: 'image/jpeg' })],
-            })
-            .then(() => console.log('이미지 공유 완료'))
-            .catch((error) => console.error('이미지 공유 실패: ', error));
-        } else {
-          console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
-        }
-      }, 'image/jpeg');
-    });
+    }));
+  
+    // #main_capture1 캡처하는 Promise 추가
+    promises.push(html2canvas(document.querySelector('#main_capture1'), {
+      scale: window.devicePixelRatio,
+      // FIXME: true로 설정 시 배경 이미지 포함 안됨!!!
+      foreignObjectRendering: false,
+    }));
+  
+    // Promise.all()을 이용하여 모든 Promise가 완료될 때까지 대기한 다음
+    // 두 캡처 이미지를 합쳐서 하나의 캔버스에 그리고, 그 캔버스를 이미지 파일로 변환하여 공유
+    Promise.all(promises)
+      .then(([canvas1, canvas2]) => {
+        const canvas = document.createElement('canvas');
+        canvas.width = canvas1.width;
+        canvas.height = canvas1.height + canvas2.height;
+  
+        const context = canvas.getContext('2d');
+        context.drawImage(canvas1, 0, 0);
+        context.drawImage(canvas2, 0, canvas1.height);
+  
+        canvas.toBlob((blob) => {
+          if (navigator.share) {
+            navigator
+              .share({
+                title: '동물성격유형테스트',
+                text: '동물성격유형결과 https://limhada.com/',
+                // url:'https://limhada.com/',
+                // 생성된 Blob 객체를 files에 전달
+                files: [new File([blob], 'image.jpg', { type: 'image/jpeg' })],
+              })
+              .then(() => console.log('이미지 공유 완료'))
+              .catch((error) => console.error('이미지 공유 실패: ', error));
+          } else {
+            console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+          }
+        }, 'image/jpeg');
+      });
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   const AnimalImgWrapper = styled.div`
     /* position: absolute; */
@@ -718,7 +800,7 @@ const QuestionContainer = () => {
               <h1>동물은!?</h1> */}
               {/* FIXME: 위 코드 지우기 */}
               <h1>
-                당신이라는 숲에 살고있는 <br /> 동물 친구들입니다!
+              당신의 숲에 살고있는<br /> 동물들입니다!
               </h1>
             </Title>
             {/* 결과 이미지 */}
@@ -730,7 +812,7 @@ const QuestionContainer = () => {
           {/* 중괄호 두번쓰는 이유 : 스타일 속성 값으로 JavaScript 객체를 사용하려면, 객체 리터럴 문법으로 작성된 객체를 중괄호로 감싸야 합니다. 이때, 중괄호는 객체 리터럴을 JSX에서 인식하도록 하는 역할을 하기 때문에 두 번 사용됩니다. */}
           {/* #으로 색을 표현하는 것을 Hexadecimal Color 또는 Hex Color라고 부릅니다. 이는 16진수 값으로 표현된 RGB 색상 값을 나타내며, CSS에서 가장 일반적으로 사용되는 색상 표현 방법 중 하나 */}
           {/* #으로 시작하는 문자열은 CSS에서 색상을 표현할 때 사용됩니다. 하지만, React에서 JSX 문법을 사용할 때는 #으로 시작하는 숫자를 직접 사용할 수 없습니다. 이는 JSX에서 중괄호({})를 사용하여 JavaScript 표현식을 삽입할 수 있는데, 중괄호 내부에서 #으로 시작하는 숫자는 JavaScript에서 잘못된 표현식으로 인식되기 때문입니다.따라서, JSX에서 CSS 색상 값을 지정할 때는 # 대신에 rgb(), rgba(), hsl(), hsla()와 같은 CSS 색상 함수를 사용하거나, CSS에서 지정 가능한 색상 이름을 사용해야 합니다. */}
-          <ResultContainer>
+          <ResultContainer id="main_capture1">
             <ResultButoon>
               <ShareResultsbutton onClick={handleShareClick12}>
                 결과 공유하기
