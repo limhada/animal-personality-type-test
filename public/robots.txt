@@ -1,3 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
+# robots.txt는 검색 엔진 로봇이 웹 사이트를 크롤링할 때 어떤 페이지를 수집할 수 있는지에 대한 지침을 제공하는 파일입니다. 이 파일은 웹 사이트의 루트 디렉토리에 위치하며, 검색 엔진이 이 파일을 읽고 해당 사이트에서 허용되거나 금지된 URL을 결정합니다. robots.txt 파일은 선택 사항이며, 모든 웹 사이트가 이 파일을 사용하지는 않습니다.
 User-agent: *
 Disallow:
