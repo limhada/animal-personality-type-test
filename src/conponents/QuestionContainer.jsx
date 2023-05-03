@@ -455,86 +455,56 @@ const QuestionContainer = () => {
   //   });
   // };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const handleShareClick12 = () => {
     const promises = [];
-  
+
     // #main_capture 캡처하는 Promise 추가
-    promises.push(html2canvas(document.querySelector('#main_capture'), {
-      scale: window.devicePixelRatio,
-      // FIXME: true로 설정 시 배경 이미지 포함 안됨!!!
-      foreignObjectRendering: false,
-    }));
-  
+    promises.push(
+      html2canvas(document.querySelector('#main_capture'), {
+        scale: window.devicePixelRatio,
+        // FIXME: true로 설정 시 배경 이미지 포함 안됨!!!
+        foreignObjectRendering: false,
+      }),
+    );
+
     // #main_capture1 캡처하는 Promise 추가
-    promises.push(html2canvas(document.querySelector('#main_capture1'), {
-      scale: window.devicePixelRatio,
-      // FIXME: true로 설정 시 배경 이미지 포함 안됨!!!
-      foreignObjectRendering: false,
-    }));
-  
+    promises.push(
+      html2canvas(document.querySelector('#main_capture1'), {
+        scale: window.devicePixelRatio,
+        // FIXME: true로 설정 시 배경 이미지 포함 안됨!!!
+        foreignObjectRendering: false,
+      }),
+    );
+
     // Promise.all()을 이용하여 모든 Promise가 완료될 때까지 대기한 다음
     // 두 캡처 이미지를 합쳐서 하나의 캔버스에 그리고, 그 캔버스를 이미지 파일로 변환하여 공유
-    Promise.all(promises)
-      .then(([canvas1, canvas2]) => {
-        const canvas = document.createElement('canvas');
-        canvas.width = canvas1.width;
-        canvas.height = canvas1.height + canvas2.height;
-  
-        const context = canvas.getContext('2d');
-        context.drawImage(canvas1, 0, 0);
-        context.drawImage(canvas2, 0, canvas1.height);
-  
-        canvas.toBlob((blob) => {
-          if (navigator.share) {
-            navigator
-              .share({
-                title: '동물성격유형테스트',
-                text: '동물성격유형결과 https://limhada.com/',
-                // url:'https://limhada.com/',
-                // 생성된 Blob 객체를 files에 전달
-                files: [new File([blob], 'image.jpg', { type: 'image/jpeg' })],
-              })
-              .then(() => console.log('이미지 공유 완료'))
-              .catch((error) => console.error('이미지 공유 실패: ', error));
-          } else {
-            console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
-          }
-        }, 'image/jpeg');
-      });
+    Promise.all(promises).then(([canvas1, canvas2]) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = canvas1.width;
+      canvas.height = canvas1.height + canvas2.height;
+
+      const context = canvas.getContext('2d');
+      context.drawImage(canvas1, 0, 0);
+      context.drawImage(canvas2, 0, canvas1.height);
+
+      canvas.toBlob((blob) => {
+        if (navigator.share) {
+          navigator
+            .share({
+              title: '동물성격유형테스트',
+              text: '동물성격유형결과 https://limhada.com/',
+              // url:'https://limhada.com/',
+              // 생성된 Blob 객체를 files에 전달
+              files: [new File([blob], 'image.jpg', { type: 'image/jpeg' })],
+            })
+            .then(() => console.log('이미지 공유 완료'))
+            .catch((error) => console.error('이미지 공유 실패: ', error));
+        } else {
+          console.log('이미지 공유 기능을 지원하지 않는 브라우저입니다.');
+        }
+      }, 'image/jpeg');
+    });
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   const AnimalImgWrapper = styled.div`
     /* position: absolute; */
@@ -594,137 +564,103 @@ const QuestionContainer = () => {
       left: 55vw;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     /* 태블릿 */
-  @media (min-width: 768px) and (max-width: 1023px) {
+    @media (min-width: 768px) and (max-width: 1023px) {
+      position: relative;
+      #animalImg1 {
+        position: absolute;
+        top: 10vh;
+        left: 42vw;
+      }
 
+      #animalImg2 {
+        position: absolute;
+        /* background-color: green; */
+        top: 30vh;
+        left: 25vw;
+      }
 
-    position: relative;
-#animalImg1 {
-  position: absolute;
-  top: 10vh;
-  left: 42vw;
-}
+      #animalImg3 {
+        position: absolute;
+        /* background-color: green; */
+        top: 30vh;
+        left: 59vw;
+      }
 
-#animalImg2 {
-  position: absolute;
-  /* background-color: green; */
-  top: 30vh;
-  left: 25vw;
-}
+      #animalImg4 {
+        position: absolute;
+        /* background-color: green; */
+        top: 50vh;
+        left: 35vw;
+      }
 
-#animalImg3 {
-  position: absolute;
-  /* background-color: green; */
-  top: 30vh;
-  left: 59vw;
-}
+      #animalImg5 {
+        position: absolute;
+        /* background-color: green; */
+        top: 50vh;
+        left: 50vw;
+      }
+    }
 
-#animalImg4 {
-  position: absolute;
-  /* background-color: green; */
-  top: 50vh;
-  left: 35vw;
-}
+    /* 데스크탑 모니터 */
+    @media (min-width: 1024px) {
+      position: relative;
 
-#animalImg5 {
-  position: absolute;
-  /* background-color: green; */
-  top: 50vh;
-  left: 50vw;
-}
+      #animalImg1 {
+        position: absolute;
+        top: 10vh;
+        left: 45vw;
+      }
 
-  }
+      #animalImg2 {
+        position: absolute;
+        /* background-color: green; */
+        top: 30vh;
+        left: 30vw;
+      }
 
+      #animalImg3 {
+        position: absolute;
+        /* background-color: green; */
+        top: 30vh;
+        left: 60vw;
+      }
 
+      #animalImg4 {
+        position: absolute;
+        /* background-color: green; */
+        top: 50vh;
+        left: 35vw;
+      }
 
-
-
-
-
-  /* 데스크탑 모니터 */
-  @media (min-width: 1024px) {
-    position: relative;
-    
-    
-
-#animalImg1 {
-  position: absolute;
-  top: 10vh;
-  left: 45vw;
-}
-
-#animalImg2 {
-  position: absolute;
-  /* background-color: green; */
-  top: 30vh;
-  left: 30vw;
-}
-
-#animalImg3 {
-  position: absolute;
-  /* background-color: green; */
-  top: 30vh;
-  left: 60vw;
-}
-
-#animalImg4 {
-  position: absolute;
-  /* background-color: green; */
-  top: 50vh;
-  left: 35vw;
-}
-
-#animalImg5 {
-  position: absolute;
-  /* background-color: green; */
-  top: 50vh;
-  left: 55vw;
-}
-
-  }
+      #animalImg5 {
+        position: absolute;
+        /* background-color: green; */
+        top: 50vh;
+        left: 55vw;
+      }
+    }
   `;
 
   const AnimalImg = styled.img`
     width: 7rem;
     height: 7rem;
-    
+
     /* background-color: #667eea; */
 
-     /* 태블릿 */
-  @media (min-width: 768px) and (max-width: 1023px) {
-    /* background-color: #667eea; */
-    width: 7rem;
-    height: 7rem;
-  }
+    /* 태블릿 */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      /* background-color: #667eea; */
+      width: 7rem;
+      height: 7rem;
+    }
 
-  /* 데스크탑 모니터 */
-  @media (min-width: 1024px) {
-    /* background-color: #667eea; */
-    width: 10rem;
-    height: 10rem;
-  }
-
-
+    /* 데스크탑 모니터 */
+    @media (min-width: 1024px) {
+      /* background-color: #667eea; */
+      width: 10rem;
+      height: 10rem;
+    }
   `;
 
   // 결과페이지 소제목 진하게
@@ -800,7 +736,8 @@ const QuestionContainer = () => {
               <h1>동물은!?</h1> */}
               {/* FIXME: 위 코드 지우기 */}
               <h1>
-              당신의 숲에 살고있는<br /> 동물들입니다!
+                당신의 숲에 살고있는
+                <br /> 동물들입니다!
               </h1>
             </Title>
             {/* 결과 이미지 */}
