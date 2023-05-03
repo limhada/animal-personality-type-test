@@ -1,15 +1,13 @@
 import React from 'react';
-import { useRoutes } from "react-router-dom"; 
-/* Navigate*/
-import Main from "../pages/Main";
+import { useRoutes, Navigate } from 'react-router-dom';
+import Main from '../pages/Main';
 
-export default function Router() {
-  const routes = useRoutes([
-    {
-      path: "/",
-      element: <Main />,
-    },
-    
+const AppRoutes = () => {
+  const routing = useRoutes([
+    { path: '/', element: <Main /> },
+    { path: '*', element: <Navigate to="/" /> },
   ]);
-  return routes;
-}
+  return routing;
+};
+
+export default AppRoutes;
