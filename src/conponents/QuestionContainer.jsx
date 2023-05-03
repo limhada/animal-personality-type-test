@@ -303,7 +303,6 @@ const ResultContainer = styled.div`
   background-color: #aea18f;
   color: white;
   width: 100%;
-  /* height: auto; */
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
