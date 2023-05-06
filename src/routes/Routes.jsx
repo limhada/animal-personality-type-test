@@ -4,7 +4,7 @@ import Main from '../pages/Main';
 
 const AppRoutes = () => {
   const routing = useRoutes([
-    { path: '/', element: <Main /> },
+    { path: '/animaltest', element: <Main /> },
     { path: '*', element: <Navigate to="/" /> },
   ]);
   return routing;
