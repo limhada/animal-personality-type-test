@@ -491,7 +491,7 @@ const QuestionContainer = () => {
           navigator
             .share({
               title: '동물성격유형테스트',
-              text: '동물성격유형결과 https://limhada.com/',
+              text: '동물성격유형테스트 해보기 https://animal-personality-type-test.vercel.app/',
               // url:'https://limhada.com/',
               // 생성된 Blob 객체를 files에 전달
               files: [new File([blob], 'image.jpg', { type: 'image/jpeg' })],
