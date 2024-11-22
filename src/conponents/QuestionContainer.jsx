@@ -339,7 +339,6 @@ const ShareResultsbutton = styled.button`
 // 해설 결과 전체 컨테이너
 const ResultContainer = styled.div`
   border-radius: 0.7rem;
-
   background-color: #aea18f;
   color: white;
   width: 80%;
@@ -351,6 +350,7 @@ const ResultContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto; /* 추가 */
+  margin-top: 1rem;
 `;
 
 // 해설
