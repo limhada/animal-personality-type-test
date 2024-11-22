@@ -342,7 +342,9 @@ const ResultContainer = styled.div`
   border-radius: 0.7rem;
   background-color: #aea18f;
   color: white;
-  width: 80%;
+  
+  /* width를 80%로 설정 시 결과 공유하기 캡처 시 오른쪽 아래 검은색 공백 생김... 임시로 100%로 다시 되돌렸음 */
+  width: 100%;
   display: flex;
 
   flex-wrap: wrap;
