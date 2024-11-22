@@ -144,8 +144,10 @@ const animalIndex = {
 };
 
 // FIXME: 내용 매끄럽게 수정하기
-// 해설 내용
 
+// 해설 내용
+////////////////////////////////////////////////////////////////////////// 수정 전
+/*
 const explanation = {
   강아지:
     '강아지: 새로운 아이디어나 경험에 대해 열려있으므로, 호기심이 많습니다.',
@@ -171,6 +173,38 @@ const explanation = {
     '코알라: 균형적인 타입으로 새로운 아이디어나 경험에 대해 어느 정도 열려있지만, 기존의 방식을 선호하는 경우도 있습니다.',
   독수리:
     '독수리: 냉정한 타입으로 일이나 상황에 대해 둔감하며 차분하게 대처하는 경우가 많습니다.',
+};
+
+*/
+
+/////////////////////////////////////////////////////// 수정 후
+const explanation = {
+  강아지:
+    '강아지: 새로운 아이디어나 경험에 대해 열려있으므로, 호기심이 많습니다. 사람들과 잘 어울리며 활발하고 긍정적인 태도로 새로운 도전을 두려워하지 않습니다.',
+  곰: '곰: 일이나 상황에 대해 어느 정도 예민하게 반응하지만, 때때로 차분하게 대처하는 경우도 있습니다. 신중하면서도 안정감을 주는 성격으로, 신뢰할 수 있는 동반자로 적합합니다.',
+  당나귀:
+    '당나귀: 새로운 아이디어나 경험보다는 기존의 방식을 선호하는 경우가 많으므로, 완고한 성격일 수 있습니다. 고집이 있지만 성실하며, 목표를 향해 꾸준히 나아가는 태도를 보입니다.',
+  벌새: '벌새: 계획적이고 체계적으로 일을 처리하는 경우가 많으므로, 부지런한 성격입니다. 빠른 행동력과 높은 생산성을 자랑하며, 주변 사람들에게 긍정적인 영향을 미칩니다.',
+  코끼리:
+    '코끼리: 계획적으로 일을 처리하는 경우도 있지만, 때때로 일을 미루는 경우도 있습니다. 온화하고 관대한 성격으로, 주변 사람들과 좋은 관계를 유지하며 신뢰를 얻습니다.',
+  나무늘보:
+    '나무늘보: 일을 처리하는 데 있어서 계획적이지 않은 경우가 많으며, 때때로 일을 미루는 경우도 있습니다. 여유로운 성격으로 스트레스를 잘 받지 않고, 느긋하게 살아가는 방식을 선호합니다.',
+  앵무새:
+    '앵무새: 다른 사람들과 함께하는 시간을 즐기며 사교성이 좋습니다. 유쾌하고 화려한 성격으로, 모임의 분위기를 밝게 만드는 데 능숙합니다.',
+  고양이:
+    '고양이: 사람들과 함께 있는 것도 좋지만 때때로 혼자 있는 것도 좋아합니다. 독립적이며 자신만의 시간을 소중히 여기는 성격으로, 조용하면서도 매력적인 태도를 보입니다.',
+  고슴도치:
+    '고슴도치: 의외로 겁이 많은 성격이므로 혼자 있는 것을 좋아합니다. 방어적인 성격이 강하며, 친밀한 관계를 맺기 위해 시간이 필요한 경우가 많습니다.',
+  레서판다:
+    '레서판다: 다른 사람들의 감정에 민감하게 반응하며, 주변 사람들을 친절하게 도와주는 경우가 많습니다. 사랑스러운 성격으로 신뢰와 공감을 통해 관계를 깊게 만드는 데 능숙합니다.',
+  악어: '악어: 다른 사람들의 감정에 어느 정도 반응하지만, 때때로 자신의 의견을 단호하게 표현하는 경우도 있습니다. 자신의 목표를 우선시하며, 필요할 때는 결단력 있는 태도를 보입니다.',
+  알파카:
+    '알파카: 다른 사람들의 감정에 둔감한 경우가 많으며, 자신의 의견을 단호하게 표현하는 경우가 많습니다. 독립적이고 자신의 길을 가는 성격으로, 안정감을 중요시합니다.',
+  토끼: '토끼: 일이나 상황에 대해 예민하게 반응하며, 걱정이 많은 편입니다. 섬세한 성격으로 작은 변화에도 민감하며, 안정적인 환경에서 가장 잘 적응합니다.',
+  코알라:
+    '코알라: 균형적인 타입으로 새로운 아이디어나 경험에 대해 어느 정도 열려있지만, 기존의 방식을 선호하는 경우도 있습니다. 여유롭고 편안한 성격으로, 조화를 이루는 것을 중요시합니다.',
+  독수리:
+    '독수리: 냉정한 타입으로 일이나 상황에 대해 둔감하며 차분하게 대처하는 경우가 많습니다. 뛰어난 통찰력과 결단력을 지닌 리더형으로, 위기 상황에서 흔들리지 않는 안정감을 제공합니다.',
 };
 
 // 최상위 컨테이너 - 배경 설정
@@ -222,7 +256,11 @@ const Content = styled(Container)`
   /* flex-basis: 0; */
   /* width: 100%; */
   /* FIXME: 모바일 웹페이지 열렸을때 주소창 보이면 화면이 살짝 아래가 짤려서 버튼이 안보임 그럴때는 값을 90정도로 설정 */
-  height: 87vh;
+
+  ///////////////////////////////// 결과 동물 이미지들어가는 영역 수정 전
+  /* height: 87vh; */
+  ///////////////////////////////// 수정 후
+  height: 50vh;
 `;
 
 // 결과 동물 이미지
@@ -300,14 +338,19 @@ const ShareResultsbutton = styled.button`
 
 // 해설 결과 전체 컨테이너
 const ResultContainer = styled.div`
+  border-radius: 0.7rem;
+
   background-color: #aea18f;
   color: white;
-  width: 100%;
+  width: 80%;
   display: flex;
+
   flex-wrap: wrap;
   flex-direction: column;
+
   justify-content: center;
   align-items: center;
+  margin: 0 auto; /* 추가 */
 `;
 
 // 해설
@@ -331,7 +374,10 @@ const Title = styled.h1`
 
 const ResultButoon = styled.div`
   display: flex;
+  // 결과 해설, 결과 공유하기 가로
   flex-direction: row;
+  // 결과 해설, 결과 공유하기 세로
+  /* flex-direction: column; */
   margin: 1rem 1rem 1rem 1rem;
 `;
 
@@ -345,10 +391,12 @@ const QuestionContainer = () => {
   // userAnswers 값을 3개씩 더하고 3으로 나눠서 result 배열에 넣는다
   // TODO: 문항의 답변을 1번카테고리의 2번까지만 답변을 선택할 경우 NaN 값이 되고 3번째 답변까지 선택해야 정상동작함 모든 질문에 대한 답변을 선택해야 하므로 결과적으로는 문제가 되지 않음 추후 이런 부분을 보완하면 좋을것 같음
   // FIXME: ex) 1번 2번 3번 문항을 응답해서 1, 2, 3 과 같이 3개의 요소가 있을때 실행하기 안그럼 값이 없어서 NaN이 나옴...
+  // 질문에 대한 점수가 저장되는 변수
   const result = [];
   for (let i = 0; i < userAnswers.length; i += 3) {
     const sum = userAnswers[i] + userAnswers[i + 1] + userAnswers[i + 2];
     result.push(sum / 3);
+    // console.log('ㅎㅇ~~~~~~~', result);
   }
 
   const handleAnswerSubmit = (answer) => {
@@ -369,26 +417,58 @@ const QuestionContainer = () => {
     }
   };
 
-  const finalResult = result.map((value, index) => {
-    const animalType = animal.find((animal) => animal.id === index);
+  ///////////////////////////////////////////////////
+  /////////////////////////////////////////////////// 수정
+  // const finalResult = result.map((value, index) => {
+  //   const animalType = animal.find((animal) => animal.id === index);
+  //   const animalContent = animalType.content.find(
+  //     (content) => value >= content.min && value < content.max,
+  //   );
+  //   // FIXME: 수정하기 확인하고
+  //   return animalContent ? animalContent.name : '';
+  // });
+
+  // 가장 큰 값 찾기
+  const maxValue = Math.max(...result);
+
+  // 가장 큰 첫 번째 값의 인덱스 찾기
+  const firstIndex = result.indexOf(maxValue);
+
+  // 동물 한 마리만 찾기
+  const finalResult = (() => {
+    const animalType = animal.find((animal) => animal.id === firstIndex);
+    if (!animalType) return ''; // 동물 데이터를 못 찾은 경우 빈 문자열 반환
+
     const animalContent = animalType.content.find(
-      (content) => value >= content.min && value < content.max,
+      (content) => maxValue >= content.min && maxValue < content.max,
     );
-    // FIXME: 수정하기 확인하고
+
     return animalContent ? animalContent.name : '';
-  });
+  })();
 
+  ////////////////////////////////////////////////// 기존 버전 결과 5마리 동물
   // 결과화면에 이미지 그려주기
-  const renderImages = () =>
-    finalResult.map((animal, i) => (
-      <AnimalImg
-        id={`animalImg${i + 1}`}
-        src={animalIndex[animal]}
-        alt={animal}
-      />
-    ));
+  // const renderImages = () =>
+  //   finalResult.map((animal, i) => (
+  //     <AnimalImg
+  //       id={`animalImg${i + 1}`}
+  //       src={animalIndex[animal]}
+  //       alt={animal}
+  //     />
+  //   ));
 
-  //
+  ////////////////////////////////////////////////// 수정 버전 결과 1마리 동물
+  const renderImages = () => {
+    if (!finalResult) return null; // 동물 데이터가 없으면 렌더링하지 않음
+    return (
+      <AnimalImg
+        id="animalImg1"
+        src={animalIndex[finalResult]}
+        alt={finalResult}
+      />
+    );
+  };
+
   const questionbutton = () =>
     buttonNames.map((name, index) => (
       <AnswerButton
@@ -410,22 +490,40 @@ const QuestionContainer = () => {
     ));
 
   // 결과 화면에 해석 보여주기
-  const renderExplanation = () =>
-    // 동적으로 아이디 만드는법 정리해서 포스팅하기
-    finalResult.map((animal, i) => (
-      <div id={`explanation${i + 1}`} style={{ marginBottom: '10px' }}>
-        {/* 기존코드 */}
-        {/* {explanation[animal]} */}
-        {/* 동물 이름만 진하게 */}
-        {/*  match 메서드는 주어진 문자열에서 정규표현식과 일치하는 부분을 찾아 반환하며, [0]을 사용하여 찾은 첫번째 일치하는 문자열을 반환 */}
+  // const renderExplanation = () =>
+  // 동적으로 아이디 만드는법 정리해서 포스팅하기
+  // finalResult.map((animal, i) => (
+  //   <div id={`explanation${i + 1}`} style={{ marginBottom: '10px' }}>
+  //     {/* 기존코드 */}
+  //     {/* {explanation[animal]} */}
+  //     {/* 동물 이름만 진하게 */}
+  //     {/*  match 메서드는 주어진 문자열에서 정규표현식과 일치하는 부분을 찾아 반환하며, [0]을 사용하여 찾은 첫번째 일치하는 문자열을 반환 */}
 
-        {/* : 이후 해석내용만 잘라내기 */}
-        {/*  :와 이어지는 공백(\s) 다음에 오는 모든 문자열(.+)을 찾아내도록, 여기서 [1]을 붙이면 일치하는 부분 중 첫 번째 그룹의 문자열, 즉 : 이후의 문자열만 추출할 수 있습니다.*/}
-        {/* <Subheading>{explanation[animal].match(/^.*?:/)[0]}</Subheading> */}
-        <Subheading>{explanation[animal].match(/^[^:]+/)[0]}</Subheading>
-        <div>{` ${explanation[animal].match(/:\s(.+)/)[1]}`}</div>
+  //     {/* : 이후 해석내용만 잘라내기 */}
+  //     {/*  :와 이어지는 공백(\s) 다음에 오는 모든 문자열(.+)을 찾아내도록, 여기서 [1]을 붙이면 일치하는 부분 중 첫 번째 그룹의 문자열, 즉 : 이후의 문자열만 추출할 수 있습니다.*/}
+  //     {/* <Subheading>{explanation[animal].match(/^.*?:/)[0]}</Subheading> */}
+  //     <Subheading>{explanation[animal].match(/^[^:]+/)[0]}</Subheading>
+  //     <div>{` ${explanation[animal].match(/:\s(.+)/)[1]}`}</div>
+  //   </div>
+  // ));
+
+  // 결과 화면에 해석 보여주기
+  const renderExplanation = () => {
+    if (!finalResult) return null;
+
+    const explanationText = explanation[finalResult];
+    if (!explanationText) return null;
+
+    const animalName = explanationText.match(/^[^:]+/)[0];
+    const description = explanationText.match(/:\s(.+)/)[1];
+
+    return (
+      <div id="explanation1" style={{ marginBottom: '10px' }}>
+        <Subheading>{animalName}</Subheading>
+        <div>{` ${description}`}</div>
       </div>
-    ));
+    );
+  };
 
   //FIXME: 방법 12 jpeg로 452kb 이걸로 선택!! 용량이 2번째로 적음 1번째로적은 webp형식은 안도르이드에서 문제가 있음 해결방법을 찾으면 webp로 수정하기
   // const handleShareClick12 = () => {
@@ -505,160 +603,172 @@ const QuestionContainer = () => {
     });
   };
 
+  ////////////////////////////////////// 수정 전 동물 5마리
+  //   const AnimalImgWrapper = styled.div`
+  //     /* position: absolute; */
+  //     /* display: flex;
+  //     flex-wrap: wrap;
+  //     justify-content: center;
+  //     align-items: center; */
+  //     /* height: 100vh; */
+  //     /* flex-direction: row-reverse; // 추가 */
+  //     position: relative;
+
+  //     width: 100%;
+  //     height: 100%;
+
+  //     #animalImg1 {
+  //       position: absolute;
+  //       // 라인 확인용 컬러
+  //       /* background-color: green; */
+  //       top: 15vh;
+  //       left: 36vw;
+  //       /* 컴퓨터에서는 50% 모바일에서는 오른쪽으로 치우짐 */
+  //       /* CSS에서 left: 50%는 부모 요소의 가로폭 기준으로 왼쪽에서 50%의 위치에 해당하는 지점에 위치하도록 지정하는 것입니다.
+
+  // 이렇게 지정하는 경우, 부모 요소의 가로폭이 바뀌면 해당 위치도 함께 변경됩니다.
+
+  // 하지만, 모바일 화면과 컴퓨터 화면의 가로폭이 다르기 때문에, 같은 비율로 위치시킨다면 실제로 위치하는 지점이 다르게 됩니다.
+
+  // 따라서, 모바일과 컴퓨터에서 같은 위치에 놓이도록 하려면 다른 방법을 사용해야 합니다. 예를 들어, viewport의 너비를 기준으로 % 대신에 vh, vw 단위를 사용하면 모바일과 컴퓨터에서 더 일관성있는 결과를 얻을 수 있습니다. */
+  //       /* left: 50%; */
+  //     }
+
+  //     #animalImg2 {
+  //       position: absolute;
+  //       /* background-color: green; */
+  //       top: 32vh;
+  //       left: 7vw;
+  //     }
+
+  //     #animalImg3 {
+  //       position: absolute;
+  //       /* background-color: green; */
+  //       top: 32vh;
+  //       left: 65vw;
+  //     }
+
+  //     #animalImg4 {
+  //       position: absolute;
+  //       /* background-color: green; */
+  //       top: 50vh;
+  //       left: 20vw;
+  //     }
+
+  //     #animalImg5 {
+  //       position: absolute;
+  //       /* background-color: green; */
+  //       top: 50vh;
+  //       left: 55vw;
+  //     }
+
+  //     /* 태블릿 */
+  //     @media (min-width: 768px) and (max-width: 1023px) {
+  //       position: relative;
+  //       #animalImg1 {
+  //         position: absolute;
+  //         top: 10vh;
+  //         left: 42vw;
+  //       }
+
+  //       #animalImg2 {
+  //         position: absolute;
+  //         /* background-color: green; */
+  //         top: 30vh;
+  //         left: 25vw;
+  //       }
+
+  //       #animalImg3 {
+  //         position: absolute;
+  //         /* background-color: green; */
+  //         top: 30vh;
+  //         left: 59vw;
+  //       }
+
+  //       #animalImg4 {
+  //         position: absolute;
+  //         /* background-color: green; */
+  //         top: 50vh;
+  //         left: 35vw;
+  //       }
+
+  //       #animalImg5 {
+  //         position: absolute;
+  //         /* background-color: green; */
+  //         top: 50vh;
+  //         left: 50vw;
+  //       }
+  //     }
+
+  //     /* 데스크탑 모니터 */
+  //     @media (min-width: 1024px) {
+  //       position: relative;
+
+  //       #animalImg1 {
+  //         position: absolute;
+  //         top: 10vh;
+  //         left: 45vw;
+  //       }
+
+  //       #animalImg2 {
+  //         position: absolute;
+  //         /* background-color: green; */
+  //         top: 30vh;
+  //         left: 30vw;
+  //       }
+
+  //       #animalImg3 {
+  //         position: absolute;
+  //         /* background-color: green; */
+  //         top: 30vh;
+  //         left: 60vw;
+  //       }
+
+  //       #animalImg4 {
+  //         position: absolute;
+  //         /* background-color: green; */
+  //         top: 50vh;
+  //         left: 35vw;
+  //       }
+
+  //       #animalImg5 {
+  //         position: absolute;
+  //         /* background-color: green; */
+  //         top: 50vh;
+  //         left: 55vw;
+  //       }
+  //     }
+  //   `;
+
+  // 동물 이미지 부모 컨테이너
   const AnimalImgWrapper = styled.div`
-    /* position: absolute; */
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center; */
-    /* height: 100vh; */
-    /* flex-direction: row-reverse; // 추가 */
-    position: relative;
-
-    width: 100%;
-    height: 100%;
-
-    #animalImg1 {
-      position: absolute;
-      // 라인 확인용 컬러
-      /* background-color: green; */
-      top: 15vh;
-      left: 36vw;
-      /* 컴퓨터에서는 50% 모바일에서는 오른쪽으로 치우짐 */
-      /* CSS에서 left: 50%는 부모 요소의 가로폭 기준으로 왼쪽에서 50%의 위치에 해당하는 지점에 위치하도록 지정하는 것입니다.
-
-이렇게 지정하는 경우, 부모 요소의 가로폭이 바뀌면 해당 위치도 함께 변경됩니다.
-
-하지만, 모바일 화면과 컴퓨터 화면의 가로폭이 다르기 때문에, 같은 비율로 위치시킨다면 실제로 위치하는 지점이 다르게 됩니다.
-
-따라서, 모바일과 컴퓨터에서 같은 위치에 놓이도록 하려면 다른 방법을 사용해야 합니다. 예를 들어, viewport의 너비를 기준으로 % 대신에 vh, vw 단위를 사용하면 모바일과 컴퓨터에서 더 일관성있는 결과를 얻을 수 있습니다. */
-      /* left: 50%; */
-    }
-
-    #animalImg2 {
-      position: absolute;
-      /* background-color: green; */
-      top: 32vh;
-      left: 7vw;
-    }
-
-    #animalImg3 {
-      position: absolute;
-      /* background-color: green; */
-      top: 32vh;
-      left: 65vw;
-    }
-
-    #animalImg4 {
-      position: absolute;
-      /* background-color: green; */
-      top: 50vh;
-      left: 20vw;
-    }
-
-    #animalImg5 {
-      position: absolute;
-      /* background-color: green; */
-      top: 50vh;
-      left: 55vw;
-    }
-
-    /* 태블릿 */
-    @media (min-width: 768px) and (max-width: 1023px) {
-      position: relative;
-      #animalImg1 {
-        position: absolute;
-        top: 10vh;
-        left: 42vw;
-      }
-
-      #animalImg2 {
-        position: absolute;
-        /* background-color: green; */
-        top: 30vh;
-        left: 25vw;
-      }
-
-      #animalImg3 {
-        position: absolute;
-        /* background-color: green; */
-        top: 30vh;
-        left: 59vw;
-      }
-
-      #animalImg4 {
-        position: absolute;
-        /* background-color: green; */
-        top: 50vh;
-        left: 35vw;
-      }
-
-      #animalImg5 {
-        position: absolute;
-        /* background-color: green; */
-        top: 50vh;
-        left: 50vw;
-      }
-    }
-
-    /* 데스크탑 모니터 */
-    @media (min-width: 1024px) {
-      position: relative;
-
-      #animalImg1 {
-        position: absolute;
-        top: 10vh;
-        left: 45vw;
-      }
-
-      #animalImg2 {
-        position: absolute;
-        /* background-color: green; */
-        top: 30vh;
-        left: 30vw;
-      }
-
-      #animalImg3 {
-        position: absolute;
-        /* background-color: green; */
-        top: 30vh;
-        left: 60vw;
-      }
-
-      #animalImg4 {
-        position: absolute;
-        /* background-color: green; */
-        top: 50vh;
-        left: 35vw;
-      }
-
-      #animalImg5 {
-        position: absolute;
-        /* background-color: green; */
-        top: 50vh;
-        left: 55vw;
-      }
-    }
+    display: flex;
+    justify-content: center; /* 가로 가운데 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
   `;
 
+  // 동물 이미지 크기
   const AnimalImg = styled.img`
-    width: 7rem;
-    height: 7rem;
+    width: 20rem; /* 고정 크기 */
+    height: 20rem;
+    margin-top: 2rem;
+    max-width: 100%; /* 부모 컨테이너를 넘지 않도록 설정 */
+    object-fit: contain; /* 이미지 비율 유지 */
 
     /* background-color: #667eea; */
 
     /* 태블릿 */
     @media (min-width: 768px) and (max-width: 1023px) {
       /* background-color: #667eea; */
-      width: 7rem;
-      height: 7rem;
+      /* width: 7rem;
+      height: 7rem; */
     }
 
     /* 데스크탑 모니터 */
     @media (min-width: 1024px) {
       /* background-color: #667eea; */
-      width: 10rem;
-      height: 10rem;
+      /* width: 10rem;
+      height: 10rem; */
     }
   `;
 
@@ -735,8 +845,8 @@ const QuestionContainer = () => {
               <h1>동물은!?</h1> */}
               {/* FIXME: 위 코드 지우기 */}
               <h1>
-                당신의 숲에 살고있는
-                <br /> 동물들입니다!
+                당신을 나타내는
+                <br /> 동물입니다!
               </h1>
             </Title>
             {/* 결과 이미지 */}
@@ -750,9 +860,6 @@ const QuestionContainer = () => {
           {/* #으로 시작하는 문자열은 CSS에서 색상을 표현할 때 사용됩니다. 하지만, React에서 JSX 문법을 사용할 때는 #으로 시작하는 숫자를 직접 사용할 수 없습니다. 이는 JSX에서 중괄호({})를 사용하여 JavaScript 표현식을 삽입할 수 있는데, 중괄호 내부에서 #으로 시작하는 숫자는 JavaScript에서 잘못된 표현식으로 인식되기 때문입니다.따라서, JSX에서 CSS 색상 값을 지정할 때는 # 대신에 rgb(), rgba(), hsl(), hsla()와 같은 CSS 색상 함수를 사용하거나, CSS에서 지정 가능한 색상 이름을 사용해야 합니다. */}
           <ResultContainer id="main_capture1">
             <ResultButoon>
-              <ShareResultsbutton onClick={handleShareClick12}>
-                결과 공유하기
-              </ShareResultsbutton>
               {/* 첫번째 해설로 스크롤이동 */}
               <Link
                 to="explanation1"
@@ -760,12 +867,17 @@ const QuestionContainer = () => {
                 offset={-100}
                 duration={500}
               >
-                <ShareResultsbutton>해설 보기</ShareResultsbutton>
+                <ShareResultsbutton>결과 해설</ShareResultsbutton>
               </Link>
+              <ShareResultsbutton onClick={handleShareClick12}>
+                결과 공유하기
+              </ShareResultsbutton>
             </ResultButoon>
             <div style={{ marginLeft: '2rem', marginRight: '2rem' }}>
               <div style={{ lineHeight: '1.8rem' }}>
                 {/* 글씨 중앙정렬을 풀기위한 div */}
+
+                {/* 해설 보여주는 로직 */}
                 {renderExplanation()}
               </div>
               <div style={{ fontSize: '0.5rem' }}>
